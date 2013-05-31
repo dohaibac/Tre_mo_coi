@@ -1,7 +1,7 @@
 <?php get_header() ?>
 <div class="container">
     <div class="row">
-		<?php get_sidebar(); ?>
+		
 		<div class="span9">
 			<section>
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
@@ -14,6 +14,7 @@
 				<?php endif; ?>
 			</section>
 		</div>
+		<?php get_sidebar(); ?>
     </div>
 </div>
  <?php get_footer(); ?>

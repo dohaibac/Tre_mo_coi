@@ -5,7 +5,7 @@
 <script src="<?php bloginfo('template_directory');?>/js/jquery.js"></script>
 <script src="<?php bloginfo('template_directory');?>/bootstrap/js/bootstrap.js"></script>
 
- <script src="<?php bloginfo('template_directory');?>/bootstrap/js/application.js"></script>
+ <!--<script src="<?php bloginfo('template_directory');?>/bootstrap/js/application.js"></script>-->
 <?php wp_footer(); ?>
 </body>
 </html>

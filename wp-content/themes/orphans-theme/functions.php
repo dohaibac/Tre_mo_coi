@@ -43,14 +43,14 @@ function custom_theme_support() {
 add_action('after_setup_theme','custom_theme_support');	
 
 /* custom menu */
-function custom_main_nav() {
+function custom_main_nav($theme_location = 'main_nav', $container = false ) {
 	// display the wp3 menu if available
     wp_nav_menu( 
     	array( 
     		'menu' => 'main_nav', /* menu name */
     		'menu_class' => 'nav',
-    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
-    		'container' => 'false', /* container class */
+    		'theme_location' => $theme_location, /* where in the theme it's assigned */
+    		'container' => $container, /* container class */
     		'fallback_cb' => 'bones_main_nav_fallback', /* menu fallback */
     		'depth' => '3', /* suppress lower levels for now */
     		'walker' => new Bootstrap_Walker()
@@ -194,4 +194,6 @@ function add_active_class($classes, $item) {
   
   return $classes;
 }
+
+
 ?>

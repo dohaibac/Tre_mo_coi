@@ -55,25 +55,21 @@
   </head>
 
   <body  <?php if(!is_home()) { ?>data-spy="scroll" data-target=".bs-docs-sidebar" <?php } ?>>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="<?php bloginfo('home'); ?>"><?php bloginfo('name'); ?></a>
-          <div class="nav-collapse collapse">
-			<?php custom_main_nav(); // Adjust using Menus in Wordpress Admin ?>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn">Sign in</button>
-            </form>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+	<header class="jumbotron subhead" id="overview">
+	  <div class="container">
+		<h1><a class="link_home" href="<?php bloginfo('home');?>"><?php bloginfo('name');?></a></h1>
+		<p class="lead"><?php bloginfo('description');?></p>
+	  </div>
+	</header>
+	<div class="navbar navbar-main">
+		  <div class="navbar-inner">
+			<div class="container-menu">
+				<?php custom_main_nav(); // Adjust using Menus in Wordpress Admin ?>
+				<form class="navbar-search pull-right">
+				  <input type="text" placeholder="Search" class="search-query">
+				   <button type="submit" class="btn search-bnt">Tìm kiếm</button>
+				</form>
+		  </div>
+		</div>
+	</div>
 	

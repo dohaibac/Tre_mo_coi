@@ -1,7 +1,7 @@
 <?php get_header() ?>
 <div class="container">
     <div class="row">
-		<?php get_sidebar(); ?>
+		
 		<div class="span9">
 			<div class="page-header">
 				<h1>
@@ -44,6 +44,7 @@
 			get_template_part( 'loop', 'archive' );
 			?>
 		</div>
+		<?php get_sidebar(); ?>
     </div>
 </div>
  <?php get_footer(); ?>

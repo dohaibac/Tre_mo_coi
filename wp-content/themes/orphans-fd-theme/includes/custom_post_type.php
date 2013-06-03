@@ -3,7 +3,7 @@
 global $post_type_name, $post_type_label;
 $post_type_name = 'tre-mo-coi';
 $post_type_label = 'Trẻ mồ côi';		
-// registration code for post type 
+// registration code for tre-mo-coi post type 
 function register_custom_posttype() { 
 	global $post_type_name, $post_type_label;
 	$label = 'Trẻ mồ côi';
@@ -41,7 +41,7 @@ function register_custom_posttype() {
  } 
 add_action('init', 'register_custom_posttype', $post_type_name);
 
-// registration code for service-category taxonomy
+// registration code for chuyen-muc-tre-mo-coi taxonomy
 global $taxonomy_name, $taxonomy_label;
 $taxonomy_name  = 'chuyen-muc-tre-mo-coi';
 $taxonomy_label = 'Chuyên mục trẻ mồ côi';

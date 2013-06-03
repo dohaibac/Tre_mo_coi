@@ -311,7 +311,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 .navbar-inner .container-menu {
    display: block;
     margin: 0 auto;
-    width: 1170px;
+    max-width: 1170px;
 }
 .container-menu .nav{
 

@@ -8,7 +8,7 @@ just edit things like thumbnail sizes, header images,
 sidebars, comments, ect.
 */
 show_admin_bar( false );	
-
+include('includes/custom_post_type.php');
 // Adding WP 3+ Functions & Theme Support
 function custom_theme_support() {
 	add_theme_support('post-thumbnails');      // wp thumbnails (sizes handled in functions.php)

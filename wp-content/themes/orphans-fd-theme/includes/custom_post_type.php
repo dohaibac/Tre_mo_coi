@@ -40,3 +40,37 @@ function register_custom_posttype() {
 	register_post_type( $post_type_name,$post_type_args);
  } 
 add_action('init', 'register_custom_posttype', $post_type_name);
+
+// registration code for service-category taxonomy
+global $taxonomy_name, $taxonomy_label;
+$taxonomy_name  = 'chuyen-muc-tre-mo-coi';
+$taxonomy_label = 'Chuyên mục trẻ mồ côi';
+function register_chuyen_muc_tre_mo_coi() {
+	global $taxonomy_name, $taxonomy_label, $post_type_name;
+	$labels = array(
+		'name' 					=> _x( $taxonomy_label, 'taxonomy general name' ),
+		'singular_name' 		=> _x( $taxonomy_label, 'taxonomy singular name' ),
+		'add_new' 				=> _x( 'Add New '.$taxonomy_label, $taxonomy_label),
+		'add_new_item' 			=> __( 'Add New '.$taxonomy_label ),
+		'edit_item' 			=> __( 'Edit '.$taxonomy_label ),
+		'new_item' 				=> __( 'New '.$taxonomy_label ),
+		'view_item' 			=> __( 'View '.$taxonomy_label ),
+		'search_items' 			=> __( 'Search '.$taxonomy_label ),
+		'not_found' 			=> __( 'No '.$taxonomy_label.' found' ),
+		'not_found_in_trash' 	=> __( 'No '.$taxonomy_label.' found in Trash' ),
+	);
+	$pages = array($post_type_name);
+	$args = array(
+		'labels' 			=> $labels,
+		'singular_label' 	=> __($taxonomy_label),
+		'public' 			=> true,
+		'show_ui' 			=> true,
+		'hierarchical' 		=> true,
+		'show_tagcloud' 	=> true,
+		'show_in_nav_menus' => true,
+		'rewrite' 			=> array('slug' => $taxonomy_name),
+	 );
+	register_taxonomy($taxonomy_name, $pages, $args);
+}
+
+add_action('init', 'register_chuyen_muc_tre_mo_coi');

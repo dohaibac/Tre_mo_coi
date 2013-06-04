@@ -47,6 +47,10 @@ section.main-menu div.row nav.top-bar{
 .main-content{
 	box-shadow:0 5px 25px #777777;
 }
+.main-content textarea{
+	max-width:100%;
+	min-width:100%;
+}
 .footer{
    background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;

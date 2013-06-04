@@ -42,7 +42,7 @@ section.main-menu div.row nav.top-bar{
 	margin:0px;
 }
 .button-tiem-kiem{
-	padding: 0 5px;
+	padding: 0 6px!important
 }
 .main-content{
 	box-shadow:0 5px 25px #777777;

@@ -1,13 +1,27 @@
 <?php
+/*
+Registration post_type, taxonomy for wordpress
+prefix : orphan_
 
+*/
+
+/* ========TRE MO COI=============== */
+/**
+* Function name:	orphan_register_orphan_posttype
+* Description : 	registration code for tre-mo-coi post type
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			Post type : 'tre-mo-coi'
+*/
+global $orphan_prefix;
+$orphan_prefix = 'orphan_';
 global $post_type_name, $post_type_label;
 $post_type_name = 'tre-mo-coi';
-$post_type_label = 'Trẻ mồ côi';		
-// registration code for tre-mo-coi post type 
-function register_custom_posttype() { 
+$post_type_label = 'Trẻ mồ côi';
+function orphan_register_orphan_posttype() { 
 	global $post_type_name, $post_type_label;
-	$label = 'Trẻ mồ côi';
-	$post_type_name = 'tre-mo-coi';
+	$label = $post_type_label;
+	$post_type_name = $post_type_name;
 	$labels = array( 
 		'name' => _x( $label, 'post type general name' ),
 		'singular_name' => _x( $label, 'post type singular name' ),
@@ -35,17 +49,23 @@ function register_custom_posttype() {
 		'rewrite' => array('slug' => $post_type_name),
 		'supports' => $supports,
 		'menu_position' => 5,
-		'menu_icon' => '' 
+		'menu_icon' => get_bloginfo('template_directory').'/images/family.png'
 	);
 	register_post_type( $post_type_name,$post_type_args);
  } 
-add_action('init', 'register_custom_posttype', $post_type_name);
+add_action('init', 'orphan_register_orphan_posttype', $post_type_name);
 
-// registration code for chuyen-muc-tre-mo-coi taxonomy
+/**
+* Function name:	orphan_register_chuyen_muc_tre_mo_coi_taxonomy
+* Description : 	registration taxonomy 'chuyen-muc-tre-mo-coi' for wordpress
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			taxonomy 'chuyen-muc-tre-mo-coi'
+*/
 global $taxonomy_name, $taxonomy_label;
 $taxonomy_name  = 'chuyen-muc-tre-mo-coi';
 $taxonomy_label = 'Chuyên mục trẻ mồ côi';
-function register_chuyen_muc_tre_mo_coi() {
+function orphan_register_chuyen_muc_tre_mo_coi_taxonomy() {
 	global $taxonomy_name, $taxonomy_label, $post_type_name;
 	$labels = array(
 		'name' 					=> _x( $taxonomy_label, 'taxonomy general name' ),
@@ -73,4 +93,7 @@ function register_chuyen_muc_tre_mo_coi() {
 	register_taxonomy($taxonomy_name, $pages, $args);
 }
 
-add_action('init', 'register_chuyen_muc_tre_mo_coi');
+add_action('init', 'orphan_register_chuyen_muc_tre_mo_coi_taxonomy');
+
+
+/* ========END TRE MO COI=============== */

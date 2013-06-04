@@ -59,7 +59,7 @@
 		<nav class="top-bar">
 		  <section class="top-bar-section">
 			<!-- Left Nav Section -->
-			<?php custom_main_nav('main_nav'); // Adjust using Menus in Wordpress Admin ?>			
+			<?php orphan_custom_main_nav('main_nav'); // Adjust using Menus in Wordpress Admin ?>			
 
 			<!-- Right Nav Section -->
 			<ul class="right">

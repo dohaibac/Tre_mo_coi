@@ -6,30 +6,28 @@ URL: htp://evizi.com
 This is where you can drop your custom functions or
 just edit things like thumbnail sizes, header images, 
 sidebars, comments, ect.
+Perefix function, class : orphan_
 */
-//show_admin_bar( false );	
+
+//show_admin_bar( false );
+	
+/**
+* Register custom post type 
+*/
 include('includes/custom_post_type.php');
-// Adding WP 3+ Functions & Theme Support
-function custom_theme_support() {
+
+/**
+* Function name:	custom_main_nav
+* Description : Adding WP 3+ Functions & Theme Support
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			int support theme with wordpress
+*/
+function orphan_custom_theme_support() {
 	add_theme_support('post-thumbnails');      // wp thumbnails (sizes handled in functions.php)
 	set_post_thumbnail_size(125, 125, true);   // default thumb size
 	add_theme_support( 'custom-background' );  // wp custom background
 	add_theme_support('automatic-feed-links'); // rss thingy
-	// to add header image support go here: http://themble.com/support/adding-header-background-image-support/
-	// adding post format support
-	/*add_theme_support( 'post-formats',      // post formats
-		array( 
-			'aside',   // title less blurb
-			'gallery', // gallery of images
-			'link',    // quick link to other site
-			'image',   // an image
-			'quote',   // a quick quote
-			'status',  // a Facebook like status update
-			'video',   // video 
-			'audio',   // audio
-			'chat'     // chat transcript 
-		)
-	);	*/
 	add_theme_support( 'menus' );            // wp menus
 	register_nav_menus(                      // wp3+ menus
 		array( 
@@ -38,13 +36,18 @@ function custom_theme_support() {
 		)
 	);	
 }
-
 // launching this stuff after theme setup
-add_action('after_setup_theme','custom_theme_support');	
+add_action('after_setup_theme','orphan_custom_theme_support');	
 
 
-/* custom menu */
-function custom_main_nav($theme_location = 'main_nav', $container = false ) {
+/**
+* Function name:	custom_main_nav
+* Description : Custom menu for wordpress
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			Custom menu for wordpress
+*/
+function orphan_custom_main_nav($theme_location = 'main_nav', $container = false ) {
 	// display the wp3 menu if available
     wp_nav_menu( 
     	array( 
@@ -54,27 +57,19 @@ function custom_main_nav($theme_location = 'main_nav', $container = false ) {
     		'container' => $container, /* container class */
     		'fallback_cb' => 'bones_main_nav_fallback', /* menu fallback */
     		'depth' => '3', /* suppress lower levels for now */
-    		'walker' => new Bootstrap_Walker()
+    		'walker' => new Orphan_Foundation_Walker()
     	)
     );
 }
-// Menu output mods
-/* Bootstrap_Walker for Wordpress 
-     * Author: George Huger, Illuminati Karate, Inc 
-     * More Info: http://illuminatikarate.com/blog/bootstrap-walker-for-wordpress 
-     * 
-     * Formats a Wordpress menu to be used as a Bootstrap dropdown menu (http://getbootstrap.com). 
-     * 
-     * Specifically, it makes these changes to the normal Wordpress menu output to support Bootstrap: 
-     * 
-     *        - adds a 'dropdown' class to level-0 <li>'s which contain a dropdown 
-     *         - adds a 'dropdown-submenu' class to level-1 <li>'s which contain a dropdown 
-     *         - adds the 'dropdown-menu' class to level-1 and level-2 <ul>'s 
-     * 
-     * Supports menus up to 3 levels deep. 
-     *  
-     */ 
-    class Bootstrap_Walker extends Walker_Nav_Menu 
+
+/**
+* Class name:	Orphan_Foundation_Walker
+* Description : Add Custom function wp_nav_menu
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			Custom menu wordpress
+*/
+ class Orphan_Foundation_Walker extends Walker_Nav_Menu 
     {     
  
         /* Start of the <ul> 
@@ -185,14 +180,20 @@ function custom_main_nav($theme_location = 'main_nav', $container = false ) {
     } 
 	
 
-// Add Twitter Bootstrap's standard 'active' class name to the active nav link item
-add_filter('nav_menu_css_class', 'add_active_class', 10, 2 );
+// Add Foundation's standard 'active' class name to the active nav link item
+add_filter('nav_menu_css_class', 'orphan_add_active_class', 10, 2 );
 
-function add_active_class($classes, $item) {
+/**
+* Function name:	orphan_custom_main_nav
+* Description : Set active menu for wordpress
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			Set active menu for wordpress
+*/
+function orphan_add_active_class($classes, $item) {
 	if( $item->menu_item_parent == 0 && in_array('current-menu-item', $classes) ) {
     $classes[] = "active";
 	}
-  
   return $classes;
 }
 ?>

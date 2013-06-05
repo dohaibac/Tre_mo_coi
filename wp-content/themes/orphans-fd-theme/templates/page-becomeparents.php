@@ -54,6 +54,14 @@ get_header();
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
+							  &nbsp;
+							</div>
+							<div class="small-9 columns">
+							  <input type="text" name="txt-phone-static" placeholder="Số điện thoại cố định (tùy chọn)" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-3 columns">
 							  <label for="txt-mail" class="inline">Email <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">

@@ -51,3 +51,7 @@ section.main-menu div.row nav.top-bar{
     padding: 25px 0 5px;
     text-align: center;
 	}
+	
+form.custom label span.require{
+	color:red;
+}

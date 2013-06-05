@@ -5,6 +5,7 @@
  * Description: A Page Template that shows form register
  * @author Long Nguyen
  */
+ global $current_user;
 get_header();
 ?>
 
@@ -12,13 +13,13 @@ get_header();
 		<div class="large-8 columns">
 
 			<div class="panel" style ="margin-top: 10px;">
-				<h3> Kết nối yêu thương: <span style="font-size:0.6em;">mở lòng để đón thêm một tình yêu</span></h3>
+				<h3><span style="font-size:0.8em;">Đón nhận yêu thương</span></h3>
 				<hr />
 				<form class="custom">
 					<fieldset>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-name" class="inline">Họ tên</label>
+							  <label for="txt-name" class="inline">Họ tên <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
 							  <input type="text" name="txt-name" id="txt-name" placeholder="Họ tên" />
@@ -26,18 +27,26 @@ get_header();
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-address" class="inline">Địa chỉ</label>
+							  <label for="txt-address" class="inline">Địa chỉ <span class="require">*</span></label>
 							</div>
-							<div class="small-4 columns">
-							  <input type="text" name="txt-address" id="txt-address" placeholder="Tỉnh (Thành phố)" />
-							</div>
-							<div class="small-5 columns">
-							  <input name="txt-town" type="text" placeholder="Quận (Huyện)" />
+							<div class="small-9 columns">
+							  <input type="text" name="txt-address" id="txt-address" placeholder="Địa chỉ (số nhà, tên đường, thôn, xóm, phường xã)" />
 							</div>
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-phone" class="inline">Điện thoại</label>
+							  &nbsp;
+							</div>
+							<div class="small-4 columns">
+							  <input type="text" name="txt-district" placeholder="Quận (Huyện)" />
+							</div>
+							<div class="small-5 columns">
+							  <input name="txt-province" type="text" placeholder="Tỉnh (Thành phố)" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-3 columns">
+							  <label for="txt-phone" class="inline">Điện thoại <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
 							  <input type="text" name="txt-phone" id="txt-phone" placeholder="Số điện thoại liên lạc" />
@@ -45,15 +54,15 @@ get_header();
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-mail" class="inline">Email</label>
+							  <label for="txt-mail" class="inline">Email <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
-							  <input type="text" name="txt-email" id="txt-mail" placeholder="Email liên lạc" />
+							  <input type="text" name="txt-email" id="txt-mail" placeholder="Email liên lạc" value="<?php echo $current_user->user_email; ?>" disabled="disabled" />
 							</div>
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-job" class="inline">Nghề nghiệp</label>
+							  <label for="txt-job" class="inline">Nghề nghiệp <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
 							  <input type="text" name="txt-job" id="txt-job" placeholder="Nghề nghiệp" />
@@ -64,15 +73,37 @@ get_header();
 							  <label for="txt-income" class="inline">Thu nhập</label>
 							</div>
 							<div class="small-9 columns">
-							  <input type="text" name="txt-income" id="txt-income" placeholder="Thu nhập hàng tháng" />
+							  
+							  <div class="row collapse">
+								  <div class="small-9 columns">
+									<input type="text" name="txt-income" id="txt-income" placeholder="Thu nhập tối thiểu hàng tháng" />
+								  </div>
+								  <div class="small-3 columns">
+									<span class="postfix">VNĐ</span>
+								  </div>
+								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-issue" class="inline">Lý do nhận nuôi</label>
+							  <label for="txt-issue" class="inline">Lý do nhận nuôi <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
 								<textarea name="txt-issue" id="txt-issue" placeholder="Lý do nhận con nuôi" rows="12"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-3 columns">
+							  <label class="inline">Nhận email</label>
+							</div>
+							<div class="small-3 columns">
+								<label for="gender1" class="inline"><input type="radio" style="display:none;" name="txt-month-email" value="1" checked="checked" /> 1 Tháng</label>
+							</div>
+							<div class="small-3 columns">
+								<label for="gender1" class="inline"><input type="radio" style="display:none;" name="txt-month-email" value="2" /> 3 Tháng</label>
+							</div>
+							<div class="small-3 columns">
+								<label for="gender1" class="inline"><input type="radio" style="display:none;" name="txt-month-email" value="3" /> 6 Tháng</label>
 							</div>
 						</div>
 
@@ -113,6 +144,15 @@ get_header();
 							  </div>
 							</div>
 						  
+						</div>
+						<div class="row">
+							  <div class="large-12 columns">
+								
+								<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
+									Bạn vui lòng nhập chính xác email, hệ thống sẽ gửi những thông tin bạn cần vào email này trong khoảng thời gian bạn đăng ký
+									nhận tin. Bạn có thế ngừng nhận email bất kỳ lúc nào bạn muốn.
+								</p>
+							  </div>
 						</div>
 						<div class="row">
 							<div class="large-12 columns text-center">

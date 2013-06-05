@@ -2,15 +2,18 @@
 if (have_posts()) :
 echo '<div class="list_item">';
  while (have_posts()) : the_post(); update_post_caches($posts); 		
+$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 ?>
 	<div class="row">
 		<div class="large-4 columns">
-			<img src="<?php bloginfo('template_directory')?>/images/thumb300x200.png" alt="">
-		</div>
-		<div class="large-8 columns">
-			<h3><?php the_title(); ?></h3>
-			<p><?php the_content_rss('',true,'', 30); ?></p>
-			<p><a rel="tooltip" href="<?php the_permalink(); ?>" class="btn">Read more...</a></p>
+			<a rel="tooltip" href="<?php the_permalink(); ?>" class="btn">
+			<?php if($image[0] != ''){?>
+			<img src="<?php echo $image[0]; ?>" alt="" width="300" height="200">
+			<?php }
+			else{?>
+			<img src="<?php echo get_template_directory_uri() ?>/images/thumb300x200.png" alt="">
+			<?php }?>
+			</a>
 		</div>
 	</div>
 <?php  endwhile;  ?>

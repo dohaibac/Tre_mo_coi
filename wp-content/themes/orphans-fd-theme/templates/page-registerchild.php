@@ -17,8 +17,8 @@ get_header();
 				<h3><span style="font-size:0.8em;">Nhập thông tin trẻ mồ côi</span></h3>
 				<hr />
 				<?php 
-				if($_POST['action'] == 1)
-				insert_tre_mo_coi($_POST) ?>
+				if($_POST['action'] == 1){
+				insert_tre_mo_coi($_POST); }?>
 				<form class="custom" action="<?php the_permalink() ?>" method="POST">
 					<input type="hidden" name="action" value="1" />
 					<fieldset>
@@ -127,10 +127,6 @@ get_header();
 						<div class="row">
 							  <div class="large-12 columns">
 								
-								<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
-									Bạn vui lòng nhập chính xác email, hệ thống sẽ gửi những thông tin bạn cần vào email này trong khoảng thời gian bạn đăng ký
-									nhận tin. Bạn có thế ngừng nhận email bất kỳ lúc nào bạn muốn.
-								</p>
 							  </div>
 						</div>
 						<div class="row">

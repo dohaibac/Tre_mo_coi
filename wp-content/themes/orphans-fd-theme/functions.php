@@ -333,4 +333,13 @@ function tmc_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'tmc_widgets_init' );
+
+/*allow redirection, even if my theme starts to send output to the browser
+Cannot modify header information */
+if ( !is_admin() ){
+	add_action('init', 'orphan_do_output_buffer');
+	function orphan_do_output_buffer() {
+			ob_start();
+	}
+}
 ?>

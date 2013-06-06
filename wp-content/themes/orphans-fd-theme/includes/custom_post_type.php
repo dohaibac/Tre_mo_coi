@@ -204,6 +204,7 @@ $orphan_fields_cv_array = array(
 			'label'			=> 'Người gặp trẻ',
 			'description' 	=> 'Nhập thông tin người gặp trẻ',
 			'type'			=> 'text',
+			'rich_editor'	=> false,
 			'options'		=> null
 		)
 	)

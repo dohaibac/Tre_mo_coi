@@ -36,7 +36,7 @@ function orphan_register_orphan_posttype() {
 		'parent_item_colon' => ''
 	);
  
-	$supports = array('title',/*'editor',*/'author','thumbnail','excerpt'); 
+	$supports = array('title','editor','author','thumbnail','excerpt'); 
 	$post_type_args = array(
 		'labels' => $labels, 
 		'singular_label' => __($label),
@@ -520,3 +520,65 @@ function orphan_shortcode_meta_box(){
 	return $orphan_prefix;
 }
 /* ========END TRE MO COI=============== */
+
+
+if ( !function_exists('orphan_meta_box_to_manage_post') ) {
+    function orphan_meta_box_to_manage_post($column_name, $post_id) {
+		global $orphan_prefix, $orphan_fields_info_array;
+            $width = (int) 60;
+            $height = (int) 60;
+
+            if ( 'thumbnail' == $column_name ) {
+                // thumbnail of WP 2.9
+                $thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
+                // image from gallery
+                $attachments = get_children( array('post_parent' => $post_id, 'post_type' => 'attachment', 'post_mime_type' => 'image') );
+                if ($thumbnail_id)
+                    $thumb = wp_get_attachment_image( $thumbnail_id, array($width, $height), true );
+                elseif ($attachments) {
+                    foreach ( $attachments as $attachment_id => $attachment ) {
+                        $thumb = wp_get_attachment_image( $attachment_id, array($width, $height), true );
+                    }
+                }
+                    if ( isset($thumb) && $thumb ) {
+                        echo $thumb;
+                    } else {
+                        echo __('<img width="60" src="'.get_template_directory_uri().'/images/no-avatar.png"/>');
+                    }
+            } else  {
+				if(isset($orphan_fields_info_array)){
+					foreach($orphan_fields_info_array as $field_value){
+						$key_value = $orphan_prefix.$field_value['name'];
+						if ( $key_value == $column_name ) {
+							$meta_values = get_post_meta($post_id, $key_value, true);
+							if($meta_values){
+								echo $meta_values;
+							} else {
+								echo 'Update...';
+							}
+						}
+					}
+					
+				}
+			}
+    }
+	// Add to admin_init function
+	add_filter('manage_posts_columns', 'orphan_add_new_manage_columns');
+
+	function orphan_add_new_manage_columns($my_columns) {
+		global $orphan_prefix, $orphan_fields_info_array;
+			$new_my_columns['cb'] = '<input type="checkbox" />';	 
+			$new_my_columns['thumbnail'] = __('Hình ảnh');
+			$new_my_columns['title'] = __('Họ tên');
+			foreach($orphan_fields_info_array as $field_value){
+				$key_colum = $orphan_prefix.$field_value['name'];
+				$new_my_columns[$key_colum] = ($field_value['label']);
+			}
+			$new_my_columns['author'] = __('Người đăng');			
+			$new_my_columns['date'] = ('Ngày đăng');		
+			return $new_my_columns;
+		}
+	// Add to admin_init function
+
+	add_action('manage_posts_custom_column', 'orphan_meta_box_to_manage_post', 10, 2);
+}

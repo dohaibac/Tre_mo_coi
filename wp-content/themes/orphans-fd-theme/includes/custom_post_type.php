@@ -519,10 +519,14 @@ function orphan_shortcode_meta_box(){
 	global $orphan_prefix;
 	return $orphan_prefix;
 }
-/* ========END TRE MO COI=============== */
 
-
-if ( !function_exists('orphan_meta_box_to_manage_post') ) {
+/**
+* Function name:	orphan_meta_box_to_manage_post
+* Description : 	add data meta_box to manage post
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			add data meta_box to manage post
+*/
     function orphan_meta_box_to_manage_post($column_name, $post_id) {
 		global $orphan_prefix, $orphan_fields_info_array;
             $width = (int) 60;
@@ -562,9 +566,14 @@ if ( !function_exists('orphan_meta_box_to_manage_post') ) {
 				}
 			}
     }
-	// Add to admin_init function
-	add_filter('manage_posts_columns', 'orphan_add_new_manage_columns');
-
+	
+/**
+* Function name:	orphan_add_new_manage_columns
+* Description : 	add columns meta_box to manage post
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			add columns meta_box to manage post
+*/
 	function orphan_add_new_manage_columns($my_columns) {
 		global $orphan_prefix, $orphan_fields_info_array;
 			$new_my_columns['cb'] = '<input type="checkbox" />';	 
@@ -578,7 +587,9 @@ if ( !function_exists('orphan_meta_box_to_manage_post') ) {
 			$new_my_columns['date'] = ('Ngày đăng');		
 			return $new_my_columns;
 		}
-	// Add to admin_init function
-
+	// Add to admin_init function $post_type_name
+if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == $post_type_name){
+	add_filter('manage_posts_columns', 'orphan_add_new_manage_columns');
 	add_action('manage_posts_custom_column', 'orphan_meta_box_to_manage_post', 10, 2);
 }
+/* ========END TRE MO COI=============== */

@@ -75,9 +75,9 @@ function orphan_register_chuyen_muc_nhan_con_nuoi_taxonomy() {
 add_action('init', 'orphan_register_chuyen_muc_nhan_con_nuoi_taxonomy');
 
 /**add box admin*/
-global $orphan_fields_array;
+global $orphan_fields_ncn_array;
 global $orphan_save_meta_post;
-$orphan_fields_array = array(
+$orphan_fields_ncn_array = array(
 	// ly do nhan con nuoi
 	// gioi tinh
 	// nam sinh
@@ -145,15 +145,19 @@ $orphan_fields_array = array(
 	)
 );
 
-$orphan_save_meta_post[] = $orphan_fields_array;
+$orphan_save_meta_post[] = $orphan_fields_ncn_array;
+function orphan_fields_ncn_array(){
+ global $orphan_fields_ncn_array;
+ return $orphan_fields_ncn_array;
+}
 add_action('admin_menu', 'orphan_add_meta_box_ncn');
 function orphan_add_meta_box_ncn(){
-	global $orphan_prefix, $orphan_fields_array, $post_type_ncn;
+	global $orphan_prefix, $orphan_fields_ncn_array, $post_type_ncn;
 	
 	$meta_box_fields = array(
 		'context' => 'normal',
 		'priority' => 'high',
-		'fields' => $orphan_fields_array
+		'fields' => $orphan_fields_ncn_array
 	);
 	add_meta_box($orphan_prefix.'metabox_thong_tin_nhan_con_nuoi', 'Thông tin nhận con nuôi', 'orphan_show_meta_box', $post_type_ncn, 'advanced', 'default', $meta_box_fields);
 }

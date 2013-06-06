@@ -92,7 +92,7 @@ get_header();
 								<label class="inline">Hình ảnh</label>
 							</div>							
 							<div class="small-6 columns">
-								<input type="url" name="url-hinhanh" id="url-hinhanh" value="" class="inline" size="50"/>
+								<input type="url" name="url-hinhanh" placeholder="Nhập url hình ảnh"  id="url-hinhanh" value="" class="inline" size="50"/>
 								<a href="#_upload" data="url-hinhanh" class="button upload_image_button prefix">Đăng hình ảnh</a>
 							</div>
 							<div class="small-3 columns">

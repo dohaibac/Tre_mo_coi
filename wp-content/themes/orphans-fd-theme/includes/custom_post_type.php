@@ -171,7 +171,7 @@ $orphan_fields_cv_array = array(
 	// tên, năm sinh, giới tính, hoàn cảnh (trc khi nhận vào trại trẻ), user id (người bảo trợ), ảnh,
 	orphan_result_meta(
 		array(
-			'name' 			=> 'cv_address',
+			'name' 			=> 'cv-address',
 			'label'			=> 'Địa điểm',
 			'description' 	=> 'Nhập địa điểm khi gặp trẻ',
 			'type'			=> 'text',
@@ -181,7 +181,7 @@ $orphan_fields_cv_array = array(
 	),
 	orphan_result_meta(
 		array(
-			'name' 			=> 'cv_time',
+			'name' 			=> 'cv-time',
 			'label'			=> 'Thời gian gặp trẻ',
 			'description' 	=> 'Nhập thời gian khi gặp trẻ',
 			'type'			=> 'date',
@@ -191,7 +191,7 @@ $orphan_fields_cv_array = array(
 	),
 	orphan_result_meta(
 		array(
-			'name' 			=> 'cv_content',
+			'name' 			=> 'cv-content',
 			'label'			=> 'Tình trạng khi gặp trẻ',
 			'description' 	=> 'Nhập tình trạng khi gặp trẻ',
 			'type'			=> 'textarea',
@@ -201,10 +201,11 @@ $orphan_fields_cv_array = array(
 	),
 	orphan_result_meta(
 		array(
-			'name' 			=> 'cv_auth',
+			'name' 			=> 'cv-auth',
 			'label'			=> 'Người gặp trẻ',
 			'description' 	=> 'Nhập thông tin người gặp trẻ',
 			'type'			=> 'text',
+			'rich_editor'	=> false,
 			'options'		=> null
 		)
 	)

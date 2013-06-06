@@ -499,7 +499,7 @@ function orphan_add_meta_script(){
 		jQuery(document).ready(function(){
 				jQuery(".<?php echo $orphan_prefix; ?>datepicker").datepicker({
 					dateFormat: "dd/mm/yy",
-					yearRange: "-18:+0",
+					yearRange: "-90:+0",
 					changeMonth: true, 
 					changeYear: true
 				});

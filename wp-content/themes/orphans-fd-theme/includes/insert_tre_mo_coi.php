@@ -2,7 +2,7 @@
 
 function insert_tre_mo_coi($data){
 	global $orphan_prefix;
-	var_dump($data);
+	//var_dump($data);
 
 	$title = $data["txt-name"];
 	// Create post object

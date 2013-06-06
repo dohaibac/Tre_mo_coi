@@ -29,5 +29,4 @@ function insert_tre_mo_coi($data){
 		
 	}
 
-
 }

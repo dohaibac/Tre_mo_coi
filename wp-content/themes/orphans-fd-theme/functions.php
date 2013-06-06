@@ -10,6 +10,7 @@ sidebars, comments, ect.
 //show_admin_bar( false );	
 include('includes/custom_post_type.php');
 include('includes/post_type_nhan_con_nuoi.php');
+include('includes/insert_tre_mo_coi.php');
 // Adding WP 3+ Functions & Theme Support
 function custom_theme_support() {
 	add_theme_support('post-thumbnails');      // wp thumbnails (sizes handled in functions.php)
@@ -313,7 +314,6 @@ function orphan_get_json($data = null){
 		$json = json_encode($data); 
 		return orphan_decodeUnicodeString($json);
 }
-
 /**
 * Function name:	tmc_widgets_init
 * Description : 	register a site bar

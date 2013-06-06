@@ -36,6 +36,7 @@ function orphan_register_orphan_posttype() {
 		'parent_item_colon' => ''
 	);
  
+ 
 	$supports = array('title',/*'editor',*/'author','thumbnail','excerpt'); 
 	$post_type_args = array(
 		'labels' => $labels, 
@@ -336,8 +337,7 @@ function orphan_show_meta_box($post, $metabox)	{
 		$field['id'] = $orphan_prefix.$field['id'];
         // get current post meta data
         $meta = get_post_meta($post->ID, $field['id'], true);
-       // var_dump($field['id'],$meta);
-		echo '<tr>',
+        echo '<tr>',
                 '<th style="width:20%"><label for="', $field['id'], '">', $field['label'], '</label></th>',
                 '<td>';
         switch ($field['type']) {
@@ -501,7 +501,7 @@ function orphan_add_meta_script(){
 		jQuery(document).ready(function(){
 				jQuery(".<?php echo $orphan_prefix; ?>datepicker").datepicker({
 					dateFormat: "dd/mm/yy",
-					yearRange: "-18:+0",
+					yearRange: "-90:+0",
 					changeMonth: true, 
 					changeYear: true
 				});

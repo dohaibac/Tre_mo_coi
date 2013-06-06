@@ -1,7 +1,12 @@
 <div class="large-4 columns">
+	<?php
+	if ( ! dynamic_sidebar( 'sidebar-m' ) ) : 
+  
+    endif;
+     ?>
 	<h4>Getting Started</h4>
 	<p>We're stoked you want to try Foundation! To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
-
+	
 	<h4>Other Resources</h4>
 	<p>Once you've exhausted the fun in this document, you should check out:</p>
 	<ul class="disc">

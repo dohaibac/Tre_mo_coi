@@ -15,6 +15,11 @@ $image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbna
 			<?php }?>
 			</a>
 		</div>
+		<div class="large-8 columns">
+			<h3><a rel="tooltip" href="<?php the_permalink(); ?>" class="btn"><?php the_title(); ?></a></h3>
+			<p><?php the_content_rss('',true,'', 30); ?></p>
+			<p><a rel="tooltip" href="<?php the_permalink(); ?>" class="btn">Xem thêm...</a></p>
+		</div>
 	</div>
 <?php  endwhile;  ?>
 	</div>

@@ -89,7 +89,7 @@ get_header();
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-								<label class="inline">Hình ảnh</label>
+								<label for="url-hinhanh" class="inline">Hình ảnh</label>
 							</div>							
 							<div class="small-6 columns">
 								<input type="url" name="url-hinhanh" placeholder="Nhập url hình ảnh"  id="url-hinhanh" value="" class="inline" size="50"/>

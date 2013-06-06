@@ -40,6 +40,13 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/styles.css" />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url');?>" media="screen" />
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	<script type="text/javascript">
+	//<![CDATA[
+	ajaxurl = '<?php echo admin_url( 'admin-ajax.php'); ?>';
+	url_theme = '<?php echo get_bloginfo('template_directory'); ?>';
+	url_home = '<?php echo get_bloginfo('home'); ; ?>';
+	//]]>
+	</script>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/jquery.js"></script>
 	<?php wp_head(); ?>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/custom.modernizr.js"></script>	

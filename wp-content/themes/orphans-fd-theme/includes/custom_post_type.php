@@ -37,7 +37,7 @@ function orphan_register_orphan_posttype() {
 	);
  
  
-	$supports = array('title',/*'editor',*/'author','thumbnail','excerpt'); 
+	$supports = array('title',/*'editor','thumbnail',*/'author','excerpt'); 
 	$post_type_args = array(
 		'labels' => $labels, 
 		'singular_label' => __($label),
@@ -106,6 +106,16 @@ $orphan_fields_info_array = array(
 	// tên, năm sinh, giới tính, hoàn cảnh (trc khi nhận vào trại trẻ), user id (người bảo trợ), ảnh,
 	orphan_result_meta(
 		array(
+			'name' 			=> 'photo',
+			'label'			=> 'Photo',
+			'description' 	=> 'Nhập đường dẫn ảnh',
+			'type'			=> 'upload',
+			'rich_editor'	=> false,
+			'options'		=> null
+		)
+	),
+	orphan_result_meta(
+		array(
 			'name' 			=> 'birthday',
 			'label'			=> 'Ngày sinh',
 			'description' 	=> 'Nhập ngày sinh',
@@ -114,7 +124,6 @@ $orphan_fields_info_array = array(
 			'options'		=> null
 		)
 	),
-
 	orphan_result_meta(
 		array(
 			'name' 			=> 'gender',
@@ -533,38 +542,21 @@ function orphan_shortcode_meta_box(){
 		global $orphan_prefix, $orphan_fields_info_array;
             $width = (int) 60;
             $height = (int) 60;
-
-            if ( 'thumbnail' == $column_name ) {
-                // thumbnail of WP 2.9
-                $thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
-                // image from gallery
-                $attachments = get_children( array('post_parent' => $post_id, 'post_type' => 'attachment', 'post_mime_type' => 'image') );
-                if ($thumbnail_id)
-                    $thumb = wp_get_attachment_image( $thumbnail_id, array($width, $height), true );
-                elseif ($attachments) {
-                    foreach ( $attachments as $attachment_id => $attachment ) {
-                        $thumb = wp_get_attachment_image( $attachment_id, array($width, $height), true );
-                    }
-                }
-                    if ( isset($thumb) && $thumb ) {
-                        echo $thumb;
-                    } else {
-                        echo __('<img width="60" src="'.get_template_directory_uri().'/images/no-avatar.png"/>');
-                    }
-            } else  {
-				if(isset($orphan_fields_info_array)){
-					foreach($orphan_fields_info_array as $field_value){
-						$key_value = $orphan_prefix.$field_value['name'];
-						if ( $key_value == $column_name ) {
-							$meta_values = get_post_meta($post_id, $key_value, true);
-							if($meta_values){
-								echo $meta_values;
+			if(isset($orphan_fields_info_array)){
+				foreach($orphan_fields_info_array as $field_value){
+					$key_value = $orphan_prefix.$field_value['name'];
+					if ( $key_value == $column_name ) {
+						$meta_values = get_post_meta($post_id, $key_value, true);
+						if($meta_values){
+							if($field_value['type'] == 'upload'){
+								echo ('<img width="60" src="'.$meta_values.'"/>');
 							} else {
-								echo 'Update...';
+								echo $meta_values;
 							}
+						} else {
+							echo 'Update...';
 						}
 					}
-					
 				}
 			}
     }
@@ -579,7 +571,6 @@ function orphan_shortcode_meta_box(){
 	function orphan_add_new_manage_columns($my_columns) {
 		global $orphan_prefix, $orphan_fields_info_array;
 			$new_my_columns['cb'] = '<input type="checkbox" />';	 
-			$new_my_columns['thumbnail'] = __('Hình ảnh');
 			$new_my_columns['title'] = __('Họ tên');
 			foreach($orphan_fields_info_array as $field_value){
 				$key_colum = $orphan_prefix.$field_value['name'];

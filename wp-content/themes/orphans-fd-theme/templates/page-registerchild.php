@@ -13,7 +13,9 @@ get_header();
 		<div class="large-8 columns">
 
 			<div class="panel" style ="margin-top: 10px;">
-				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
+				<?php 
+				if (have_posts()) : the_post(); update_post_caches($posts); 	
+				?>
 				<h3><span style="font-size:0.8em;">Nhập thông tin trẻ mồ côi</span></h3>
 				<hr />
 				<?php 
@@ -89,11 +91,13 @@ get_header();
 							<div class="small-3 columns">
 								<label class="inline">Hình ảnh</label>
 							</div>							
-							<div class="small-9 columns">
-								<label for="gender1" class="inline">
-								<input type="file" name="file-hinhanh" id="file-hinhanh" value="1" class="inline" size="50"/></label>
+							<div class="small-6 columns">
+								<input type="url" name="url-hinhanh" id="url-hinhanh" value="" class="inline" size="50"/>
+								<a href="#_upload" data="url-hinhanh" class="button upload_image_button prefix">Đăng hình ảnh</a>
 							</div>
-													
+							<div class="small-3 columns">
+								<img style="border:1px solid #d5d5d5;" id="image_url-hinhanh" width="80" src="<?php echo get_template_directory_uri();  ?>/images/no-avatar.png"/>
+							</div>						
 						</div>
 
 						<div class="panel">
@@ -136,6 +140,43 @@ get_header();
 
 					</fieldset>
 				</form>
+				<?php
+					wp_enqueue_script('media-upload');
+					wp_enqueue_script('thickbox');
+					wp_enqueue_style('thickbox');
+				?>
+				<script type="text/javascript">
+					jQuery(function($){
+					var txtBox_id = '';
+					var image_id = '';
+					$('.upload_image_button').click(function() {
+
+						txtBox_id = '#'+$(this).attr('data');
+						image_id = '#image_'+$(this).attr('data');
+
+						formfield = $(txtBox_id);
+
+						tb_show('Đăng hình ảnh', url_home+'/wp-admin/media-upload.php?type=image&amp;TB_iframe=true');
+
+						return false;
+
+					});
+
+					// send the selected image to the iamge url field
+
+					window.send_to_editor = function(html) {
+
+						imgurl = $('img',html).prop('src');
+
+						$(txtBox_id).val(imgurl);
+
+						$(image_id).attr('src', imgurl).fadeIn();
+
+						tb_remove();
+
+					}
+				});
+				</script>
 				<?php endif; ?>
 			</div>
 

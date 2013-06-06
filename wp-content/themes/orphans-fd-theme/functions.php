@@ -313,6 +313,7 @@ function orphan_get_json($data = null){
 		$json = json_encode($data); 
 		return orphan_decodeUnicodeString($json);
 }
+
 /**
 * Function name:	tmc_widgets_init
 * Description : 	register a site bar

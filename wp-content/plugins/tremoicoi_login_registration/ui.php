@@ -58,7 +58,7 @@ function tmc_add_register_box_template(){
 			<img src="{$PLUGIN_DIR_URL}asset/imgs/register-header.png" width="600" />
 		</div>
 		<br />
-		<div data-alert="" class="alert-box alert" style="display:none;" id="tmc_login_error_container">
+		<div data-alert="" class="alert-box alert" style="display:none;" id="tmc_register_error_container">
           Bạn phải nhập đầy đủ thông tin.
         </div>
 		

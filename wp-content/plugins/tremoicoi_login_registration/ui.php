@@ -1,37 +1,38 @@
 <?php
+
 global $current_user;
 
 $PLUGIN_DIR_URL = plugin_dir_url(__FILE__);
 
-if(is_null($current_user)){
-	add_action('wp_head', 'tmc_add_jquery_plugins');
-	add_action('wp_footer', 'tmc_add_login_box_template', 100);
-	add_action('wp_footer', 'tmc_add_register_box_template', 100);
-	add_action('wp_footer', 'tmc_add_user_panel', 101);
+if (is_null($current_user)) {
+    add_action('wp_head', 'tmc_add_jquery_plugins');
+    add_action('wp_footer', 'tmc_add_login_box_template', 100);
+    add_action('wp_footer', 'tmc_add_register_box_template', 100);
+    add_action('wp_footer', 'tmc_add_user_panel', 101);
 }
 
 add_action('wp_head', 'tmc_add_javascript');
 
-function tmc_add_user_panel(){
-	echo '<div id="tmc_user_panel_data" style="display:none;">';
-	if(!is_user_logged_in() ){	
-	echo <<<EOF
+function tmc_add_user_panel() {
+    echo '<div id="tmc_user_panel_data" style="display:none;">';
+    if (!is_user_logged_in()) {
+        echo <<<EOF
 		<a href="#login" id="tmc_login_button" class="small button">Đăng nhập</a> | <a id="tmc_register_button" href="#register" class="small button">Đăng ký</a>
 EOF;
-	}else{
-		$current_user = wp_get_current_user();
-		$site_url = get_site_url();
-		$logout_url = wp_logout_url( home_url() );
-	echo <<<EOF
+    } else {
+        $current_user = wp_get_current_user();
+        $site_url = get_site_url();
+        $logout_url = wp_logout_url(home_url());
+        echo <<<EOF
 	Chào {$current_user->user_login} <a href="{$site_url}/profile" class="small button">Trang cá nhân</a> | <a class="small button alert" href="$logout_url">Thoát</a>
 EOF;
-	}
-	echo '</div>';
+    }
+    echo '</div>';
 }
 
-function tmc_add_jquery_plugins(){
-	global $PLUGIN_DIR_URL;
-	echo <<<EOF
+function tmc_add_jquery_plugins() {
+    global $PLUGIN_DIR_URL;
+    echo <<<EOF
 	<!-- Fancy box -->
 	<!-- Add mousewheel plugin (this is optional) -->
 	<script type="text/javascript" src="{$PLUGIN_DIR_URL}asset/js/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
@@ -41,18 +42,18 @@ function tmc_add_jquery_plugins(){
 EOF;
 }
 
-function tmc_add_javascript(){
-	global $PLUGIN_DIR_URL;
-	$ajax_url = admin_url('admin-ajax.php');
-	echo <<<EOF
+function tmc_add_javascript() {
+    global $PLUGIN_DIR_URL;
+    $ajax_url = admin_url('admin-ajax.php');
+    echo <<<EOF
 	<script language="javascript">var ajaxurl = '$ajax_url';</script>
 	<script type="text/javascript" src="{$PLUGIN_DIR_URL}asset/js/tremocoi_login_registration.js"></script>
 EOF;
 }
 
-function tmc_add_register_box_template(){
-	global $PLUGIN_DIR_URL;
-	echo <<<EOF
+function tmc_add_register_box_template() {
+    global $PLUGIN_DIR_URL;
+    echo <<<EOF
 	<div id="register" style="display:none;width:600px;height:auto;">
 		<div>
 			<img src="{$PLUGIN_DIR_URL}asset/imgs/register-header.png" width="600" />
@@ -144,9 +145,9 @@ function tmc_add_register_box_template(){
 EOF;
 }
 
-function tmc_add_login_box_template(){
-	global $PLUGIN_DIR_URL;
-	echo <<<EOF
+function tmc_add_login_box_template() {
+    global $PLUGIN_DIR_URL;
+    echo <<<EOF
 		<div id="login" style="display:none;width:300px;height:auto;">
 		<div>
 			<img src="{$PLUGIN_DIR_URL}asset/imgs/login-header.png" width="300" />
@@ -191,22 +192,21 @@ function tmc_add_login_box_template(){
 			<a href="#" id="tmc_login_submit_button" class="success small button" title="Đăng nhập">Đăng nhập</a>
 			</div>
 				<div style="clear:both;"></div>
-			</div>
-			
-		
+			</div>			
 			<div>
-				<div class="left" style="font-size:17px;font-weight:bold;margin-top:7px;">Đăng nhập bằng</div>
-				<div class="right">
-				<a href="#" id="login_by_facebook" title="Đăng nhập bằng Facebook" style="background:url({$PLUGIN_DIR_URL}asset/imgs/facebook-and-twitter-logo-png-8115.png) -35px 0px no-repeat;display:block;width:35px;height:34px;float:left;"></a>
-				<a href="#" id="login_by_twitter" title="Đăng nhập bằng Twitter" style="background:url({$PLUGIN_DIR_URL}asset/imgs/facebook-and-twitter-logo-png-8115.png) 0px 0px no-repeat;display:block;width:35px;height:34px;float:left;margin-left:5px;"></a>
-				</div>
-				<div style="clear:both;"></div>
-			</div>
-			<div style="font-style:italic;font-size:14px;margin-top:7px;">
-				Chưa có tài khoản? Click vào <a href="#" id="tmc_login_form_signup_link">đây</a> để đăng ký
-			</div>
-			</div>
-		<div style="clear:both;"></div>
-	</div>
+				<div class="left">				
+EOF;
+    do_action( 'wordpress_social_login' );
+
+    echo <<<EOF
+    </div>
+    <div style = "clear:both;"></div>
+    </div>
+    <div style = "font-style:italic;font-size:14px;margin-top:15px;margin-bottom:5px; float:right;">
+    Chưa có tài khoản? Click vào <a href = "#" id = "tmc_login_form_signup_link">đây</a> để đăng ký
+    </div>
+    </div>
+    <div style = "clear:both;"></div>
+    </div >
 EOF;
 }

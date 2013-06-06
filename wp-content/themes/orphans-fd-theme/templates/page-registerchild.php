@@ -13,10 +13,16 @@ get_header();
 		<div class="large-8 columns">
 
 			<div class="panel" style ="margin-top: 10px;">
+				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
 				<h3><span style="font-size:0.8em;">Nhập thông tin trẻ mồ côi</span></h3>
 				<hr />
-				<form class="custom">
+				<?php 
+				if($_POST['action'] == 1)
+				insert_tre_mo_coi($_POST) ?>
+				<form class="custom" action="<?php the_permalink() ?>" method="POST">
+					<input type="hidden" name="action" value="1" />
 					<fieldset>
+					
 						<div class="row">
 							<div class="small-3 columns">
 							  <label for="txt-name" class="inline">Họ tên <span class="require">*</span></label>
@@ -73,10 +79,10 @@ get_header();
 							
 							<div class="small-4 columns">
 								<label for="gender1" class="inline">
-								<input type="radio" style="display:none;" name="txt-gender" id="gender1" value="1" checked="checked" /> Nam</label>
+								<input type="radio" style="display:none;" name="txt-gender" id="gender1" value="Nam" checked="checked" /> Nam</label>
 							</div>
 							<div class="small-5 columns">
-								<label for="gender2" class="inline"><input type="radio" style="display:none;" name="txt-gender" id="gender2" value="2" /> Nữ</label>
+								<label for="gender2" class="inline"><input type="radio" style="display:none;" name="txt-gender" id="gender2" value="Nữ" /> Nữ</label>
 							</div>							
 						</div>
 						<div class="row">
@@ -111,10 +117,10 @@ get_header();
 							</div>
 							<div class="row">
 								<div class="large-3 columns">
-									<label for="txt-status" class="inline">Tình trạng</label>								
+									<label for="txt-content" class="inline">Tình trạng</label>								
 								</div>
 								<div class="large-9 columns">
-									<input type="text" name="txt-status" id="txt-status" placeholder="Tình trạng" />
+									<input type="text" name="txt-content" id="txt-content" placeholder="Tình trạng" />
 								</div>
 							</div>
 						</div>
@@ -135,6 +141,7 @@ get_header();
 
 					</fieldset>
 				</form>
+				<?php endif; ?>
 			</div>
 
 

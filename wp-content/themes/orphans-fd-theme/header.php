@@ -43,93 +43,17 @@
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/jquery.js"></script>
 	<?php wp_head(); ?>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/custom.modernizr.js"></script>	
-	
-	<!-- Fancy box -->
-	<!-- Add mousewheel plugin (this is optional) -->
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
-	<!-- Add fancyBox main JS and CSS files -->
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/fancybox/source/jquery.fancybox.js?v=2.1.4"></script>
-	<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/js/fancybox/source/jquery.fancybox.css?v=2.1.4" media="screen" />
-	<script language="javascript">
-	$(document).ready(function(){		
-		$("#login_button").fancybox({
-		width: 330,
-		height: 306,
-		scrolling: 'no',
-		helpers: {
-			title : {
-				type : 'outside'
-			},
-			overlay : {
-				speedOut : 0
-			}
-		}
-		});
-	});
-	</script>
 </head>
 <body>
-	<div id="login_box" style="display:none;width:300px;height:306px;">
-		<div>
-			<img src="<?php echo get_template_directory_uri(); ?>/images/login-header.png" width="300" />
-		</div>
-		<br />
-			<div>
-			  <div class="large-12 columns" style="padding-left:0px;padding-right:0px;width:300px;">
-				<div class="left"style="margin-top:7px;">
-				<label><b>Tên đăng nhập</b></label>
-				</div>
-				<div class="right" style="margin-left:10px;">
-				<input type="text" value="" style="width:170px;">
-				</div>
-			  </div>
-			  <div style="clear:both;"></div>
-			</div>
-			<div>
-			  <div class="large-12 columns" style="padding-left:0px;padding-right:0px;width:300px;">
-			  <div class="left"style="margin-top:7px;">
-				<label><b>Mật khẩu</b></label>
-			  </div>
-			  <div class="right" style="margin-left:10px;">
-				<input type="password" value=""  style="width:170px;">
-			  </div>
-			  </div>
-			  <div style="clear:both;"></div>
-			</div>
-			<div>
-			<div class="left" style="margin-top:8px;font-size:14px;">
-			<label for="rememberme"><input style="margin:0 0 0 0;vertical-align:middle;" name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="90"> <span>Tự động đăng nhập lần sau</span>
-			</label>
-			</div>
-			<div class="right">
-			<a href="#" class="success small button" title="Đăng nhập">Đăng nhập</a>
-			</div>
-				<div style="clear:both;"></div>
-			</div>
-		
-			<div>
-				<div class="left" style="font-size:17px;font-weight:bold;margin-top:7px;">Đăng nhập bằng</div>
-				<div class="right">
-				<a href="#" id="login_by_facebook" title="Đăng nhập bằng Facebook" style="background:url(<?php echo get_template_directory_uri(); ?>/images/facebook-and-twitter-logo-png-8115.png) -35px 0px no-repeat;display:block;width:35px;height:34px;float:left;"></a>
-				<a href="#" id="login_by_twitter" title="Đăng nhập bằng Twitter" style="background:url(<?php echo get_template_directory_uri(); ?>/images/facebook-and-twitter-logo-png-8115.png) 0px 0px no-repeat;display:block;width:35px;height:34px;float:left;margin-left:5px;"></a>
-				</div>
-				<div style="clear:both;"></div>
-			</div>
-			<div style="font-style:italic;font-size:14px;margin-top:7px;">
-				Chưa có tài khoản? Click vào <a href="/sign-up">đây</a> để đăng ký
-			</div>
-		<div style="clear:both;"></div>
-	</div>
-	<header class="main-header">
+<header class="main-header">
 		<div class="row">
-			<div class="large-12 columns left"style="width:75%;">
+			<div class="large-12 columns left"style="width:60%;">
 				<div>
 				<h2 class="title"><a class="link_home" href="<?php bloginfo('home');?>/"><?php bloginfo('name');?></a></h2>
 				<p class="lead"><?php bloginfo('description');?></p>
 				</div>
 			</div>
-			<div class="right" style="padding-right:20px;position:relative;z-index:1000;">
-			<a href="#login_box" id="login_button" class="small button">Đăng nhập</a> | <a id="register_button" href="#" class="small button">Đăng ký</a>
+			<div class="right" style="padding-right:20px;position:relative;z-index:1000;" id="tmc_user_panel">
 			</div>
 		</div>
 	</header>

@@ -35,7 +35,7 @@
  
   
   <script>
-    $(document).foundation();
+   $(document).foundation();
   </script>
   <?php wp_footer() ?>
 </body>

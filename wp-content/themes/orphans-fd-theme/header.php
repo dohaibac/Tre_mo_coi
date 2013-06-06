@@ -40,21 +40,20 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/styles.css" />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url');?>" media="screen" />
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-	 <script>
-  document.write('<script src=' +
-  ('__proto__' in {} ? '<?php echo get_template_directory_uri(); ?>/js/vendor/zepto' : '<?php echo get_template_directory_uri(); ?>/js/vendor/jquery') +
-  '.js><\/script>')
-  </script>
+	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/jquery.js"></script>
 	<?php wp_head(); ?>
-	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/custom.modernizr.js"></script>
-
+	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/custom.modernizr.js"></script>	
 </head>
 <body>
-	<header class="main-header">
+<header class="main-header">
 		<div class="row">
-			<div class="large-12 columns">
+			<div class="large-12 columns left"style="width:60%;">
+				<div>
 				<h2 class="title"><a class="link_home" href="<?php bloginfo('home');?>/"><?php bloginfo('name');?></a></h2>
 				<p class="lead"><?php bloginfo('description');?></p>
+				</div>
+			</div>
+			<div class="right" style="padding-right:20px;position:relative;z-index:1000;" id="tmc_user_panel">
 			</div>
 		</div>
 	</header>

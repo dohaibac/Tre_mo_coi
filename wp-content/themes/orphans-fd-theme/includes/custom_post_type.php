@@ -36,7 +36,8 @@ function orphan_register_orphan_posttype() {
 		'parent_item_colon' => ''
 	);
  
-	$supports = array('title','editor','author','thumbnail','excerpt'); 
+ 
+	$supports = array('title',/*'editor',*/'author','thumbnail','excerpt'); 
 	$post_type_args = array(
 		'labels' => $labels, 
 		'singular_label' => __($label),

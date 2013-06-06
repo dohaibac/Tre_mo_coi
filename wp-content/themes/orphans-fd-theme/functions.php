@@ -313,4 +313,13 @@ function orphan_get_json($data = null){
 		$json = json_encode($data); 
 		return orphan_decodeUnicodeString($json);
 }
+
+/*allow redirection, even if my theme starts to send output to the browser
+Cannot modify header information */
+if ( !is_admin() ){
+	add_action('init', 'orphan_do_output_buffer');
+	function orphan_do_output_buffer() {
+			ob_start();
+	}
+}
 ?>

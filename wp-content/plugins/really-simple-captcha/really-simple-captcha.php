@@ -213,7 +213,7 @@ class ReallySimpleCaptcha {
 
 		foreach ( $suffixes as $suffix ) {
 			$filename = sanitize_file_name( $prefix . $suffix );
-			$file = trailingslashit( $this->tmp_dir ) . $filename;
+			$file = untrailingslashit( $this->tmp_dir ) . $filename;
 			if ( @is_file( $file ) )
 				unlink( $file );
 		}

@@ -6,13 +6,27 @@ $(document).ready(function(){
 		$('#tmc_register_waiting').hide();
 		$('#tmc_register_error_container').hide();
 		$('#tmc_register_success').hide();
-	}, autoDimensions : false, helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}});
+	}, autoDimensions : false,fitToView: false, helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}});
 	
 	$('#tmc_username').onEnter( function() {login();});
 	$('#tmc_password').onEnter( function() {login();});
 	$('#tmc_rememberme').onEnter( function() {login();});
 	$("#tmc_login_submit_button").click(function(){login();});
 	$("#tmc_register_submit_button").click(function(){register();return false;});
+	$('#tmc_register_form').click(function() {
+		$(this).closest('form').find("input[type=text], input[type=password], textarea").val("");
+	});
+	$('#tmc_login_form_signup_link').click(function(){
+		$.fancybox.close();
+		$.fancybox(
+			$("#register").html(),
+			{scrolling: 'no', beforeShow: function(){
+			$('#tmc_register_form_container').show();
+			$('#tmc_register_waiting').hide();
+			$('#tmc_register_error_container').hide();
+			$('#tmc_register_success').hide();
+		}, autoDimensions : false,fitToView: false, helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}});
+	});
 	
 	
 	var tmc_register_validator = $('#tmc_register_form').bind("invalid-form.validate", function() {
@@ -120,6 +134,8 @@ $(document).ready(function(){
 					}
 					else
 					{
+						if(result.errors.invalid_username)
+							errors.append('<li>Tên đăng nhập không hợp lệ.</li>');
 						if(result.errors.username_exists)
 							errors.append('<li>Tên đăng nhập này đã tồn tại.</li>');
 						if(result.errors.email_exists)

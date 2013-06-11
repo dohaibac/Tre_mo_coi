@@ -43,6 +43,7 @@ function tmc_add_jquery_plugins() {
 	<style>
 	#tmc_register_form .error{font-size:11px;}
 	#tmc_register_form input{margin:8px 0px 4px 0px;}
+	#fancybox-inner{height:auto !important;}
 	</style>
 EOF;
 }
@@ -104,16 +105,11 @@ function tmc_add_register_box_template() {
 							<div class="small-3 columns">
 							  <label for="txt-pwd" class="inline">Mật khẩu <span class="require">*</span></label>
 							</div>
-							<div class="small-9 columns">
-							  <input type="password" name="txt-pwd" id="txt-pwd" placeholder="Mật khẩu" value="">
+							<div class="small-4 columns">
+							  <input type="text" id="txt-pwd" name="txt-pwd" placeholder="Mật khẩu">
 							</div>
-						</div>
-						<div class="row">
-							<div class="small-3 columns">
-							  <label for="txt-confirm-pwd" class="inline">Xác nhận <span class="require">*</span></label>
-							</div>
-							<div class="small-9 columns">
-							  <input type="password" name="txt-confirm-pwd" id="txt-confirm-pwd" placeholder="Nhập lại mật khẩu" value="">
+							<div class="small-5 columns">
+							  <input name="txt-confirm-pwd" id="txt-confirm-pwd" type="text" placeholder="Xác nhận mật khẩu">
 							</div>
 						</div>
 						<div class="row">

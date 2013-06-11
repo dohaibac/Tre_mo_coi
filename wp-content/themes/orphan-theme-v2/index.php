@@ -21,7 +21,7 @@
 				<h2>Tin tức - Sự kiện</h2>
 				<div class="box-content">
 					<div class="row">
-						<div class="large-7 columns">
+						<div class="large-7 columns box-news">
 							<div class="row">
 								<div class="large-4 columns">
 									<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/1.png"/></a>

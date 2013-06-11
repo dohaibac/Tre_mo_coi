@@ -314,3 +314,6 @@ span.date{
     color: #FFFFFF;
     font-size: 0.9em;
 }
+.box-news{}
+.box-news .row{  margin-bottom: 10px;}
+.box-news .row:last-child{  margin-bottom: 0px;}

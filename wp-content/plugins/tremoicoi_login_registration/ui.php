@@ -43,6 +43,7 @@ function tmc_add_jquery_plugins() {
 	<style>
 	#tmc_register_form .error{font-size:11px;}
 	#tmc_register_form input{margin:8px 0px 4px 0px;}
+	#fancybox-inner{height:auto !important;}
 	</style>
 EOF;
 }

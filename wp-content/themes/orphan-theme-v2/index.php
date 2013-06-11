@@ -24,9 +24,9 @@
 						<div class="large-7 columns">
 						<?php 
 						$i=0;
-						$featuredPost = new WP_Query();
-						$featuredPost->query('showposts=10&orderby=DESC');
-						if (have_posts()) : while ($featuredPost->have_posts()) : $featuredPost->the_post(); update_post_caches($posts); 		
+						$newsPost = new WP_Query();
+						$newsPost->query('showposts=10&cat=1,5&orderby=DESC');
+						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
 						$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 						if($i < 3){?>
 							<div class="row">
@@ -63,7 +63,6 @@
 						<?php $i++; endwhile;  wp_reset_query(); ?>
 							</ul>
 						</div>
-						<?php endif; ?>
 												
 					</div>
 					
@@ -73,42 +72,39 @@
 			<div class="row shadow-box">
 				<h2>Chương trình hoạt động <a href="" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content list-2">
+				<?php
+				$acNewsPost = new WP_Query();
+				$acNewsPost->query('showposts=2&cat=8&orderby=DESC');
+				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				?>
 					<div class="row">
 						<div class="large-3 columns">
-							<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/3.png"/></a>
+							<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image[0] ?>"/></a>
 						</div>
 						<div class="large-9 columns">
-							<h3><a href="">Mỗi bàn tay, một tấm lòng</a></h3>
-							<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<p><?php the_content_rss('',true,'', 30); ?></p>
 						</div>
 					</div>
-					<div class="row">
-						<div class="large-3 columns">
-							<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/4.png"/></a>
-						</div>
-						<div class="large-9 columns">
-							<h3><a href="">Mỗi bàn tay, một tấm lòng</a></h3>
-							<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-						</div>
-					</div>
+				<?php endwhile; wp_reset_query();?>
 				</div>
 			</div><!--End Chương trình hoạt động -->
 			<!--Begin Văn bản luật -->
 			<div class="row shadow-box">
 				<h2>Văn bản luật về trẻ em <a href="" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content">
+				<?php
+				$lawPost = new WP_Query();
+				$lawPost->query('showposts=3&cat=9&orderby=DESC');
+				while ($lawPost->have_posts()) : $lawPost->the_post();		
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				?>
 					<div class="row">
-						<h3><a href="">Văn bản luật về bảo vệ quyền lợi trẻ em</a></h3>
-						<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+						<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+						<p><?php the_content_rss('',true,'', 30); ?></p>
 					</div>
-					<div class="row">
-						<h3><a href="">Văn bản luật về nhận con nuôi</a></h3>
-						<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-					</div>
-					<div class="row">
-						<h3><a href="">Luật Việt Nam về nghĩa vụ và quyền lợi của trẻ em</a></h3>
-						<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-					</div>
+				<?php endwhile; wp_reset_query();?>
 				</div>
 			</div><!--End Văn bản luật -->
 		</div>

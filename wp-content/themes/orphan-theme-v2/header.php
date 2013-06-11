@@ -47,7 +47,6 @@
 	url_home = '<?php echo get_bloginfo('home'); ; ?>';
 	//]]>
 	</script>
-	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/jquery.js"></script>
 	<?php wp_head(); ?>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/custom.modernizr.js"></script>	
 </head>
@@ -57,7 +56,7 @@
 			<div class="row header">
 				<div class="large-12 columns">
 					<h2><a href="<?php bloginfo('home');?>/" class="logo"></a></h2>
-					<div class="user-box">
+					<div class="user-box" id="tmc_user_panel">
 						<a class="small" id="tmc_login_button" href="#login">Đăng nhập</a> | 
 						<a class="small" href="#register" id="tmc_register_button">Đăng ký</a>
 					</div>

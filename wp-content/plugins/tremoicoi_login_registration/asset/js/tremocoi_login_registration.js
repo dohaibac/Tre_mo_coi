@@ -13,6 +13,9 @@ $(document).ready(function(){
 	$('#tmc_rememberme').onEnter( function() {login();});
 	$("#tmc_login_submit_button").click(function(){login();});
 	$("#tmc_register_submit_button").click(function(){register();return false;});
+	$('#tmc_register_form').click(function() {
+		$(this).closest('form').find("input[type=text], input[type=password], textarea").val("");
+	});
 	$('#tmc_login_form_signup_link').click(function(){
 		$.fancybox.close();
 		$.fancybox(
@@ -131,6 +134,8 @@ $(document).ready(function(){
 					}
 					else
 					{
+						if(result.errors.invalid_username)
+							errors.append('<li>Tên đăng nhập không hợp lệ.</li>');
 						if(result.errors.username_exists)
 							errors.append('<li>Tên đăng nhập này đã tồn tại.</li>');
 						if(result.errors.email_exists)

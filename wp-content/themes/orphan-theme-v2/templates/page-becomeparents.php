@@ -159,19 +159,19 @@ get_header();
 							  <label class="inline">Thời gian nhận email</label>
 							</div>
 							<div class="small-3 columns">
-								<label for="txt-email-duration1" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration1" value="1" onclick="javascript:email_duration('txt-email-duration1');" /> 1 Tháng</label>
+								<label for="txt-email-duration1" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration1" value="1" onclick="javascript:email_duration('txt-email-duration1');" style="display:none;" /> 1 Tháng</label>
 							</div>
 							<div class="small-3 columns">
-								<label for="txt-email-duration3" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration3" value="3" onclick="javascript:email_duration('txt-email-duration3');" checked="checked" /> 3 Tháng</label>
+								<label for="txt-email-duration3" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration3" value="3" onclick="javascript:email_duration('txt-email-duration3');" checked="checked" style="display:none;" /> 3 Tháng</label>
 							</div>
 							<div class="small-3 columns">
-								<label for="txt-email-duration6" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration6" value="6" onclick="javascript:email_duration('txt-email-duration6');" /> 6 Tháng</label>
+								<label for="txt-email-duration6" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration6" value="6" onclick="javascript:email_duration('txt-email-duration6');" style="display:none;" /> 6 Tháng</label>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-reason" class="inline">Lý do nhận nuôi <span class="require">*</span></label>
+							  <label for="txt-reason" class="inline">Lý do nhận nuôi </label>
 							</div>
 							<div class="small-9 columns">
 								<textarea name="txt-reason" id="txt-reason" placeholder="Lý do nhận con nuôi" rows="12"></textarea>
@@ -202,13 +202,13 @@ get_header();
 								<label class="inline">Giới tính</label>
 							  </div>
 							  <div class="large-3 columns">
-								<label for="gender1" class="inline"><input type="radio" name="txt-gender" id="gender1" value="Nam" /> Nam</label>
+								<label for="gender1" class="inline"><input type="radio" name="txt-gender" id="gender1" value="Nam" style="display:none;" /> Nam</label>
 							  </div>
 							  <div class="large-3 columns">
-								<label for="gender2" class="inline"><input type="radio" name="txt-gender" id="gender2" value="Nữ" /> Nữ</label>
+								<label for="gender2" class="inline"><input type="radio" name="txt-gender" id="gender2" value="Nữ" style="display:none;" /> Nữ</label>
 							  </div>
 							  <div class="large-3 columns">
-								<label for="gender3" class="inline"><input type="radio" name="txt-gender" id="gender3" value="Nam / Nữ" checked="checked" /> Nam / Nữ</label>
+								<label for="gender3" class="inline"><input type="radio" name="txt-gender" id="gender3" value="Nam / Nữ" checked="checked" style="display:none;" /> Nam / Nữ</label>
 							  </div>
 							</div>
 							

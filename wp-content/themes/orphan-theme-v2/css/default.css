@@ -50,7 +50,6 @@ a:hover{
 	-moz-border-radius: 10px 10px 0 0;
 	-webkit-border-radius: 10px 10px 0 0;
     display: block;
-    overflow: hidden;
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -66,6 +65,13 @@ a:hover{
 }
 .main-menu ul li{
 	background:url("../images/divider.png") no-repeat scroll right center transparent;
+}
+.main-menu ul li:first-child{
+	 border-radius: 10px 0 0 0;
+	 -webkit-border-radius: 10px 0 0 0;
+	 -moz-border-radius: 10px 0 0 0;
+    display: block;
+    overflow: hidden;
 }
 .main-menu ul li:last-child{
 	background:none;
@@ -215,6 +221,7 @@ footer{
 	background: url("../images/logo.png") no-repeat scroll 0 -10px transparent;
     display: block;
     height: 170px;
+	width: 45%;
 }
 h2 .logo{
 
@@ -317,3 +324,6 @@ span.date{
 .box-news{}
 .box-news .row{  margin-bottom: 10px;}
 .box-news .row:last-child{  margin-bottom: 0px;}
+.main-content textarea{
+	max-width:365px;
+}

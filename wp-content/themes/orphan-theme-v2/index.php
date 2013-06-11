@@ -21,45 +21,49 @@
 				<h2>Tin tức - Sự kiện</h2>
 				<div class="box-content">
 					<div class="row">
-						<div class="large-7 columns box-news">
+						<div class="large-7 columns">
+						<?php 
+						$i=0;
+						$newsPost = new WP_Query();
+						$newsPost->query('showposts=10&cat=1,5&orderby=DESC');
+						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
+						$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+						if($i < 3){?>
 							<div class="row">
 								<div class="large-4 columns">
-									<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/1.png"/></a>
+									<a href="<?php the_permalink(); ?>"><?php if($image[0] != ''){?>
+										<img class="thumb" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>" width="226" height="93">
+										<?php }
+										else{?>
+										<img class="thumb" src="<?php echo get_template_directory_uri() ?>/images/no_image.png" width="226" height="93" alt="">
+										<?php }?>
+									</a>
 								</div>
 								<div class="large-8 columns">
-									<h3><a href="">Mỗi bàn tay, một tấm lòng</a></h3>
-									<p> Lorem ipsum dolor sit amet, consectetueadipi scing elit...</p>
+									<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+									<p> <?php the_content_rss('',true,'', 10); ?></p>
 								</div>
 							</div>
-							<div class="row">
-								<div class="large-4 columns">
-									<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/2.png"/></a>
-								</div>
-								<div class="large-8 columns">
-									<h3><a href="">Mỗi bàn tay, một tấm lòng</a></h3>
-									<p> Lorem ipsum dolor sit amet, consectetueadipi scing elit...</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="large-4 columns">
-									<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/4.png"/></a>
-								</div>
-								<div class="large-8 columns">
-									<h3><a href="">Mỗi bàn tay, một tấm lòng</a></h3>
-									<p> Lorem ipsum dolor sit amet, consectetueadipi scing elit...</p>
-								</div>
-							</div>
+						<?php }
+						else {
+						if($i == 3){ ?>
 						</div>
 						<div class="large-5 columns meta-list">
 							<ul class="meta">
-								<li><a href="#">Những vòng tay yêu thương</a><span class="date"> (12/06/2013)</span></li>
-								<li><a href="#">Thắp sáng ước mơ bằng những yêu thương</a><span class="date">(12/06/2013)</span></li>	
-								<li><a href="#">Khi giắc mơ về bên nụ cười trẻ thơ </a><span class="date">(12/06/2013)</span></li>
-								<li><a href="#">6 bước biến ước mơ thành hiện thực</a><span class="date">(12/06/2013)</span></li>
-								<li><a href="#">Thắp sáng ước mơ bằng những yêu thương </a><span class="date">(12/06/2013)</span></li>
+								<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+								<?php $my_date = the_date('d-m-Y', '<span class="date">', '</span>', FALSE); if($my_date != '') echo '('.$my_date.')' ?></li>
+						<?php }
+						else{ ?>
+								<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+								<?php $my_date = the_date('d-m-Y', '<span class="date">', '</span>', FALSE); if($my_date != '') echo '('.$my_date.')' ?></li>
+						<?php }
+						}
+						?>
 							
+						<?php $i++; endwhile;  wp_reset_query(); ?>
 							</ul>
 						</div>
+												
 					</div>
 					
 				</div>
@@ -68,42 +72,39 @@
 			<div class="row shadow-box">
 				<h2>Chương trình hoạt động <a href="" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content list-2">
+				<?php
+				$acNewsPost = new WP_Query();
+				$acNewsPost->query('showposts=2&cat=8&orderby=DESC');
+				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				?>
 					<div class="row">
 						<div class="large-3 columns">
-							<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/3.png"/></a>
+							<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image[0] ?>"/></a>
 						</div>
 						<div class="large-9 columns">
-							<h3><a href="">Mỗi bàn tay, một tấm lòng</a></h3>
-							<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<p><?php the_content_rss('',true,'', 30); ?></p>
 						</div>
 					</div>
-					<div class="row">
-						<div class="large-3 columns">
-							<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/4.png"/></a>
-						</div>
-						<div class="large-9 columns">
-							<h3><a href="">Mỗi bàn tay, một tấm lòng</a></h3>
-							<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-						</div>
-					</div>
+				<?php endwhile; wp_reset_query();?>
 				</div>
 			</div><!--End Chương trình hoạt động -->
 			<!--Begin Văn bản luật -->
 			<div class="row shadow-box">
 				<h2>Văn bản luật về trẻ em <a href="" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content">
+				<?php
+				$lawPost = new WP_Query();
+				$lawPost->query('showposts=3&cat=9&orderby=DESC');
+				while ($lawPost->have_posts()) : $lawPost->the_post();		
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				?>
 					<div class="row">
-						<h3><a href="">Văn bản luật về bảo vệ quyền lợi trẻ em</a></h3>
-						<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+						<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+						<p><?php the_content_rss('',true,'', 30); ?></p>
 					</div>
-					<div class="row">
-						<h3><a href="">Văn bản luật về nhận con nuôi</a></h3>
-						<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-					</div>
-					<div class="row">
-						<h3><a href="">Luật Việt Nam về nghĩa vụ và quyền lợi của trẻ em</a></h3>
-						<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat. euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-					</div>
+				<?php endwhile; wp_reset_query();?>
 				</div>
 			</div><!--End Văn bản luật -->
 		</div>

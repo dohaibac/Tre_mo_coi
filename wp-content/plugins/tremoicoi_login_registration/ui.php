@@ -17,7 +17,7 @@ function tmc_add_user_panel() {
     echo '<div id="tmc_user_panel_data" style="display:none;">';
     if (!is_user_logged_in()) {
         echo <<<EOF
-		<a href="#login" id="tmc_login_button" class="small button">Đăng nhập</a> | <a id="tmc_register_button" href="#register" class="small button">Đăng ký</a>
+		<a href="#login" id="tmc_login_button">Đăng nhập</a> | <a id="tmc_register_button" href="#register">Đăng ký</a>
 EOF;
     } else {
         $current_user = wp_get_current_user();

@@ -3,43 +3,59 @@
 /**
  * Template Name: Đăng ký nhận trẻ Template
  * Description: A Page Template that shows form register
- * @author Long Nguyen
+ * @author Long Nguyen and Ha Nguyen
  */
+
  global $current_user, $orphan_prefix;
  //$data = orphan_fields_ncn_array();
- if(isset($_POST) && ($_POST != null) && ($_POST['txt-name'] != null)){
-    $hoten = $_POST['txt-name']; //ten
-	$ngaysinh = $_POST['txt-birthday']; // nam sinh
-	$lydo = $_POST['txt-issue'];
-	$gioitinh = $_POST['txt-gender'];
-	$ghichu = $_POST['txt-note'];
-	$thoigianmail = $_POST['txt-month-email'];
+ 
+ if(isset($_POST["become_parent"]) && $_POST["become_parent"] == "become_parent")
+ {
+ 	/*** AUTHOR INFO ***/
+    $address_home = $_POST['txt-address']; //dia chi
+    $address_district = $_POST['txt-district'];  // quan(huyen)
+    $address_province = $_POST['txt-province']; //tinh
+    $phone = $_POST['txt-phone']; // dien thoai
+    $phone_static = $_POST['txt-phone-static']; // dt co dinh
+    $job = $_POST['txt-job']; // nghe nghiep
+    $income = $_POST['txt-income'];  // thu nhap
+  	
+	update_user_meta($current_user->ID, "address", $address_home);
+	update_user_meta($current_user->ID, "district", $address_district);
+	update_user_meta($current_user->ID, "province", $address_province);
+	update_user_meta($current_user->ID, "phone", $phone);
+	update_user_meta($current_user->ID, "phone_static", $phone_static);
+	update_user_meta($current_user->ID, "job", $job);
+	update_user_meta($current_user->ID, "income", $income);    
+ 	/*~~ AUTHOR INFO ~~*/
 	
-    /*$_POST['txt-address']; //dia chi
-    $_POST['txt-district']  // quan(huyen)
-    $_POST['txt-province'] //tinh
-    $_POST['txt-phone'] // dien thoai
-    $_POST['txt-phone-static'] // dt co dinh
-    $_POST['txt-job'] // nghe nghiep
-    $_POST['txt-income']  // thu nhap
-    //$_POST['txt-issue'] // lý do
-    //$_POST['txt-month-email'] // thoi gian nhan mail
-    
-    //$_POST['txt-gender'] // gioi tinh
-    //$_POST['txt-note'] // ghi chu*/
+	
+ 	/*** POST INFO ***/
+	$reason = $_POST['txt-reason'];
+	$email_duration = $_POST['txt-email-duration'];    
+	$birth_year = $_POST['txt-birthyear']; // nam sinh
+	$gender = $_POST['txt-gender'];
+	$note = $_POST['txt-note'];
+	
 	$my_post = array(
-	  'post_title'    => $hoten,
-	  'post_author'   => $current_user->ID,
-	  'post_type'     => 'nhan-con-nuoi'
+	  	'post_author'   => $current_user->ID,
+	  	'post_type'     => 'nhan-con-nuoi',
+	  	'post_title'    => 'Nhận con nuôi',
+		'post_content' 	=> $reason,
+		'post_status' 	=> 'cronjob'
 	);
 
 	// Insert the post into the database
 	$post_id = wp_insert_post( $my_post );
-	update_post_meta($post_id, $orphan_prefix .'ncn-ly-do', $lydo);
-	update_post_meta($post_id, $orphan_prefix .'ncn-ngay-sinh', $ngaysinh);
-	update_post_meta($post_id, $orphan_prefix .'ncn-gioi-tinh', $gioitinh);
-	update_post_meta($post_id, $orphan_prefix .'ncn-ghi-chu', $ghichu);
-	update_post_meta($post_id, $orphan_prefix .'ncn-month-email', $thoigianmail);
+	
+	update_post_meta($post_id, $orphan_prefix .'ncn-ly-do', $reason);
+	update_post_meta($post_id, $orphan_prefix .'ncn_email_duration', $email_duration);
+	update_post_meta($post_id, $orphan_prefix .'ncn-nam-sinh', $birth_year);
+	update_post_meta($post_id, $orphan_prefix .'ncn-gioi-tinh', $gender);
+	update_post_meta($post_id, $orphan_prefix .'ncn_ghi-chu', $note);
+ 	/*~~ POST INFO ~~*/  
+	
+	
 	wp_redirect(home_url("dang-ky-nhan-mail-thanh-cong"));
 }
 get_header();
@@ -52,13 +68,31 @@ get_header();
 				<h3><span style="font-size:0.8em;">Đón nhận yêu thương</span></h3>
 				<hr />
 				<form class="custom" method="post">
+					<input type="hidden" name="become_parent" value="become_parent" />
+					
 					<fieldset>
 						<div class="row">
 							<div class="small-3 columns">
 							  <label for="txt-name" class="inline">Họ tên <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
-							  <input type="text" name="txt-name" id="txt-name" placeholder="Họ tên" />
+							  <input type="text" name="txt-name" id="txt-name" placeholder="Họ tên" value="<?php echo $current_user->display_name; ?>" disabled="disabled" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="small-3 columns">
+							  <label for="txt-mail" class="inline">Email <span class="require">*</span></label>
+							</div>
+							<div class="small-9 columns">
+							  
+							  <div class="row collapse">
+								  <div class="small-9 columns">
+									<input type="text" name="txt-email" id="txt-mail" placeholder="Email liên lạc" value="<?php echo $current_user->user_email; ?>" disabled="disabled" />
+								  </div>
+								  <div class="small-3 columns">
+									<span class="postfix"><a href="<?php echo get_site_url();?>/wp-admin/profile.php?updated=1" >Sửa email</a></span>
+								  </div>
+								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -66,7 +100,7 @@ get_header();
 							  <label for="txt-address" class="inline">Địa chỉ <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
-							  <input type="text" name="txt-address" id="txt-address" placeholder="Địa chỉ (số nhà, tên đường, thôn, xóm, phường xã)" />
+							  <input type="text" name="txt-address" id="txt-address" placeholder="Địa chỉ (số nhà, tên đường, thôn, xóm, phường xã)" value="<?php echo get_user_meta($current_user->ID, "address", true); ?>" />
 							</div>
 						</div>
 						<div class="row">
@@ -74,10 +108,10 @@ get_header();
 							  &nbsp;
 							</div>
 							<div class="small-4 columns">
-							  <input type="text" name="txt-district" placeholder="Quận (Huyện)" />
+							  <input type="text" name="txt-district" placeholder="Quận (Huyện)" value="<?php echo get_user_meta($current_user->ID, "district", true); ?>" />
 							</div>
 							<div class="small-5 columns">
-							  <input name="txt-province" type="text" placeholder="Tỉnh (Thành phố)" />
+							  <input name="txt-province" type="text" placeholder="Tỉnh (Thành phố)" value="<?php echo get_user_meta($current_user->ID, "province", true); ?>" />
 							</div>
 						</div>
 						<div class="row">
@@ -85,7 +119,7 @@ get_header();
 							  <label for="txt-phone" class="inline">Điện thoại <span class="require">*</span></label>
 							</div>
 							<div class="small-9 columns">
-							  <input type="text" name="txt-phone" id="txt-phone" placeholder="Số điện thoại liên lạc" />
+							  <input type="text" name="txt-phone" id="txt-phone" placeholder="Số điện thoại liên lạc" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
 							</div>
 						</div>
 						<div class="row">
@@ -94,14 +128,6 @@ get_header();
 							</div>
 							<div class="small-9 columns">
 							  <input type="text" name="txt-phone-static" placeholder="Số điện thoại cố định (tùy chọn)" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="small-3 columns">
-							  <label for="txt-mail" class="inline">Email <span class="require">*</span></label>
-							</div>
-							<div class="small-9 columns">
-							  <input type="text" name="txt-email" id="txt-mail" placeholder="Email liên lạc" value="<?php echo $current_user->user_email; ?>" disabled="disabled" />
 							</div>
 						</div>
 						<div class="row">
@@ -130,24 +156,25 @@ get_header();
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="txt-issue" class="inline">Lý do nhận nuôi <span class="require">*</span></label>
+							  <label class="inline">Thời gian nhận email</label>
 							</div>
-							<div class="small-9 columns">
-								<textarea name="txt-issue" id="txt-issue" placeholder="Lý do nhận con nuôi" rows="12"></textarea>
+							<div class="small-3 columns">
+								<label for="txt-email-duration1" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration1" value="1" onclick="javascript:email_duration('txt-email-duration1');" /> 1 Tháng</label>
+							</div>
+							<div class="small-3 columns">
+								<label for="txt-email-duration3" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration3" value="3" onclick="javascript:email_duration('txt-email-duration3');" checked="checked" /> 3 Tháng</label>
+							</div>
+							<div class="small-3 columns">
+								<label for="txt-email-duration6" class="inline"><input type="radio" name="txt-email-duration" id="txt-email-duration6" value="6" onclick="javascript:email_duration('txt-email-duration6');" /> 6 Tháng</label>
 							</div>
 						</div>
+						
 						<div class="row">
 							<div class="small-3 columns">
-							  <label class="inline">Nhận email</label>
+							  <label for="txt-reason" class="inline">Lý do nhận nuôi <span class="require">*</span></label>
 							</div>
-							<div class="small-3 columns">
-								<label for="gender1" class="inline"><input type="radio" style="display:none;" name="txt-month-email" value="1 Tháng" checked="checked" /> 1 Tháng</label>
-							</div>
-							<div class="small-3 columns">
-								<label for="gender1" class="inline"><input type="radio" style="display:none;" name="txt-month-email" value="3 Tháng" /> 3 Tháng</label>
-							</div>
-							<div class="small-3 columns">
-								<label for="gender1" class="inline"><input type="radio" style="display:none;" name="txt-month-email" value="6 Tháng" /> 6 Tháng</label>
+							<div class="small-9 columns">
+								<textarea name="txt-reason" id="txt-reason" placeholder="Lý do nhận con nuôi" rows="12"></textarea>
 							</div>
 						</div>
 
@@ -155,11 +182,11 @@ get_header();
 						  <h6> Nhu cầu: </h4>
 						  <hr />
 						  <div class="row">
-							  <div class="large-2 columns">
+							  <div class="large-3 columns">
 								<label class="inline">Năm sinh</label>
 							  </div>
-							  <div class="large-3 columns">
-								<select name = "txt-birthday">
+							  <div class="large-3 columns" align="right">
+								<select name = "txt-birthyear">
 									<?php 
 										$tmpyear = date("Y");
 										for($i=$tmpyear;$i>($tmpyear-12);$i--):
@@ -168,16 +195,20 @@ get_header();
 									<?php endfor; ?>
 								</select>
 							  </div>
-							  <div class="large-2 columns">
+							</div>
+							
+							<div class="row" >
+							  <div class="large-3 columns">
 								<label class="inline">Giới tính</label>
 							  </div>
-							  <div class="large-5 columns">
-								  <div class="large-6 columns">
-									<label for="gender1" class="inline"><input type="radio" style="display:none;" name="txt-gender" id="gender1" value="Nam" checked="checked" /> Nam</label>
-								  </div>
-								  <div class="large-6 columns">
-									<label for="gender2" class="inline"><input type="radio" style="display:none;" name="txt-gender" id="gender2" value="Nữ" /> Nữ</label>
-								  </div>
+							  <div class="large-3 columns">
+								<label for="gender1" class="inline"><input type="radio" name="txt-gender" id="gender1" value="Nam" /> Nam</label>
+							  </div>
+							  <div class="large-3 columns">
+								<label for="gender2" class="inline"><input type="radio" name="txt-gender" id="gender2" value="Nữ" /> Nữ</label>
+							  </div>
+							  <div class="large-3 columns">
+								<label for="gender3" class="inline"><input type="radio" name="txt-gender" id="gender3" value="Nam / Nữ" checked="checked" /> Nam / Nữ</label>
 							  </div>
 							</div>
 							
@@ -193,8 +224,7 @@ get_header();
 							  <div class="large-12 columns">
 								
 								<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
-									Bạn vui lòng nhập chính xác email, hệ thống sẽ gửi những thông tin bạn cần vào email này trong khoảng thời gian bạn đăng ký
-									nhận tin. Bạn có thế ngừng nhận email bất kỳ lúc nào bạn muốn.
+									Hệ thống sẽ gửi thông tin những trẻ mồ côi phù hợp nhu cầu của bạn vào địa chỉ email trong vòng <span id="email_duration" /></span> tháng. Bạn có thể hủy chức năng này ngay tại email của bạn bất cứ khi nào bạn muốn.
 								</p>
 							  </div>
 						</div>
@@ -217,3 +247,12 @@ get_header();
  <?php 
  get_footer();
  ?>
+ 
+<script>
+function email_duration(obj_id)
+{
+	$("#email_duration").html($("#"+obj_id).val());
+}
+
+email_duration("txt-email-duration3");
+</script>

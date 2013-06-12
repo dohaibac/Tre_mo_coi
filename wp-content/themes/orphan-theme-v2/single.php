@@ -8,8 +8,13 @@ get_header();
 					<h2><?php if(function_exists('bcn_display'))	{bcn_display();	} ?></h2>
 					<div class="box-content list-2">
 						<?php the_content(); ?>
+						<hr />
+						<?php comments_template(); ?>
+						
+						
 					</div>
 				<?php endif; ?>	
+				
 			</div>
 		</div>
 	</div><!--end .large-8-->

@@ -6,6 +6,12 @@
 	<div class="shadow-box">
 		<a href="#"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
 	</div>
+	<div class="sidebar-box shadow-box">
+		<h2>Video <a href="" class="read-more">Xem tiếp...</a></h2>
+		<div class="box-content">
+			<img alt="title"  src="<?php echo get_template_directory_uri(); ?>/images/video.png" style="height:180px;"/>
+		</div>
+	</div>
 	<!--Begin widget Tấm lòng vàng -->
 	<div class="row sidebar-box shadow-box">
 		<h2>Tấm lòng vàng</h2>

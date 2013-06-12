@@ -1,19 +1,9 @@
 <?php get_header()?>
 	<div class="large-8 columns content">
 		<div class="row">
-			<div class="row featured">
-				<div class="large-7 slide-box columns">
-					<div class="shadow-box">
-						<img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/slider.png"/>
-					</div>
-				</div>
-				<div class="large-5 video columns">
-					<div class="sidebar-box shadow-box">
-						<h2>Video <a href="" class="read-more">Xem tiếp...</a></h2>
-						<div class="box-content">
-							<img alt="title"  src="<?php echo get_template_directory_uri(); ?>/images/video.png" style="height:180px;"/>
-						</div>
-					</div>
+			<div class="row">
+				<div class="shadow-box">
+					<img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/slider.png"/>
 				</div>
 			</div><!--end .featured-->
 			<!--Begin Tin tức -->
@@ -27,16 +17,12 @@
 						$newsPost = new WP_Query();
 						$newsPost->query('showposts=10&cat=1,5&orderby=DESC');
 						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
-						$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+						$image = orphan_get_post_thumbnai();//wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 						if($i < 3){?>
 							<div class="row">
 								<div class="large-4 columns">
-									<a href="<?php the_permalink(); ?>"><?php if($image[0] != ''){?>
-										<img class="thumb" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>" width="226" height="93">
-										<?php }
-										else{?>
-										<img class="thumb" src="<?php echo get_template_directory_uri() ?>/images/no_image.png" width="226" height="93" alt="">
-										<?php }?>
+									<a href="<?php the_permalink(); ?>">
+										<img class="thumb" src="<?php echo $image; ?>" alt="<?php the_title(); ?>" width="226" height="93">
 									</a>
 								</div>
 								<div class="large-8 columns">
@@ -76,11 +62,11 @@
 				$acNewsPost = new WP_Query();
 				$acNewsPost->query('showposts=2&cat=8&orderby=DESC');
 				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
-				$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				$image = orphan_get_post_thumbnai();// wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 				?>
 					<div class="row">
 						<div class="large-3 columns">
-							<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image[0] ?>"/></a>
+							<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image ?>"/></a>
 						</div>
 						<div class="large-9 columns">
 							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -98,7 +84,6 @@
 				$lawPost = new WP_Query();
 				$lawPost->query('showposts=3&cat=9&orderby=DESC');
 				while ($lawPost->have_posts()) : $lawPost->the_post();		
-				$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 				?>
 					<div class="row">
 						<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>

@@ -239,7 +239,7 @@ EOF;
     </div>
     <div style = "clear:both;"></div>
     </div>
-    <div style = "font-style:italic;font-size:14px;margin-top:15px;margin-bottom:5px; float:right;">
+    <div style = "font-style:italic;font-size:14px;margin-top:5px;margin-bottom:5px;">
     Chưa có tài khoản? Click vào <a href = "#" id = "tmc_login_form_signup_link">đây</a> để đăng ký
     </div>
     </div>

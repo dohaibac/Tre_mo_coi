@@ -1,20 +1,36 @@
 <?php get_header()?>
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/nivo-slider/themes/default/default.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css" type="text/css" media="screen" />
 	<div class="large-8 columns content">
 		<div class="row">
-			<div class="row featured">
-				<div class="large-7 slide-box columns">
-					<div class="shadow-box">
-						<img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/slider.png"/>
-					</div>
-				</div>
-				<div class="large-5 video columns">
-					<div class="sidebar-box shadow-box">
-						<h2>Video <a href="" class="read-more">Xem tiếp...</a></h2>
-						<div class="box-content">
-							<img alt="title"  src="<?php echo get_template_directory_uri(); ?>/images/video.png" style="height:180px;"/>
+			<div class="row shadow-box">
+				<div class="large-12" style="padding-right:0px;">
+					
+					<div class="slider-wrapper theme-default" style="width:100%;">
+						<div id="slider" class="nivoSlider">
+							<img src="<?php echo get_template_directory_uri() ?>/img/images/toystory.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/img/images/toystory.jpg" alt="" style="width:100%;"/>
+							<a href="http://dev7studios.com"><img src="<?php echo get_template_directory_uri() ?>/img/images/up.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/js/nivo-slider/images/up.jpg" alt="" title="This is an example of a caption" /></a>
+							<img src="<?php echo get_template_directory_uri() ?>/img/images/walle.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/img/images/walle.jpg" alt="" data-transition="slideInLeft" />
+							<img src="<?php echo get_template_directory_uri() ?>/img/images/nemo.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/img/images/nemo.jpg" alt="" title="#htmlcaption" />
+						</div>
+						<div id="htmlcaption" class="nivo-html-caption">
+							<strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. 
 						</div>
 					</div>
+					
 				</div>
+				
+				
+				<script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/nivo-slider/jquery.nivo.slider.js"></script>
+				<script type="text/javascript">
+				$(window).load(function() {
+					$('#slider').nivoSlider({
+						controlNav : false
+					});
+				});
+				</script>
+				
 			</div><!--end .featured-->
 			<!--Begin Tin tức -->
 			<div class="row shadow-box">

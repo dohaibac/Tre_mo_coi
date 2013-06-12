@@ -9,18 +9,19 @@
 					
 					<div class="slider-wrapper theme-default" style="width:100%;">
 						<div id="slider" class="nivoSlider">
-							<img src="<?php echo get_template_directory_uri() ?>/img/images/toystory.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/img/images/toystory.jpg" alt="" style="width:100%;"/>
-							<a href="http://dev7studios.com"><img src="<?php echo get_template_directory_uri() ?>/img/images/up.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/js/nivo-slider/images/up.jpg" alt="" title="This is an example of a caption" /></a>
-							<img src="<?php echo get_template_directory_uri() ?>/img/images/walle.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/img/images/walle.jpg" alt="" data-transition="slideInLeft" />
-							<img src="<?php echo get_template_directory_uri() ?>/img/images/nemo.jpg" data-thumb="<?php echo get_template_directory_uri() ?>/img/images/nemo.jpg" alt="" title="#htmlcaption" />
-						</div>
-						<div id="htmlcaption" class="nivo-html-caption">
-							<strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. 
-						</div>
-					</div>
-					
+							<?php
+							$slicePost = new WP_Query();
+							$slicePost->query('showposts=10&cat=10&orderby=DESC');
+							while ($slicePost->have_posts()) : $slicePost->the_post();
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full');
+							if($image[0] == '') $image[0] = get_template_directory_uri().'/img/images/toystory.jpg' ;
+							?>
+								<a href="<?php the_permalink(); ?>">
+								<img height="243" src="<?php echo $image[0]; ?>" data-thumb="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" /></a>
+							<?php endwhile; wp_reset_query();?>
+						</div>						
+					</div>					
 				</div>
-				
 				
 				<script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/nivo-slider/jquery.nivo.slider.js"></script>
 				<script type="text/javascript">

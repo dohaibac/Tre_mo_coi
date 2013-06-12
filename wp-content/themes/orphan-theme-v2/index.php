@@ -1,20 +1,36 @@
 <?php get_header()?>
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/nivo-slider/themes/default/default.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css" type="text/css" media="screen" />
 	<div class="large-8 columns content">
 		<div class="row">
-			<div class="row featured">
-				<div class="large-7 slide-box columns">
-					<div class="shadow-box">
-						<img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/slider.png"/>
-					</div>
+			<div class="row shadow-box">
+				<div class="large-12" style="padding-right:0px;">
+					
+					<div class="slider-wrapper theme-default" style="width:100%;">
+						<div id="slider" class="nivoSlider">
+							<?php
+							query_posts( array('category_name'      => 'dia-chi-cac-trung-tam', 'order'    => 'DESC') );
+							while (have_posts()) : the_post();
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full');
+							if($image[0] == '') $image[0] = get_template_directory_uri().'/img/images/toystory.jpg' ;
+							?>
+								<a href="<?php the_permalink(); ?>">
+								<img height="243" src="<?php echo $image[0]; ?>" data-thumb="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" /></a>
+							<?php endwhile; wp_reset_query();?>
+						</div>						
+					</div>					
 				</div>
-				<div class="large-5 video columns">
-					<div class="sidebar-box shadow-box">
-						<h2>Video <a href="" class="read-more">Xem tiếp...</a></h2>
-						<div class="box-content">
-							<img alt="title"  src="<?php echo get_template_directory_uri(); ?>/images/video.png" style="height:180px;"/>
-						</div>
-					</div>
-				</div>
+				
+				<script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/nivo-slider/jquery.nivo.slider.js"></script>
+				<script type="text/javascript">
+				$(window).load(function() {
+					$('#slider').nivoSlider({
+						controlNav : false
+					});
+				});
+				</script>
+				
 			</div><!--end .featured-->
 			<!--Begin Tin tức -->
 			<div class="row shadow-box">

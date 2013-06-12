@@ -37,19 +37,8 @@
 		</div>
 	</div><!--End widget Tấm lòng vàng -->
 	<!--Begin widget  Bình luận mới nhất -->
-	<div class="row sidebar-box shadow-box">
-		<h2>Bình luận mới nhất</h2>
-		<div class="box-content list-2">
-			<ul class="meta">
-				<li><a href="#">Những vòng tay yêu thương</a><span class="date"> (12/06/2013)</span></li>
-				<li><a href="#">Thắp sáng ước mơ bằng những yêu thương</a><span class="date">(12/06/2013)</span></li>	
-				<li><a href="#">Khi giắc mơ về bên nụ cười trẻ thơ </a><span class="date">(12/06/2013)</span></li>
-				<li><a href="#">6 bước biến ước mơ thành hiện thực</a><span class="date">(12/06/2013)</span></li>
-				<li><a href="#">Thắp sáng ước mơ bằng những yêu thương </a><span class="date">(12/06/2013)</span></li>
-				<li><a href="#">Khi giắc mơ về bên nụ cười trẻ thơ </a><span class="date">(12/06/2013)</span></li>
-			</ul>
-		</div>
-	</div><!--End widget Bình luận mới nhất -->
+	<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('sidebar_main') ) :endif;?>
+	<!--End widget Bình luận mới nhất -->
 	<!--Begin widget  widget Fan Page -->
 	<div class="row sidebar-box shadow-box">
 		<h2>Fan Page</h2>
@@ -59,13 +48,5 @@
 			</div>
 		</div>
 	</div><!--End widget Fan Page -->
-	
-	<div>
-		<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-		<div id="secondary" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>
-		</div><!-- #secondary -->
-	<?php endif; ?>
-	</div>
 	
 </div><!--end .large-4-->

@@ -342,4 +342,35 @@ if ( !is_admin() ){
 			ob_start();
 	}
 }
+
+function orphan_get_post_thumbnai(){
+	global $post;
+	$src_img = '';
+	if (has_post_thumbnail()){ 
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+		if(isset($image[0])){
+			$src_img = $image[0];
+		} else {
+			$src_img = get_thumbnail_by_post_content();
+		}
+	} else{
+		$src_img = get_thumbnail_by_post_content();
+	}
+	return $src_img;
+}
+
+function get_thumbnail_by_post_content(){
+	global $post;
+	$src_img = '';
+	ob_start();
+	ob_end_clean();
+	$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+	if(isset($matches [1] [0]))
+	$src_img = $matches [1] [0];
+
+	if(empty($src_img)){ //Defines a default image
+		$src_img = get_bloginfo('template_directory')."/images/no_image.png";
+	}
+	return $src_img;
+}
 ?>

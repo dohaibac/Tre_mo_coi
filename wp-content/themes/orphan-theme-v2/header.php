@@ -47,10 +47,18 @@
 	url_home = '<?php echo get_bloginfo('home'); ; ?>';
 	//]]>
 	</script>
+	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/jquery.js"></script>	
 	<?php wp_head(); ?>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/custom.modernizr.js"></script>	
 </head>
 <body>
+<script language="javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div class="wrapper">
 		<div class="wrapper-content">
 			<div class="row header">

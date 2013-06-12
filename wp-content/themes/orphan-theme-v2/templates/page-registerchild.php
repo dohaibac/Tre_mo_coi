@@ -18,6 +18,7 @@ get_header();
 				?>
 				<h3><span style="font-size:0.8em;">Nhập thông tin trẻ mồ côi</span></h3>
 				<hr />
+				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.</span>
 				<?php 
 				if($_POST['action'] == 1){
 				insert_tre_mo_coi($_POST); }?>
@@ -124,7 +125,7 @@ get_header();
 									<label for="txt-content" class="inline">Tình trạng</label>								
 								</div>
 								<div class="large-9 columns">
-									<input type="text" name="txt-content" id="txt-content" placeholder="Tình trạng" />
+									<textarea name="txt-content" id="txt-content" ></textarea>
 								</div>
 							</div>
 						</div>

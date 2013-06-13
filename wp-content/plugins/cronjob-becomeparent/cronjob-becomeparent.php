@@ -493,6 +493,7 @@ if ( !function_exists('becomeparent_email') ) :
 		          <td class="footer" valign="top"><multiline label="Description">
 		          <p>
 						Nếu gia đình bạn đã nhận nuôi trẻ, dù trong hay ngoài hệ thống của chúng tôi, phiền bạn hồi âm hoặc <a href="http://demo.evizi.com/tre_mo_coi/lien-he">liên hệ</a> với chúng tôi, để thông tin của gia đình cũng như con bạn được bảo mật tuyệt đối.
+						<br>
 						Tuy nhiên, chúng tôi cũng rất vinh hạnh nếu được đăng thông tin phản hồi về hình ảnh, thông tin cuộc sống hạnh phúc của trẻ tại gia đình bạn để rung động thêm nhiều con tim nữa cùng tạo nên hạnh phúc cho trẻ thơ.
 		          </p>
 		          </multiline>
@@ -557,7 +558,7 @@ endif;
 
 
 
-add_filter( 'posts_request', 'dump_request' );
+//add_filter( 'posts_request', 'dump_request' );
 
 function dump_request( $input ) {
 

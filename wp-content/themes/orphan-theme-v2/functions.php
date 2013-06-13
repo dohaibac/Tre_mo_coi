@@ -38,7 +38,18 @@ function custom_theme_support() {
 			'main_nav' => 'The Main Menu',   // main nav in header
 			'footer_links' => 'Footer Links' // secondary nav in footer
 		)
-	);	
+	);
+
+	if(function_exists('register_sidebar')){
+		 register_sidebar(array(
+		  'name' => 'sidebar_main',
+		  'description' => 'Sidebar cho game',
+		  'before_widget'  => '<div id="id_%1$s" class="row sidebar-box shadow-box">',
+		  'after_widget'  => '</div></div>',
+		  'before_title'  => '<h2>',
+		  'after_title'   => '</h2><div class="box-content list-2">'
+		 ));
+	}
 }
 
 // launching this stuff after theme setup

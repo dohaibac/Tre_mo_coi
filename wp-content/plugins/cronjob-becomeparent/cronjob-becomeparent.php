@@ -2,7 +2,7 @@
 /*   
 Plugin Name: Cronjob Become Parent Plugin
 Plugin URI: http://tremocoi.org.vn/   
-Description: A plugin to run "becone parent" crontasks.   
+Description: A plugin to run "become parent" crontasks.   
 Version: 1.0.0 
 Author: Ha Nguyen   
 Author URI: http://tremocoi.org.vn/
@@ -492,14 +492,20 @@ if ( !function_exists('becomeparent_email') ) :
 		        <tr>
 		          <td class="footer" valign="top"><multiline label="Description">
 		          <p>
-						Website tremocoi.org.vn giúp kết nối những tấm lòng vàng, những gia đình mong muốn có con nuôi với những trẻ em mồ côi,bị bỏ rơi, rất rất cần tình cảm gia đình.          
+						Nếu gia đình bạn đã nhận nuôi trẻ, dù trong hay ngoài hệ thống của chúng tôi, phiền bạn hồi âm hoặc <a href="http://demo.evizi.com/tre_mo_coi/lien-he">liên hệ</a> với chúng tôi, để thông tin của gia đình cũng như con bạn được bảo mật tuyệt đối.
+						Tuy nhiên, chúng tôi cũng rất vinh hạnh nếu được đăng thông tin phản hồi về hình ảnh, thông tin cuộc sống hạnh phúc của trẻ tại gia đình bạn để rung động thêm nhiều con tim nữa cùng tạo nên hạnh phúc cho trẻ thơ.
+		          </p>
+		          </multiline>
+		          <hr/>
+		          <p>
+						Website tremocoi.org.vn giúp kết nối những gia đình mong muốn có con nuôi, những tấm lòng vàng với những trẻ em mồ côi, bị bỏ rơi, vô cùng khao khát tình cảm yêu thương gia đình.          
 		          </p>
 		          </multiline>
 		          <hr/>
 		            <p>
 		            
-		             	Nếu cảm thấy những email như thế này làm phiền bạn và bạn không muốn nhận thông tin từ website nữa, vui lòng: 
-		              <unsubscribe style="color:#dee7c6; text-decoration: underline;">Unsubscribe Instantly.</unsubscribe>
+		             	Nếu cảm thấy những email như thế này làm phiền bạn và bạn không muốn nhận thông tin từ website nữa, vui lòng hủy chức năng gửi email 
+		              <unsubscribe style="color:#dee7c6; text-decoration: underline;">tại đây.</unsubscribe>
 		            </p></td>
 		        </tr>
 		      </table>

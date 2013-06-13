@@ -75,6 +75,7 @@ function wp_initial_constants( ) {
 
 	// Constants for expressing human-readable intervals
 	// in their respective number of seconds.
+ 	define( 'FIVESECONDS_IN_SECONDS', 5 );
  	define( 'MINUTE_IN_SECONDS', 60 );
  	define( 'HOUR_IN_SECONDS',   60 * MINUTE_IN_SECONDS );
  	define( 'DAY_IN_SECONDS',    24 * HOUR_IN_SECONDS   );
@@ -276,7 +277,7 @@ function wp_functionality_constants( ) {
 	 * @since 3.3.0
 	 */
 	if ( !defined( 'WP_CRON_LOCK_TIMEOUT' ) )
-		define('WP_CRON_LOCK_TIMEOUT', 60);  // In seconds
+		define('WP_CRON_LOCK_TIMEOUT', 10);  // In seconds
 }
 
 /**

@@ -5,26 +5,26 @@
  * Description: A Page Template that shows form register
  * @author Phi Ho
  */
- global $current_user;
+global $current_user;
 get_header();
 ?>
 
-	<div class="row main-content">
-		<div class="large-8 columns">
-
-			<div class="panel" style ="margin-top: 10px;">
-				<?php 
-				if (have_posts()) : the_post(); update_post_caches($posts); 	
-				?>
-				<h3><span style="font-size:0.8em;">Nhập thông tin trẻ mồ côi</span></h3>
+<div class="large-8 columns content">
+	<div class="row">
+		<div class="row shadow-box">
+			<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
+			<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
+			<div class="box-content">
+				
 				<hr />
+				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.</span>
 				<?php 
 				if($_POST['action'] == 1){
 				insert_tre_mo_coi($_POST); }?>
 				<form class="custom" action="<?php the_permalink() ?>" method="POST">
 					<input type="hidden" name="action" value="1" />
 					<fieldset>
-					
+						
 						<div class="row">
 							<div class="small-3 columns">
 							  <label for="txt-name" class="inline">Họ tên <span class="require">*</span></label>
@@ -45,7 +45,7 @@ get_header();
 							</div>
 							<div class="small-3 columns">							  
 								<select name = "cbx-day">
-									<option value="0">Chọn ngày</option>
+									<option value="0">Ngày</option>
 									<?php 
 										for($i=1;$i <=31 ;$i++):
 									?>
@@ -55,7 +55,7 @@ get_header();
 							</div>
 							<div class="small-3 columns">
 								<select name = "cbx-month">
-									<option value="0">Chọn tháng</option>
+									<option value="0">Tháng</option>
 									<?php 
 										for($i=1;$i <= 12 ;$i++):
 									?>
@@ -124,20 +124,16 @@ get_header();
 									<label for="txt-content" class="inline">Tình trạng</label>								
 								</div>
 								<div class="large-9 columns">
-									<input type="text" name="txt-content" id="txt-content" placeholder="Tình trạng" />
+									<textarea name="txt-content" id="txt-content" ></textarea>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							  <div class="large-12 columns">								
-							  </div>
-						</div>
+						</div>						
 						<div class="row">
 							<div class="large-12 columns text-center">
 								<button>Đăng ký</button>
 							</div>
 						</div>
-
+					
 					</fieldset>
 				</form>
 				<?php
@@ -177,15 +173,15 @@ get_header();
 					}
 				});
 				</script>
-				<?php endif; ?>
+			
 			</div>
-
-
+			<?php endif; ?>	
 		</div>
 
-		<?php get_sidebar(); ?>
 	</div>
-
+	
+</div>
+<?php get_sidebar(); ?>
  <?php 
  get_footer();
  ?>

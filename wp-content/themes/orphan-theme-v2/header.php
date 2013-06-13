@@ -72,7 +72,7 @@
 			</div><!--end .header-->
 		
 			<div class="row main">
-				<div class="row main-menu">
+				<div class="row main-menu top-bar">
 					<section class="top-bar-section">
 						<!-- Left Nav Section -->
 						<?php custom_main_nav('main_nav'); // Adjust using Menus in Wordpress Admin ?>		

@@ -14,8 +14,11 @@ get_header();
 						<div class="facebook-like">
 						<div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="<?php the_permalink(); ?>" data-send="true" data-layout="standard" data-width="500" data-show-faces="true" data-font="trebuchet ms"></div>
 						</div>
-						<hr />
-						<?php comments_template(); ?>
+						<?php if(comments_open()){
+							echo '<hr />';
+							comments_template();
+						}
+						?>
 					</div>
 				<?php endif; ?>	
 			</div>

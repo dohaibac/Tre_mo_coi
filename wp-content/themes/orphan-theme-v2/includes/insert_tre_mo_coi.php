@@ -2,6 +2,8 @@
 
 function insert_tre_mo_coi($data){
 	global $orphan_prefix;
+	global $current_user;
+    get_currentuserinfo();
 	//var_dump($data);
 
 	$title = $data["txt-name"];
@@ -9,9 +11,8 @@ function insert_tre_mo_coi($data){
 	$my_post = array(
 	  'post_title'    => $title,
 	  'post_type'    => 'tre-mo-coi',
-	  'post_content'  => 'This is my post.',
 	  'post_status'   => 'pending',
-	  'post_author'   => 1
+	  'post_author'   => $current_user->ID
 	);
 	$birthday = $data["cbx-day"].'/'.$data["cbx-month"].'/'.$data["cbx-year"];
 	// Insert the post into the database

@@ -23,8 +23,9 @@ EOF;
         $current_user = wp_get_current_user();
         $site_url = get_site_url();
         $logout_url = wp_logout_url(home_url());
+		$profile_url = get_edit_profile_url($current_user);
         echo <<<EOF
-	Chào {$current_user->user_login} <a href="{$site_url}/profile" class="small button">Trang cá nhân</a> | <a class="small button alert" href="$logout_url">Thoát</a>
+	Chào {$current_user->user_login} <a href="{$profile_url}" class="small button">Trang cá nhân</a> | <a class="small button alert" href="$logout_url">Thoát</a>
 EOF;
     }
     echo '</div>';
@@ -173,7 +174,8 @@ function tmc_add_register_box_template() {
 							</div>
 							-->
 							<div class="right" style="padding-right:15px;margin-top:9px;">
-							<button class="small" id="tmc_register_submit_button" style="margin-bottom:0px;">Đăng ký</button> <button class="small" style="margin-bottom:0px;">Nhập lại</button>
+							<button class="small" id="tmc_register_submit_button" style="margin-bottom:0px;">Đăng ký</button>
+							 <button class="small" style="margin-bottom:0px;"  id="tmc_register_reset_button" >Nhập lại</button>
 							</div>
 						</div>
 				</form>

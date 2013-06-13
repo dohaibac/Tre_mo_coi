@@ -16,30 +16,24 @@
 	<div class="row sidebar-box shadow-box">
 		<h2>Tấm lòng vàng</h2>
 		<div class="box-content list-2">
+			
+			<?php
+			$slicePost = new WP_Query();
+			$slicePost->query('showposts=3&cat=6&orderby=DESC');
+			while ($slicePost->have_posts()) : $slicePost->the_post();
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+			if($image[0] == '') $image[0] = get_template_directory_uri().'/img/images/toystory.jpg' ;
+			?>
 			<div class="row">
 				<div class="large-4 columns">
-					<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/1.png"/></a>
+					<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image[0]; ?>"/></a>
 				</div>
 				<div class="large-8 columns">
-					<h3><a href="">Mỗi bàn tay, một tấm lòng, đón nhận yêu thương</a></h3>
+					<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 				</div>
 			</div>
-			<div class="row">
-				<div class="large-4 columns">
-					<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/2.png"/></a>
-				</div>
-				<div class="large-8 columns">
-					<h3><a href="">Mỗi bàn tay, một tấm lòng, đón nhận yêu thương</a></h3>
-				</div>
-			</div>
-			<div class="row">
-				<div class="large-4 columns">
-					<a href=""><img alt="title" class="thumb" src="<?php echo get_template_directory_uri(); ?>/images/temp-img/3.png"/></a>
-				</div>
-				<div class="large-8 columns">
-					<h3><a href="">Mỗi bàn tay, một tấm lòng, đón nhận yêu thương</a></h3>
-				</div>
-			</div>
+			<?php endwhile; wp_reset_query();?>			
+			
 		</div>
 	</div><!--End widget Tấm lòng vàng -->
 	<!--Begin widget  Bình luận mới nhất -->

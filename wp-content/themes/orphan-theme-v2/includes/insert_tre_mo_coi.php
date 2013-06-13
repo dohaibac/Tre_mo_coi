@@ -11,6 +11,7 @@ function insert_tre_mo_coi($data){
 	$my_post = array(
 	  'post_title'    => $title,
 	  'post_type'    => 'tre-mo-coi',
+	  'post_content'  => 'Trẻ mồ côi',
 	  'post_status'   => 'pending',
 	  'post_author'   => $current_user->ID
 	);

@@ -83,11 +83,11 @@
 			</div><!--End Tin tức -->
 			<!--Begin Chương trình hoạt động -->
 			<div class="row shadow-box">
-				<h2>Chương trình hoạt động <a href="" class="read-more">Xem tiếp...</a></h2>
+				<h2>Chương trình hoạt động <a href="<?php echo home_url( '/category/chuong-trinh-hoat-dong')?>" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content list-2">
 				<?php
 				$acNewsPost = new WP_Query();
-				$acNewsPost->query('showposts=2&cat=8&orderby=DESC');
+				$acNewsPost->query('showposts=3&cat=8&orderby=DESC');
 				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
 				$image = orphan_get_post_thumbnai(); //wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 				
@@ -107,7 +107,7 @@
 			</div><!--End Chương trình hoạt động -->
 			<!--Begin Văn bản luật -->
 			<div class="row shadow-box">
-				<h2>Văn bản luật về trẻ em <a href="" class="read-more">Xem tiếp...</a></h2>
+				<h2>Văn bản luật về trẻ em <a href="<?php echo home_url( '/category/van-ban-luat-ve-tre-em')?>" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content">
 				<?php
 				$lawPost = new WP_Query();

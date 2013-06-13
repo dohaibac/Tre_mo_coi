@@ -18,6 +18,17 @@ $orphan_prefix = 'orphan_';
 global $post_type_name, $post_type_label;
 $post_type_name = 'tre-mo-coi';
 $post_type_label = 'Trẻ mồ côi';
+
+
+global $missing_children_prefix; $missing_children_prefix = 'missing_children_';
+global $missing_parent_prefix; $missing_parent_prefix = 'missing_parent_';
+
+
+global $recruitment_prefix; $recruitment_prefix = "recruitment_";
+global $post_type_recruitment_name; $post_type_recruitment_label;
+$post_type_recruitment_name = 'viec-lam'; $post_type_recruitment_label = "Việc làm cho em";
+
+
 function orphan_register_orphan_posttype() { 
 	global $post_type_name, $post_type_label;
 	$label = $post_type_label;

@@ -32,7 +32,7 @@
 	
  	/*** POST INFO ***/
 	$reason = $_POST['txt_reason'];
-	$email_duration = $_POST['txt_email_duration'];    
+	$email_duration = $_POST['txt_email_duration']; 
 	$birth_year = $_POST['txt_birthyear']; // nam sinh
 	$gender = $_POST['txt_gender'];
 	$note = $_POST['txt_note'];
@@ -42,14 +42,14 @@
 	  	'post_type'     => 'nhan-con-nuoi',
 	  	'post_title'    => 'Đón nhận yêu thương',
 		'post_content' 	=> $reason,
-		'post_status' 	=> 'cronjob'
+		'post_status' 	=> 'private'
 	);
 
 	// Insert the post into the database
 	$post_id = wp_insert_post( $my_post );
 	
 	update_post_meta($post_id, $orphan_prefix .'ncn_ly_do', $reason);
-	update_post_meta($post_id, $orphan_prefix .'ncn_email_duration', $email_duration);
+	update_post_meta($post_id, $orphan_prefix .'ncn_finished_date', get_finished_date(intval($email_duration)));
 	update_post_meta($post_id, $orphan_prefix .'ncn_nam_sinh', $birth_year);
 	update_post_meta($post_id, $orphan_prefix .'ncn_gioi_tinh', $gender);
 	update_post_meta($post_id, $orphan_prefix .'ncn_ghi_chu', $note);
@@ -57,6 +57,7 @@
 	
 	
 	wp_redirect(home_url("dang-ky-nhan-mail-thanh-cong"));
+	
 }
 ?>
 
@@ -67,8 +68,8 @@ get_header();
 		<div class="row">
 			<div class="row shadow-box">
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
-					<h2>Đón nhận yêu thương</h2>
-					<div class="box-content list-2">
+					<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
+					<div class="box-content">
 						<form class="custom" method="post">
 							<input type="hidden" name="become_parent" value="become_parent" />
 							

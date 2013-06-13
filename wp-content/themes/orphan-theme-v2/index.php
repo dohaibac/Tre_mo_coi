@@ -10,9 +10,8 @@
 					<div class="slider-wrapper theme-default" style="width:100%;">
 						<div id="slider" class="nivoSlider">
 							<?php
-							$slicePost = new WP_Query();
-							$slicePost->query('showposts=10&cat=10&orderby=DESC');
-							while ($slicePost->have_posts()) : $slicePost->the_post();
+							query_posts( array('category_name'      => 'dia-chi-cac-trung-tam', 'order'    => 'DESC') );
+							while (have_posts()) : the_post();
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full');
 							if($image[0] == '') $image[0] = get_template_directory_uri().'/img/images/toystory.jpg' ;
 							?>

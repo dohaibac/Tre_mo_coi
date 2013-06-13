@@ -6,17 +6,10 @@
 	<div class="shadow-box">
 		<a href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
 	</div>
-	<div class="sidebar-box shadow-box">
-		<h2>Video <a href="" class="read-more">Xem tiếp...</a></h2>
-		<div class="box-content">
-			<img alt="title"  src="<?php echo get_template_directory_uri(); ?>/images/video.png" style="height:180px;"/>
-		</div>
-	</div>
 	<!--Begin widget Tấm lòng vàng -->
 	<div class="row sidebar-box shadow-box">
 		<h2>Tấm lòng vàng</h2>
 		<div class="box-content list-2">
-			
 			<?php
 			$slicePost = new WP_Query();
 			$slicePost->query('showposts=3&cat=6&orderby=DESC');
@@ -32,24 +25,12 @@
 					<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 				</div>
 			</div>
-			<?php endwhile; wp_reset_query();?>			
-			
+			<?php endwhile; wp_reset_query();?>	
 		</div>
 	</div><!--End widget Tấm lòng vàng -->
 	<!--Begin widget  Bình luận mới nhất -->
-	<div class="row sidebar-box shadow-box">
-		<h2>Bình luận mới nhất</h2>
-		<div class="box-content list-2">
-			<ul class="meta">
-				<li><a href="#">Những vòng tay yêu thương</a><span class="date"> (12/06/2013)</span></li>
-				<li><a href="#">Thắp sáng ước mơ bằng những yêu thương</a><span class="date">(12/06/2013)</span></li>	
-				<li><a href="#">Khi giắc mơ về bên nụ cười trẻ thơ </a><span class="date">(12/06/2013)</span></li>
-				<li><a href="#">6 bước biến ước mơ thành hiện thực</a><span class="date">(12/06/2013)</span></li>
-				<li><a href="#">Thắp sáng ước mơ bằng những yêu thương </a><span class="date">(12/06/2013)</span></li>
-				<li><a href="#">Khi giắc mơ về bên nụ cười trẻ thơ </a><span class="date">(12/06/2013)</span></li>
-			</ul>
-		</div>
-	</div><!--End widget Bình luận mới nhất -->
+	<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('sidebar_main') ) :endif;?>
+	<!--End widget Bình luận mới nhất -->
 	<!--Begin widget  widget Fan Page -->
 	<div class="row sidebar-box shadow-box">
 		<h2>Fan Page</h2>

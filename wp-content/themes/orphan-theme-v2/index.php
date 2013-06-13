@@ -45,6 +45,7 @@
 						$newsPost->query('showposts=10&cat=1,5&orderby=DESC');
 						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
 						$image = orphan_get_post_thumbnai();//wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+						if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
 						if($i < 3){?>
 							<div class="row">
 								<div class="large-4 columns">
@@ -89,7 +90,9 @@
 				$acNewsPost = new WP_Query();
 				$acNewsPost->query('showposts=2&cat=8&orderby=DESC');
 				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
-				$image = orphan_get_post_thumbnai();// wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				$image = orphan_get_post_thumbnai(); //wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				
+				if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
 				?>
 					<div class="row">
 						<div class="large-3 columns">

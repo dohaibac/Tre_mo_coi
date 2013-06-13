@@ -12,9 +12,10 @@ get_header();
 <div class="large-8 columns content">
 	<div class="row">
 		<div class="row shadow-box">
+			<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
+			<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
 			<div class="box-content">
 				
-				<h3><span style="font-size:0.8em;">Nhập thông tin trẻ mồ côi</span></h3>
 				<hr />
 				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.</span>
 				<?php 
@@ -172,9 +173,9 @@ get_header();
 					}
 				});
 				</script>
-				
-			</div>
 			
+			</div>
+			<?php endif; ?>	
 		</div>
 
 	</div>

@@ -67,8 +67,8 @@ get_header();
 		<div class="row">
 			<div class="row shadow-box">
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
-					<h2>Đón nhận yêu thương</h2>
-					<div class="box-content list-2">
+					<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
+					<div class="box-content">
 						<form class="custom" method="post">
 							<input type="hidden" name="become_parent" value="become_parent" />
 							

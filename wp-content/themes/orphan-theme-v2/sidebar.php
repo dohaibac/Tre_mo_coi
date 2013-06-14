@@ -6,6 +6,51 @@
 	<div class="shadow-box">
 		<a href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
 	</div>
+	
+	<div class="row sidebar-box shadow-box">
+		<h2>Videos</h2>
+		<div class="box-content video">
+			<div id="mediaspace_wrapper"></div>
+			<ul class="list_video">
+			<?php
+			$videoPost = new WP_Query();
+			$videoPost->query('showposts=3&cat=11&orderby=DESC');
+			while ($videoPost->have_posts()) : $videoPost->the_post();		
+			?>
+				<li class="video"><a data="<?php echo get_post_meta( get_the_ID(), 'url_video', true ) ?>" href="#view_video"><?php the_title(); ?></a></li>
+			<?php endwhile; wp_reset_query();?>
+			
+			</ul>
+			<script type="text/javascript">			
+			$(document).ready(function() {
+				var link_video = $(".list_video li:first").find('a').attr("data"); 
+				load_video(link_video,false);
+				$(".list_video li a").click(function(){ 
+					link_video = $(".list_video li:hover").find('a').attr("data"); 
+					if(link_video){
+						load_video(link_video, true);
+						$(".list_video li").removeClass("playvideo"); 
+						$(".list_video li:hover").addClass("playvideo"); 
+					}
+					return false;
+				});
+				function load_video(url_video, auto_play){
+					jwplayer('mediaspace_wrapper').setup({
+							'flashplayer':  '<?php echo get_template_directory_uri(); ?>/js/player-video/player.swf',
+							'file': url_video,
+							'autostart': auto_play,
+							'controlbar': 'bottom',
+							'icons': 'false',
+							'width': '100%',
+							'height': '225'
+						});
+				}
+			});
+			</script>
+		</div>
+		
+	</div>
+	
 	<!--Begin widget Tấm lòng vàng -->
 	<div class="row sidebar-box shadow-box">
 		<h2>Tấm lòng vàng</h2>

@@ -107,10 +107,10 @@ function tmc_add_register_box_template() {
 							  <label for="txt-pwd" class="inline">Mật khẩu <span class="require">*</span></label>
 							</div>
 							<div class="small-4 columns">
-							  <input type="text" id="txt-pwd" name="txt-pwd" placeholder="Mật khẩu">
+							  <input type="password" id="txt-pwd" name="txt-pwd" placeholder="Mật khẩu">
 							</div>
 							<div class="small-5 columns">
-							  <input name="txt-confirm-pwd" id="txt-confirm-pwd" type="text" placeholder="Xác nhận mật khẩu">
+							  <input name="txt-confirm-pwd" id="txt-confirm-pwd" type="password" placeholder="Xác nhận mật khẩu">
 							</div>
 						</div>
 						<div class="row">

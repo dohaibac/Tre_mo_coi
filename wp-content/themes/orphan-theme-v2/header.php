@@ -50,6 +50,7 @@
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/jquery.js"></script>	
 	<?php wp_head(); ?>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/custom.modernizr.js"></script>	
+	<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.jcarousellite.js"></script>	
 </head>
 <body>
 <script language="javascript">(function(d, s, id) {

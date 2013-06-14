@@ -10,9 +10,8 @@
 					<div class="slider-wrapper theme-default" style="width:100%;">
 						<div id="slider" class="nivoSlider">
 							<?php
-							$slicePost = new WP_Query();
-							$slicePost->query('showposts=10&cat=10&orderby=DESC');
-							while ($slicePost->have_posts()) : $slicePost->the_post();
+							query_posts( array('category_name'      => 'dia-chi-cac-trung-tam', 'order'    => 'DESC') );
+							while (have_posts()) : the_post();
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full');
 							if($image[0] == '') $image[0] = get_template_directory_uri().'/img/images/toystory.jpg' ;
 							?>
@@ -45,6 +44,7 @@
 						$newsPost->query('showposts=10&cat=1,5&orderby=DESC');
 						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
 						$image = orphan_get_post_thumbnai();//wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+						if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
 						if($i < 3){?>
 							<div class="row">
 								<div class="large-4 columns">
@@ -83,13 +83,15 @@
 			</div><!--End Tin tức -->
 			<!--Begin Chương trình hoạt động -->
 			<div class="row shadow-box">
-				<h2>Chương trình hoạt động <a href="" class="read-more">Xem tiếp...</a></h2>
+				<h2>Chương trình hoạt động <a href="<?php echo home_url( '/category/chuong-trinh-hoat-dong')?>" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content list-2">
 				<?php
 				$acNewsPost = new WP_Query();
-				$acNewsPost->query('showposts=2&cat=8&orderby=DESC');
+				$acNewsPost->query('showposts=3&cat=8&orderby=DESC');
 				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
-				$image = orphan_get_post_thumbnai();// wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				$image = orphan_get_post_thumbnai(); //wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				
+				if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
 				?>
 					<div class="row">
 						<div class="large-3 columns">
@@ -105,7 +107,7 @@
 			</div><!--End Chương trình hoạt động -->
 			<!--Begin Văn bản luật -->
 			<div class="row shadow-box">
-				<h2>Văn bản luật về trẻ em <a href="" class="read-more">Xem tiếp...</a></h2>
+				<h2>Văn bản luật về trẻ em <a href="<?php echo home_url( '/category/van-ban-luat-ve-tre-em')?>" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content">
 				<?php
 				$lawPost = new WP_Query();

@@ -38,7 +38,18 @@ function custom_theme_support() {
 			'main_nav' => 'The Main Menu',   // main nav in header
 			'footer_links' => 'Footer Links' // secondary nav in footer
 		)
-	);	
+	);
+
+	if(function_exists('register_sidebar')){
+		 register_sidebar(array(
+		  'name' => 'sidebar_main',
+		  'description' => 'Sidebar cho game',
+		  'before_widget'  => '<div id="id_%1$s" class="row sidebar-box shadow-box">',
+		  'after_widget'  => '</div></div>',
+		  'before_title'  => '<h2>',
+		  'after_title'   => '</h2><div class="box-content list-2">'
+		 ));
+	}
 }
 
 // launching this stuff after theme setup
@@ -372,5 +383,42 @@ function get_thumbnail_by_post_content(){
 		$src_img = get_bloginfo('template_directory')."/images/no_image.png";
 	}
 	return $src_img;
+}
+
+
+function get_finished_date($email_duration)
+{
+	if(is_int($email_duration) && $email_duration > 0)
+	{		
+		$gmdate = get_now_in_option_gmt_offset();
+
+		$d = new DateTime($gmdate);
+		$d->modify( "+".$email_duration." month" );
+		$d->modify( "-1 day" );
+		return $d->format( 'Y-m-d H:i:s' );
+		
+		
+		
+//		$date=("d.m.Y");
+//		$date=strtotime($date);
+//		$date=date('Y-m-1',$date);
+//		$now=strtotime("+".$email_duration." month", strtotime($date));
+//		
+//		$lastdayofnextmonth=strtotime("-1 day", $now);
+//		$nextmonthsfirstdate = date('m.d.Y',$now);//		
+//		return 
+	}
+	
+	return null;
+}
+
+function get_now_in_option_gmt_offset()
+{
+	$h = get_option('gmt_offset'); // Hour for time zone goes here e.g. +7 or -4, just remove the + or -
+	$hm = $h * 60; 
+	$ms = $hm * 60;
+	$gmdate = gmdate("Y-m-d H:i:s", time()+($ms)); // the "-" can be switched to a plus if that's what your time zone is.
+	
+	return $gmdate;
 }
 ?>

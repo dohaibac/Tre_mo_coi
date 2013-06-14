@@ -321,6 +321,8 @@ function wp_get_schedules() {
 		'hourly'     => array( 'interval' => HOUR_IN_SECONDS,      'display' => __( 'Once Hourly' ) ),
 		'twicedaily' => array( 'interval' => 12 * HOUR_IN_SECONDS, 'display' => __( 'Twice Daily' ) ),
 		'daily'      => array( 'interval' => DAY_IN_SECONDS,       'display' => __( 'Once Daily' ) ),
+		'minutely'   => array( 'interval' => MINUTE_IN_SECONDS, 	'display' => __( 'Once Minutely' ) ),
+		'fivesecondly' => array( 'interval' => FIVESECONDS_IN_SECONDS, 	'display' => __( 'Five Secondly' ) ),
 	);
 	return array_merge( apply_filters( 'cron_schedules', array() ), $schedules );
 }

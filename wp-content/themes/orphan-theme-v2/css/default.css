@@ -189,6 +189,23 @@ section.top-bar-section ul ul.dropdown li a{
 .main-content .content .video .box-content{ height: 195px;}
 .main-content  .slide-box{height: 225px;}
 .video .shadow-box{margin-bottom:0px!important;}
+.video .list_video{
+ border: 1px solid #D5D5D5;
+    list-style: none outside none;
+    margin: 0;
+	list-style:none;
+}
+.video .list_video li{
+	border: 1px doted #d5d5d5;
+	padding:2px 0px 2px 10px;
+}
+.video .list_video li a{
+	display:block;
+	overflow:hidden;
+}
+.video .list_video li.playvideo{
+	background: #EDEDED;
+}
 .row .row{
 	margin:0px;
 }

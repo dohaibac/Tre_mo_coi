@@ -295,7 +295,8 @@ if ( !function_exists('becomeparent_email') ) :
 		if($mapping_type == "map_old_demands_new_children" && (is_null($children) || count($children) == 0))
 			return;
 			
-		$user = get_user_by('id', $demand->post_author);		
+		$user = get_user_by('id', $demand->post_author);	
+		$user_id = $user->ID;	
 		$user_firstname = stripslashes($user->user_firstname); 
 		$user_lastname = stripslashes($user->user_lastname); 
 		$user_email = stripslashes($user->user_email); 
@@ -312,7 +313,7 @@ if ( !function_exists('becomeparent_email') ) :
 		$message = '
 		<html>
 		<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<title>Thông tin trẻ mồ côi đang chờ đón yêu thương</title>
 		<style>
 		h1 {color: #547159 !important; font-size: 48px; text-shadow: 1px 1px 1px #fff; font-family: Georgia, "Times New Roman", Times, serif; margin: 0; padding: 0;}
@@ -392,7 +393,7 @@ if ( !function_exists('becomeparent_email') ) :
 		            
 		            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 		              <tr>
-		                <td height="30">&nbsp;</td>
+		                <td height="10">&nbsp;</td>
 		              </tr>
 		            </table>
 		            <!--/break-->
@@ -400,10 +401,7 @@ if ( !function_exists('becomeparent_email') ) :
 		            <repeater>
 		            <table class="content" width="540" border="0" align="center" cellpadding="0" cellspacing="0">
 		              <tr>
-		                <td style="text-align:center;"> 
-		                  <h2 style="font-size:18px;">
-		                    <singleline label="Title">Thông tin trẻ mồ côi đang chờ đón yêu thương</singleline>
-		                  </h2>                 
+		                <td style="text-align:left;"> 
 		                  <multiline label="Description">
 		                  <p style="text-align:left;">
 			                  Xin chào '. $user_firstname. ' '. $user_lastname .',
@@ -413,34 +411,35 @@ if ( !function_exists('becomeparent_email') ) :
 		                  if($children):
 		$message .=         	
 								'Dưới đây là những trẻ phù hợp với nhu cầu tìm kiếm của bạn:
-		            			<table class="table-border-tpo" style = "border-collapse:collapse;text-align:left" border="1" align="left">
-				                  	<tr>
-				                  		<td>STT</td>
-				                  		<td>Tên trẻ</td>
-				                  		<td>Giới tính</td>
-				                  		<td>Năm sinh</td>
-				                  		<td>Ảnh hiện tại</td>
-				                  		<td>Người bảo trợ</td>
-				                  		<td>Điện thoại</td>
-				                  		<td>Email</td>
+		            			<table class="table-border-tpo" style = "border-collapse:collapse;text-align:left;border-color:#cccccc;margin-bottom:10px;" border="1" align="left" width="100%">
+				                  	<tr style="border-color:#cccccc; font-weight:bold">
+				                  		<td style="border-color:#cccccc">STT</td>
+				                  		<td style="border-color:#cccccc">Tên trẻ</td>
+				                  		<td style="border-color:#cccccc">Giới tính</td>
+				                  		<td style="border-color:#cccccc">Năm sinh</td>
+				                  		<td style="border-color:#cccccc">Ảnh hiện tại</td>
+				                  		<td style="border-color:#cccccc">Người bảo trợ</td>
+				                  		<td style="border-color:#cccccc">Điện thoại</td>
+				                  		<td style="border-color:#cccccc">Email</td>
 				                  	</tr>';
 	$i = 0;
 	foreach ($children as $child):
 		$i ++;
 		$message .=         	
-				                  	'<tr>
-				                  		<td>'. $i .'</td>
-				                  		<td>'. $child->post_title .'</td>
-				                  		<td>'. $child->orphan_gender .'</td>
-				                  		<td>'. substr($child->orphan_birthday, -4) .'</td>		                  		
-				                  		<td></td>		                  		
-				                  		<td></td>
-				                  		<td></td>
-				                  		<td></td>
+				                  	'<tr style="border-color:#cccccc">
+				                  		<td style="border-color:#cccccc">'. $i .'</td>
+				                  		<td style="border-color:#cccccc">'. $child->post_title .'</td>
+				                  		<td style="border-color:#cccccc">'. $child->orphan_gender .'</td>
+				                  		<td style="border-color:#cccccc">'. substr($child->orphan_birthday, -4) .'</td>		                  		
+				                  		<td style="border-color:#cccccc"></td>		                  		
+				                  		<td style="border-color:#cccccc"></td>
+				                  		<td style="border-color:#cccccc"></td>
+				                  		<td style="border-color:#cccccc"></td>
 				                  	</tr>';
 	endforeach;
 		$message .=         				                  	
 			                  '</table>
+			                  <br />
 			                  <br />
 			                  Bạn tham khảo thông tin trên và liên lạc với người bảo trợ để gặp gỡ và tìm hiểu thêm về trẻ.
 			                  ';
@@ -449,12 +448,11 @@ if ( !function_exists('becomeparent_email') ) :
 			                  ';		                  
 		                  endif;
 		$message .=         			
-		                  	  'Hoặc mời liên lạc với <a href="demo.evizi.com/tre_mo_coi/lien-he" title="trẻ mồ côi">chúng tôi</a> để biết thêm chi tiết.
+		                  	  'Hoặc mời bạn liên lạc với <a href="'.home_url().'/lien-he" title="trẻ mồ côi">chúng tôi</a> để biết thêm chi tiết.
 				              <br />Chúc bạn sớm tìm được thiên thần nhỏ yêu thương của mình!
 			                  <br />
-			                  http://tremocoi.org.vn
-			                  <br /><br />
-			                  Cảm ơn bạn đã sử dụng website tremocoi.org.vn
+			                  <br />
+			                  Cảm ơn bạn đã sử dụng website '.home_url().'
 		                  
 		                  </p>
 		                  </multiline>
@@ -492,21 +490,21 @@ if ( !function_exists('becomeparent_email') ) :
 		        <tr>
 		          <td class="footer" valign="top"><multiline label="Description">
 		          <p>
-						Nếu gia đình bạn đã nhận nuôi trẻ, dù trong hay ngoài hệ thống của chúng tôi, phiền bạn hồi âm hoặc <a href="http://demo.evizi.com/tre_mo_coi/lien-he">liên hệ</a> với chúng tôi, để thông tin của gia đình cũng như con bạn được bảo mật tuyệt đối.
+						Nếu gia đình bạn đã nhận nuôi trẻ, dù trong hay ngoài hệ thống của chúng tôi, phiền bạn hồi âm hoặc <a style="color:orange;" href="http://demo.evizi.com/tre_mo_coi/lien-he">liên hệ</a> với chúng tôi, để thông tin của gia đình cũng như con bạn được bảo mật tuyệt đối.
 						<br>
 						Tuy nhiên, chúng tôi cũng rất vinh hạnh nếu được đăng thông tin phản hồi về hình ảnh, thông tin cuộc sống hạnh phúc của trẻ tại gia đình bạn để rung động thêm nhiều con tim nữa cùng tạo nên hạnh phúc cho trẻ thơ.
 		          </p>
 		          </multiline>
 		          <hr/>
 		          <p>
-						Website tremocoi.org.vn giúp kết nối những gia đình mong muốn có con nuôi, những tấm lòng vàng với những trẻ em mồ côi, bị bỏ rơi, vô cùng khao khát tình cảm yêu thương gia đình.          
+						Website <a href="'.home_url().'" style="color:orange;">'.home_url().'</a> giúp kết nối những gia đình mong muốn có con nuôi, những tấm lòng vàng với những trẻ em mồ côi, bị bỏ rơi, vô cùng khao khát tình cảm yêu thương gia đình.          
 		          </p>
 		          </multiline>
 		          <hr/>
 		            <p>
 		            
 		             	Nếu cảm thấy những email như thế này làm phiền bạn và bạn không muốn nhận thông tin từ website nữa, vui lòng hủy chức năng gửi email 
-		              <unsubscribe style="color:#dee7c6; text-decoration: underline;">tại đây.</unsubscribe>
+		              <a href="'.home_url().'/huy-email/?unsubscripbe='.base64_encode($demand->ID."|".md5($user_id.$user_email."aJ#FTUkk")).'" style="color:orange;">tại đây.</a>
 		            </p></td>
 		        </tr>
 		      </table>

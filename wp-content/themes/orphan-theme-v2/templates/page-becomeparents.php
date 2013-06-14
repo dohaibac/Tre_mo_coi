@@ -8,6 +8,36 @@
 
  global $current_user, $orphan_prefix;
  //$data = orphan_fields_ncn_array();
+  
+if($current_user->ID == null)
+{
+	?>
+	<script>
+	alert("Bạn cần đăng nhập và kích hoạt tài khoản trước khi sử dụng chức năng này.");
+	document.location.href = '<?php echo home_url()?>';
+	</script>
+	<?
+}
+else 
+{
+	$key = get_user_meta($current_user->ID, 'tmc_activation_key', true);
+	if (!empty($key))
+	{
+		?>
+		<script>
+		if(confirm("Bạn cần kích hoạt tài khoản tại hòm thư điện tử của bạn, trước khi sử dụng chức năng này. Bạn có muốn nhận lại thư kích hoạt tài khoản không?"))
+		{
+			<?php
+			wp_new_user_notification( $current_user->ID ); 
+			?>
+			alert("Chúng tôi đã gửi lại thư kích hoạt, vui lòng kiểm tra hòm thư điện tử của bạn!");
+		}
+		document.location.href = '<?php echo home_url()?>';
+		</script>
+		<?
+	}
+}
+
  
  if(isset($_POST["become_parent"]) && $_POST["become_parent"] == "become_parent")
  {

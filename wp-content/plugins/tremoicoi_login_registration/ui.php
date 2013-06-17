@@ -24,8 +24,10 @@ EOF;
         $site_url = get_site_url();
         $logout_url = wp_logout_url(home_url());
 		$profile_url = get_edit_profile_url($current_user);
+		$full_name = "{$current_user->last_name} {$current_user->first_name}";
+		$full_name = $full_name == ' ' ? $current_user->user_login : $full_name;
         echo <<<EOF
-	Chào {$current_user->user_login} <a href="{$profile_url}" class="small button">Trang cá nhân</a> | <a class="small button alert" href="$logout_url">Thoát</a>
+	Chào $full_name, <a style="font-weight:bold;" href="{$profile_url}" >Trang cá nhân</a> | <a style="font-weight:bold;" href="$logout_url">Thoát</a>
 EOF;
     }
     echo '</div>';

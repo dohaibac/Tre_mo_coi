@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 Author: Evizi Team
 URL: htp://evizi.com
@@ -48,6 +48,15 @@ function custom_theme_support() {
 		  'after_widget'  => '</div></div>',
 		  'before_title'  => '<h2>',
 		  'after_title'   => '</h2><div class="box-content list-2">'
+		 ));
+		 
+		 register_sidebar(array(
+		  'name' => 'footer_gallery',
+		  'description' => 'Footer gallery',
+		  'before_widget'  => '<div class="row shadow-box box-large">',
+		  'after_widget'  => '</ul><a class="control left prev">Prev</a><a class="control right next">Next</a></div></div>',
+		  'before_title'  => '<h2>',
+		  'after_title'   => '</h2><div class="box-content album"><ul class="small-block-grid-5" style="margin-top:8px !important!" id="album_slider">'
 		 ));
 	}
 }

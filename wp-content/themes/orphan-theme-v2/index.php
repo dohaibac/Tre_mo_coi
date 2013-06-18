@@ -1,4 +1,4 @@
-<?php get_header()?>
+﻿<?php get_header()?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/nivo-slider/themes/default/default.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/js/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css" type="text/css" media="screen" />
@@ -87,7 +87,7 @@
 				<div class="box-content list-2">
 				<?php
 				$acNewsPost = new WP_Query();
-				$acNewsPost->query('showposts=3&cat=8&orderby=DESC');
+				$acNewsPost->query('showposts=7&cat=8&orderby=DESC');
 				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
 				$image = orphan_get_post_thumbnai(); //wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 				
@@ -111,7 +111,7 @@
 				<div class="box-content">
 				<?php
 				$lawPost = new WP_Query();
-				$lawPost->query('showposts=3&cat=9&orderby=DESC');
+				$lawPost->query('showposts=7&cat=9&orderby=DESC');
 				while ($lawPost->have_posts()) : $lawPost->the_post();		
 				?>
 					<div class="row">

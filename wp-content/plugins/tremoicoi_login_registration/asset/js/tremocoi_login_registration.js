@@ -1,6 +1,6 @@
 $(document).ready(function(){		
 	$('#tmc_user_panel').html($('#tmc_user_panel_data').html());
-	$("#tmc_login_button").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){$('#tmc_username').focus();}});
+	$("#tmc_login_button").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){$('#tmc_username').focus();}, beforeShow: function(){jQuery('#login #tmc_login_error_container').hide();}});
 	$("#tmc_register_button").fancybox({scrolling: 'no', beforeShow: function(){
 		$('#tmc_register_form_container').show();
 		$('#tmc_register_waiting').hide();

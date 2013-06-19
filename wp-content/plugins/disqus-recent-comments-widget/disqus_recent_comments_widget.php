@@ -20,7 +20,7 @@ class disqus_recent_comments_widget extends WP_Widget {
 	
 	public function widget($args, $instance) {
 		echo <<<EOF
-<div class="row sidebar-box shadow-box"><h2>Bình luận mới nhất</h2><div class="box-content list-2" style="padding-left:10px;" id="disqus_recent_comment_box"><div style="text-align:center;font-style:italic;font-size:13px;color:#999;padding:10px;">Đang tải...</div></div></div>
+<div class="row sidebar-box shadow-box"><h2>Bình luận mới nhất</h2><div class="box-content list-2" style="padding-left:10px;padding-top:0px;margin-top:-10px;" id="disqus_recent_comment_box"><div style="text-align:center;font-style:italic;font-size:13px;color:#999;padding:20px 10px 10px 10px;">Đang tải...</div></div></div>
 <script language="javascript">
 $(document).ready(function(){
 	jQuery.post(

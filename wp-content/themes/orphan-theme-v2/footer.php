@@ -13,7 +13,7 @@
 					</div><!--Begin Menu bottom-->
 					<!--Begin .coppy-right-->
 					<div class="row coppy-right">
-						<p>© Evizi Team. Website Tre Mo Coi, LP. All Rights Reserved.</p>
+						<p>© <a href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved.</p>
 					</div><!--end .coppy-right-->
 				</div>
 			</div><!--end .main-main-->
@@ -25,6 +25,20 @@
 			<footer></footer>
 		</div><!--end .wrapper-content-->
 	</div><!--end .wrapper-->
-	  <?php wp_footer() ?>
+	<?php wp_footer() ?>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('li#menu-item-304 a, li#menu-item-303 a, a.nhap-thong-tin-tre-mo-coi, a.don-nhan-yeu-thuong').click(function(){
+				var user_login = <?php echo (is_user_logged_in())? 'true' : 'false'; ?>;
+				if(user_login == true){
+					return true;
+				} else{
+					jQuery('#login #tmc_login_error_container').html('Bạn phải đăng nhập trước khi thực hiện chức năng này').fadeIn();
+					jQuery("a#tmc_login_button").click();
+					return false;
+				}
+			});
+		});
+	</script>
 </body>
 </html>

@@ -64,6 +64,8 @@ $(document).ready(function(){
 		var pwd = $.trim($('#tmc_password').val());
 		var rememberme = $('#tmc_rememberme').is(':checked') ? 'forever' : null;
 		
+		$('#tmc_login_error_container').html('Bạn phải nhập đầy đủ thông tin.');
+		
 		if(username == '' || pwd == ''){
 			$('#tmc_login_error_container').show();
 			return;

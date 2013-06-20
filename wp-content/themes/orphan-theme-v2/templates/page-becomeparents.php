@@ -165,6 +165,7 @@ get_header();
 										<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
 											Hệ thống sẽ gửi thông tin những trẻ mồ côi phù hợp nhu cầu của bạn vào địa chỉ email trong khoảng thời gian bạn đăng ký nhận email (dưới đây). Bạn có thể hủy chức năng này ngay tại email của bạn bất cứ khi nào bạn muốn.
 										</p>
+									  	<br />
 									  </div>
 								</div>
 								

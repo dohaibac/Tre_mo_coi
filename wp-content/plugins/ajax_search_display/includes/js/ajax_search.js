@@ -15,8 +15,6 @@ jQuery(document).ready(function() {
 //    });
     jQuery('.page').live('click', function(e) {
         e.preventDefault();
-        var link = jQuery(this).attr('href');
-        alert(document.location);
         jQuery('.wp-tab-content').html('Vui lòng đợi...');
         post_types = jQuery(this).attr("post_types");
         page = jQuery(this).attr("title");

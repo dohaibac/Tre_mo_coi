@@ -15,6 +15,9 @@ jQuery(document).ready(function() {
 //    });
     jQuery('.page').live('click', function(e) {
         e.preventDefault();
+        var link = jQuery(this).attr('href');
+        alert(document.location);
+        jQuery('.wp-tab-content').html('Vui lòng đợi...');
         post_types = jQuery(this).attr("post_types");
         page = jQuery(this).attr("title");
         jQuery.get(document.pathname, {
@@ -39,7 +42,7 @@ jQuery(document).ready(function() {
             post_types: post_types, paged: '1'}, function(data) {
             if (data.length > 0) {
                 var $response = $(data);
-                jQuery(".wp-tab-content").html('loading...');
+                jQuery(".wp-tab-content").html('Vui lòng đợi...');
                 jQuery(".wp-tab-content").html(
                         $response.find('.wp-tab-content').html());
                 jQuery(".ui-tabs-anchor").html(

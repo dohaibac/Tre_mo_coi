@@ -1,8 +1,7 @@
 <?php
-if (have_posts()) :
-    global $wp_query;
-    $total_results = $wp_query->found_posts;
-    ?>
+global $wp_query;
+$total_results = $wp_query->found_posts;
+?>
 <div class="row">
     <div class="large-7 columns">
         <h2 style='background-image: none; border: none; 
@@ -40,8 +39,9 @@ if (have_posts()) :
         <?php } ?>  
         <div class="fixed"></div>
     </div>
-    </div>
-    <?php
+</div>
+<?php
+if (have_posts()) :
     while (have_posts()) : the_post();
         update_post_caches($posts);
         $image = orphan_get_post_thumbnai(); // wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');

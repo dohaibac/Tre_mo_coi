@@ -7,6 +7,41 @@
  */
 global $current_user;
 get_header();
+
+
+// CHECK LOGIN
+if($current_user->ID == null)
+{
+	?>
+	<script>
+	alert("Bạn cần đăng nhập và kích hoạt tài khoản trước khi sử dụng chức năng này.");
+	document.location.href = '<?php echo home_url()?>';
+	</script>
+	<?php
+}
+else 
+{
+	$key = get_user_meta($current_user->ID, 'tmc_activation_key', true);
+	if (!empty($key))
+	{
+		?>
+		<script>
+		if(confirm("Bạn cần kích hoạt tài khoản tại hòm thư điện tử của bạn, trước khi sử dụng chức năng này. Bạn có muốn nhận lại thư kích hoạt tài khoản không?"))
+		{
+			<?php
+			wp_new_user_notification( $current_user->ID ); 
+			?>
+			alert("Chúng tôi đã gửi lại thư kích hoạt, vui lòng kiểm tra hòm thư điện tử của bạn!");
+		}
+		document.location.href = '<?php echo home_url()?>';
+		</script>
+		<?php
+	}
+}
+
+$captcha = create_captcha(); 
+$prefix = $captcha['prefix'];
+$file = $captcha['file'];
 ?>
 
 <div class="large-8 columns content">
@@ -19,9 +54,27 @@ get_header();
 				<hr />
 				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.</span>
 				<?php 
+				$errors = new WP_Error();
 				if($_POST['action'] == 1){
-				insert_tre_mo_coi($_POST); }?>
-				<form class="custom" action="<?php the_permalink() ?>" method="POST">
+					$captcha_instance = new ReallySimpleCaptcha();	
+					if(!$captcha_instance->check( $_POST['captcha_prefix'], $_POST['txt_captcha'] ))
+					{
+						$captcha_error = true;	
+					}
+					$captcha_instance->remove( $_POST['captcha_prefix'] );	
+					if($captcha_error)
+					{
+						$errors->add( 'captcha_error', __( "Mã bảo mật không đúng, vui lòng nhập lại." ) );
+						
+					}
+					else 
+					{	
+				
+						insert_tre_mo_coi($_POST); 
+					}
+				}?>
+				<div data-alert="" class="alert-box alert" style="display:none;margin-bottom:5px;" id="registerchild_error_container"></div>
+				<form class="custom" action="<?php the_permalink() ?>" method="POST" id="registerchild_form" onsubmit="registerchild()">
 					<input type="hidden" name="action" value="1" />
 					<fieldset>
 						
@@ -127,10 +180,20 @@ get_header();
 									<textarea name="txt-content" id="txt-content" ></textarea>
 								</div>
 							</div>
+							<div class="row">
+								<div class="small-3 columns">
+								  <label for="txt_captcha" class="inline">Mã bảo mật <span class="require">*</span></label>
+								</div>
+								<div class="small-9 columns">
+								  <div class="left"><input type="text" style="width:100px;" name="txt_captcha" id="txt_captcha" placeholder="Mã bảo mật"></div>
+								  <div class="left" style="margin-top:1px;"><img id="captcha_file" src="<?php echo $file; ?>" /></div>
+								  <input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />
+								</div>
+							</div>
 						</div>						
 						<div class="row">
 							<div class="large-12 columns text-center">
-								<button>Đăng ký</button>
+								<button id="submit_form_register_child">Đăng ký</button>
 							</div>
 						</div>
 					
@@ -172,6 +235,45 @@ get_header();
 
 					}
 				});
+				
+				//Check form 
+				$(document).ready(function(){	
+			
+				$("#submit_form_register_child").click(function(){registerchild();return false;});
+				
+				var registerchild_validator = $('#registerchild_form').bind("invalid-form.validate", function() {
+					
+					 $("#registerchild_error_container").text("Bạn cần phải điền đầy đủ và hợp lệ các thông tin bên dưới.");
+					 $("#registerchild_error_container").show();
+				 }).validate({
+					 
+					rules:{
+					  'txt-name': "required",
+					  'txt-place': "required",
+					  'txt-time': "required",
+					  'txt-content': "required",
+					  'txt_captcha': "required"
+					},
+					messages: {
+						
+					  'txt-name': "Nhập họ và tên.",
+					  'txt-place': "Nhập địa chỉ",
+					  'txt-time': "Nhập địa điểm gặp trẻ em",
+					  'txt-content': "Nhập tình trạng lúc gặp trẻ",
+					  'txt_captcha': "Nhập mã bảo mật."
+					},
+					wrapper : 'div',
+					debug: false
+				  });
+				
+				function registerchild(){
+					
+				  if(registerchild_validator.form()){
+					  $('#registerchild_form').submit();
+				  }
+				}
+			});
+				
 				</script>
 			
 			</div>
@@ -184,4 +286,22 @@ get_header();
 <?php get_sidebar(); ?>
  <?php 
  get_footer();
+ 
+
+// ERRORS PROCESSING
+if ( $errors->get_error_code() )
+{
+	$error_messages = $errors->get_error_messages();
+	$error_strs = "<ul>";
+	foreach ($error_messages as $error_message): 
+		$error_strs .= "<li>".$error_message."</li>";
+	endforeach;
+	$error_strs .= "</ul>";
+	?>
+	<script>
+		$("#registerchild_error_container").html("<?php echo $error_strs;?>");
+	 	$("#registerchild_error_container").show();
+	</script>
+	<?php 
+}
  ?>

@@ -1,10 +1,10 @@
 
 <div class="large-4 columns">
 	<div class="shadow-box" style="margin-bottom: 18px !important">
-		<a href="<?php echo get_permalink( get_page_by_path( 'don-nhan-yeu-thuong' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/don-nhan-yeu-thuong.png"/></a>
+		<a class="don-nhan-yeu-thuong" href="<?php echo get_permalink( get_page_by_path( 'don-nhan-yeu-thuong' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/don-nhan-yeu-thuong.png"/></a>
 	</div>
 	<div class="shadow-box">
-		<a href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
+		<a class="nhap-thong-tin-tre-mo-coi" href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
 	</div>
 	
 	<div class="row sidebar-box shadow-box">
@@ -60,12 +60,12 @@
 			$slicePost = new WP_Query();
 			$slicePost->query('showposts=3&cat=6&orderby=DESC');
 			while ($slicePost->have_posts()) : $slicePost->the_post();
-			$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
-			if($image[0] == '') $image[0] = get_template_directory_uri().'/img/images/toystory.jpg' ;
+			$image = orphan_get_post_thumbnai();// wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+			if($image == '') $image = get_template_directory_uri().'/img/images/toystory.jpg' ;
 			?>
 			<div class="row">
 				<div class="large-4 columns">
-					<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image[0]; ?>"/></a>
+					<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image; ?>"/></a>
 				</div>
 				<div class="large-8 columns">
 					<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -86,5 +86,5 @@
 			</div>
 		</div>
 	</div><!--End widget Fan Page -->
-	
+	<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('sidebar_bottom') ) :endif;?>
 </div><!--end .large-4-->

@@ -233,6 +233,16 @@ section.top-bar-section ul ul.dropdown li a{
 	font-size: 1em;
     padding: 5px;
 }
+.box-content h2{
+	background:none;
+	border:none;
+	padding:0px;
+}
+.box-content img{
+	border:1px solid #d5d5d5;
+	padding:2px;
+	margin:5px 0px;
+}
 .featured,
 .shadow-box ,
 .sidebar-box

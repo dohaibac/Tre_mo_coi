@@ -58,6 +58,14 @@ function custom_theme_support() {
 		  'before_title'  => '<h2>',
 		  'after_title'   => '</h2><div class="box-content album"><ul class="small-block-grid-5" style="margin-top:8px !important!" id="album_slider">'
 		 ));
+		  register_sidebar(array(
+		  'name' => 'sidebar_bottom',
+		  'description' => 'Sidebar cho game',
+		  'before_widget'  => '<div id="id_%1$s" class="row sidebar-box shadow-box">',
+		  'after_widget'  => '</div></div>',
+		  'before_title'  => '<h2>',
+		  'after_title'   => '</h2><div class="box-content list-2">'
+		 ));
 	}
 }
 

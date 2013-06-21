@@ -217,16 +217,6 @@ $orphan_fields_cv_array = array(
 			'rich_editor'	=> false,
 			'options'		=> null
 		)
-	),
-	orphan_result_meta(
-		array(
-			'name' 			=> 'album-image',
-			'label'			=> 'Hình ảnh',
-			'description' 	=> 'Nhập thông tin người gặp trẻ',
-			'type'			=> 'multiupload',
-			'rich_editor'	=> false,
-			'options'		=> null
-		)
 	)
 );
 $orphan_save_meta_post[] = $orphan_fields_cv_array;
@@ -346,7 +336,7 @@ function orphan_show_meta_box($post, $metabox)	{
 	wp_enqueue_script('jquery-ui-1.8.16.custom.min',get_bloginfo('template_directory').'/includes/js/jquery-ui-1.8.16.custom.min.js');
 	wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includes/js/ui.datepicker-vi.js');
 	wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/includes/js/orphan-script-admin.js');
-	wp_enqueue_script('swfobject',get_bloginfo('template_directory').'/includes/multiuploads/js/myplupload.js');
+	
 	echo '<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />';
 	echo '<link rel="stylesheet" href="'.get_bloginfo('template_directory').'/includes/css/custom-meta-post.css" />';
 
@@ -429,21 +419,12 @@ function orphan_show_meta_box($post, $metabox)	{
                 echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />&nbsp;';
 				echo $field['desc'];
                 break;
-			case 'multiupload': 
-
-				$meta_name =  $field['name'];
-				include('multiuploads/multiuploads.php');
-				
-				if(function_exists('fn_additional_preview_images')){
-					fn_additional_preview_images($field);
-				}
-				break;
         }
         echo     '<td>',
             '</tr>';
 
     }
-	echo '</table>';
+	echo '</table><style>.ui-datepicker{}</style>';
 	echo orphan_add_meta_script();
 }
 

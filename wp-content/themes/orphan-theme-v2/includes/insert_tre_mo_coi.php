@@ -15,7 +15,7 @@ function insert_tre_mo_coi($data){
 	  'post_status'   => 'pending',
 	  'post_author'   => $current_user->ID
 	);
-	$birthday = $data["cbx-day"].'/'.$data["cbx-month"].'/'.$data["cbx-year"];
+	$birthday = $data["birthday_datepicker"];
 	// Insert the post into the database
 	$post_id  = wp_insert_post( $my_post );
 	//echo $post_id;

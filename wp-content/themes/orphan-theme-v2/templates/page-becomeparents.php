@@ -22,7 +22,7 @@ if($current_user->ID == null)
 	alert("Bạn cần đăng nhập và kích hoạt tài khoản trước khi sử dụng chức năng này.");
 	document.location.href = '<?php echo home_url()?>';
 	</script>
-	<?
+	<?php 
 }
 else 
 {
@@ -40,7 +40,7 @@ else
 		}
 		document.location.href = '<?php echo home_url()?>';
 		</script>
-		<?
+		<?php 
 	}
 }
 

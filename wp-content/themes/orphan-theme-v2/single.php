@@ -7,7 +7,7 @@ get_header();
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
 					<h2><?php if(function_exists('bcn_display'))	{bcn_display();	} ?></h2>
 					<div class="box-content list-2">
-						<div style="font-style:italic;"><small><?php the_time('F jS, Y') ?> bởi <?php the_author_posts_link() ?> </small></div>
+						<div style="font-style:italic;"><small><?php the_time('d F, Y') ?> bởi <?php the_author_posts_link() ?> </small></div>
 						<br />
 						<?php the_content(); ?>
 						<br />

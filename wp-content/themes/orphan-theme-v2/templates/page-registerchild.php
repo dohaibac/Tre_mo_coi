@@ -42,8 +42,12 @@ else
 $captcha = create_captcha(); 
 $prefix = $captcha['prefix'];
 $file = $captcha['file'];
+wp_enqueue_script('jquery-ui-1.8.16.custom.min',get_bloginfo('template_directory').'/includes/js/jquery-ui-1.8.16.custom.min.js');
+wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includes/js/ui.datepicker-vi.js');
+wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/includes/js/orphan-script-admin.js');
 ?>
-
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="<?php get_bloginfo('template_directory')?>/includes/css/custom-meta-post.css" />
 <div class="large-8 columns content">
 	<div class="row">
 		<div class="row shadow-box">
@@ -52,7 +56,8 @@ $file = $captcha['file'];
 			<div class="box-content">
 				
 				<hr />
-				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.</span>
+				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.<br /></span>
+				
 				<?php 
 				$errors = new WP_Error();
 				if($_POST['action'] == 1){
@@ -73,7 +78,7 @@ $file = $captcha['file'];
 						insert_tre_mo_coi($_POST); 
 					}
 				}?>
-				<div data-alert="" class="alert-box alert" style="display:none;margin-bottom:5px;" id="registerchild_error_container"></div>
+				<div data-alert="" class="alert-box alert" style="display:none;margin:15px 0 5px 0;" id="registerchild_error_container"></div>
 				<form class="custom" action="<?php the_permalink() ?>" method="POST" id="registerchild_form" onsubmit="registerchild()">
 					<input type="hidden" name="action" value="1" />
 					<fieldset>
@@ -82,31 +87,33 @@ $file = $captcha['file'];
 							<div class="small-3 columns">
 							  <label for="txt-name" class="inline">Họ tên <span class="require">*</span></label>
 							</div>
-							<div class="small-6 columns">
-							  <input type="text" name="txt-name" id="txt-name" placeholder="Họ tên" />
+							<div class="small-6 columns"  style="margin-bottom: 15px;">
+							  <input style="margin:0px 0 4px 0;" type="text" name="txt-name" id="txt-name" placeholder="Họ tên" />
 							</div>
-							<div class="small-2 columns">
-								<label for="chk-newname" class="inline">Tên mới</label>
+							<div class="small-1 columns" style="float:left; padding:0px; text-align:right; margin:0px 0 4px 0; width:60px;">
+								<label for="chk-newname" class="inline" style="margin:8px 8px 0 0; padding:0px;">Tên mới</label>
 							</div>
-							<div class="small-1 columns">
+							<div class="small-2 columns" style="width:70px; padding:4px 0 0 0">
 							  <input type="checkbox" name="chk-newname" id="chk-newname" style="display:none;" /> 
 							</div>
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
-							  <label for="cbx-day" class="inline">Ngày sinh <span class="require">*</span></label>
+							  <label for="birthday_datepicker" class="inline">Ngày sinh <span class="require">*</span></label>
 							</div>
-							<div class="small-3 columns">							  
-								<select name = "cbx-day">
+							<div class="small-6 columns" style="margin-bottom: 15px;">								
+								<input readonly="readonly" style="margin:0px 0 4px 0;" type="text" class="my_datepicker" name="birthday_datepicker" id="birthday_datepicker" value=""/>
+								<!--select name = "cbx-day">
 									<option value="0">Ngày</option>
 									<?php 
 										for($i=1;$i <=31 ;$i++):
 									?>
 									<option value="<?php echo $i ?>"><?php echo $i ?></option>
 									<?php endfor; ?>
-								</select>
+								</select-->
 							</div>
-							<div class="small-3 columns">
+							<div class="small-3 columns"></div>
+							<!--div class="small-3 columns">
 								<select name = "cbx-month">
 									<option value="0">Tháng</option>
 									<?php 
@@ -117,7 +124,8 @@ $file = $captcha['file'];
 								</select>
 							</div>
 							<div class="small-3 columns">
-								<select name = "cbx-year">
+								<select name = "cbx-year" style="float:left">
+									<option value="">Năm sinh</option>
 									<?php 
 										$tmpyear = date("Y");
 										for($i=$tmpyear;$i>($tmpyear-12);$i--):
@@ -125,18 +133,18 @@ $file = $captcha['file'];
 									<option value="<?php echo $i ?>"><?php echo $i ?></option>
 									<?php endfor; ?>
 								</select>
-							</div>
+							</div-->
 						</div>
 						<div class="row">
 							<div class="small-3 columns">
 								<label class="inline">Giới tính</label>
 							</div>
 							
-							<div class="small-4 columns">
+							<div class="small-2 columns">
 								<label for="gender1" class="inline">
 								<input type="radio" style="display:none;" name="txt-gender" id="gender1" value="Nam" checked="checked" /> Nam</label>
 							</div>
-							<div class="small-5 columns">
+							<div class="small-7 columns">
 								<label for="gender2" class="inline"><input type="radio" style="display:none;" name="txt-gender" id="gender2" value="Nữ" /> Nữ</label>
 							</div>							
 						</div>
@@ -146,7 +154,7 @@ $file = $captcha['file'];
 							</div>							
 							<div class="small-6 columns">
 								<input type="url" name="url-hinhanh" placeholder="Nhập url hình ảnh"  id="url-hinhanh" value="" class="inline" size="50"/>
-								<a href="#_upload" data="url-hinhanh" class="button upload_image_button prefix">Đăng hình ảnh</a>
+								<a href="#_upload" data="url-hinhanh" class="button upload_image_button prefix" style="z-index:1">Đăng hình ảnh</a>
 							</div>
 							<div class="small-3 columns">
 								<img style="border:1px solid #d5d5d5;" id="image_url-hinhanh" width="80" src="<?php echo get_template_directory_uri();  ?>/images/no-avatar.png"/>
@@ -160,33 +168,33 @@ $file = $captcha['file'];
 								<div class="large-3 columns">
 									<label for="txt-place" class="inline">Địa điểm</label>								
 								</div>
-								<div class="large-9 columns">
-									<input type="text" name="txt-place" id="txt-place" placeholder="Địa điểm" />
+								<div class="large-9 columns" style="margin-bottom: 15px;">
+									<input style="margin:0px 0 4px 0;" type="text" name="txt-place" id="txt-place" placeholder="Địa điểm" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="large-3 columns">
 									<label for="txt-time" class="inline">Thời gian</label>								
 								</div>
-								<div class="large-9 columns">
-									<input type="text" name="txt-time" id="txt-time" placeholder="Thời gian" />
+								<div class="large-9 columns" style="margin-bottom: 15px;">
+									<input style="margin:0px 0 4px 0;" type="text" name="txt-time" id="txt-time" placeholder="Thời gian" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="large-3 columns">
 									<label for="txt-content" class="inline">Tình trạng</label>								
 								</div>
-								<div class="large-9 columns">
-									<textarea name="txt-content" id="txt-content" ></textarea>
+								<div class="large-9 columns" style="margin-bottom: 15px;">
+									<textarea style="margin:0px 0 4px 0;" name="txt-content" id="txt-content" ></textarea>
 								</div>
 							</div>
 							<div class="row">
 								<div class="small-3 columns">
 								  <label for="txt_captcha" class="inline">Mã bảo mật <span class="require">*</span></label>
 								</div>
-								<div class="small-9 columns">
-								  <div class="left"><input type="text" style="width:100px;" name="txt_captcha" id="txt_captcha" placeholder="Mã bảo mật"></div>
-								  <div class="left" style="margin-top:1px;"><img id="captcha_file" src="<?php echo $file; ?>" /></div>
+								<div class="small-9 columns" style="margin-bottom: 15px;">
+								  <div class="left"><input style="margin:0px 0 4px 0;" type="text" style="width:100px;" name="txt_captcha" id="txt_captcha" placeholder="Mã bảo mật"></div>
+								  <div class="left" style="margin-top:1px;"> &nbsp; <img style="padding:0px; margin:0px 0 4px 0;" id="captcha_file" src="<?php echo $file; ?>" /></div>
 								  <input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />
 								</div>
 							</div>
@@ -238,6 +246,15 @@ $file = $captcha['file'];
 				
 				//Check form 
 				$(document).ready(function(){	
+				
+				//init datepicker control
+				$('.my_datepicker').datepicker({
+					dateFormat:'dd/mm/yy',
+					maxDate: new Date,
+					yearRange: "-20:+0",
+					changeMonth: true, 
+					changeYear: true
+				});
 			
 				$("#submit_form_register_child").click(function(){registerchild();return false;});
 				
@@ -250,6 +267,7 @@ $file = $captcha['file'];
 					rules:{
 					  'txt-name': "required",
 					  'txt-place': "required",
+					  'birthday_datepicker' : "required",
 					  'txt-time': "required",
 					  'txt-content': "required",
 					  'txt_captcha': "required"
@@ -258,6 +276,7 @@ $file = $captcha['file'];
 						
 					  'txt-name': "Nhập họ và tên.",
 					  'txt-place': "Nhập địa chỉ",
+					  'birthday_datepicker' : "Nhập ngày sinh",
 					  'txt-time': "Nhập địa điểm gặp trẻ em",
 					  'txt-content': "Nhập tình trạng lúc gặp trẻ",
 					  'txt_captcha': "Nhập mã bảo mật."

@@ -17,7 +17,10 @@ get_header();
                 get_template_part('loop', 'archive');
                 return ob_get_clean();
             }
+            ?>
 
+            <?php
+            $pt = get_query_var('post_types');
             $tab_titile = '';
             if ($pt == "tre-mo-coi") {
                 $tab_titile = 'Trẻ mồ côi';
@@ -27,12 +30,11 @@ get_header();
                 $tab_titile = 'Tất cả';
             }
             ?>
-            <?php $pt = get_query_var('post_types'); ?>
             <div class="wp-tabs wpui-light" style="padding: 2px;">
                 <h3 class="wp-tab-title"><?php echo $tab_titile ?></h3>
                 <div class="wp-tab-content">
                     <div class='box-content list-2'>
-                        <?php get_template_part('loop', 'archive'); ?>
+<?php get_template_part('loop', 'archive'); ?>
                     </div>
                 </div>
             </div>

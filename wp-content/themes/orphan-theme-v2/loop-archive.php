@@ -11,6 +11,17 @@ $total_results = $wp_query->found_posts;
         <h2 style='background-image: none; border: none; 
             font-size: 10px; padding: 0; padding-left: 10px;'>
             Bạn có muốn tìm theo: 
+            <?php
+            $pt = get_query_var('post_types');
+            $tab_titile = '';
+            if ($pt == "tre-mo-coi") {
+                $tab_titile = 'Trẻ mồ côi';
+            } elseif ($pt == "post") {
+                $tab_titile = 'Bài viết';
+            } else {
+                $tab_titile = 'Tất cả';
+            }
+            ?>
             <?php if ($pt == "tre-mo-coi") { ?>
                 <a id="p-search" href="javascript:void(0);">Tất cả? </a>
                 <a id="p-search" post_types="post" 

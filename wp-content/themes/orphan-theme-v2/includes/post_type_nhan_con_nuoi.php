@@ -85,9 +85,9 @@ $orphan_fields_ncn_array = array(
 	// thoi gian nhan mail
 	orphan_result_meta(
 		array(
-			'name' 			=> 'ncn-ly-do',
+			'name' 			=> 'ncn_ly_do',
 			'label'			=> 'Lý do nhận con nuôi',
-			'description' 	=> 'lý do nhận con nuôi',
+			'description' 	=> '',
 			'type'			=> 'textarea',
 			'required'		=> true,
 			'rich_editor'	=> false,
@@ -96,9 +96,9 @@ $orphan_fields_ncn_array = array(
 	),
 	orphan_result_meta(
 		array(
-			'name' 			=> 'ncn-ngay-sinh',
+			'name' 			=> 'ncn_nam_sinh',
 			'label'			=> 'Năm sinh',
-			'description' 	=> 'Nhập năm sinh',
+			'description' 	=> '',
 			'type'			=> 'date',
 			'rich_editor'	=> false,
 			'options'		=> null
@@ -107,9 +107,9 @@ $orphan_fields_ncn_array = array(
 
 	orphan_result_meta(
 		array(
-			'name' 			=> 'ncn-gioi-tinh',
+			'name' 			=> 'ncn_gioi_tinh',
 			'label'			=> 'Giới tính',
-			'description' 	=> 'Giới tính của trẻ',
+			'description' 	=> '',
 			'type'			=> 'radio',
 			'rich_editor'	=> false,
 			'options'		=> array(
@@ -120,9 +120,9 @@ $orphan_fields_ncn_array = array(
 	),
 	orphan_result_meta(
 		array(
-			'name' 			=> 'ncn-ghi-chu',
+			'name' 			=> 'ncn_ghi_chu',
 			'label'			=> 'Ghi chú thông tin',
-			'description' 	=> 'Nhập thông tin ghi chú',
+			'description' 	=> '',
 			'type'			=> 'textarea',
 			'rich_editor'	=> false,
 			'options'		=> null
@@ -131,9 +131,9 @@ $orphan_fields_ncn_array = array(
 	,
 	orphan_result_meta(
 		array(
-			'name' 			=> 'ncn-month-email',
+			'name' 			=> 'ncn_finished_date',
 			'label'			=> 'Thời gian nhận email',
-			'description' 	=> 'Nhập thời gian nhận email',
+			'description' 	=> '',
 			'type'			=> 'radio',
 			'rich_editor'	=> false,
 			'options'		=> array(

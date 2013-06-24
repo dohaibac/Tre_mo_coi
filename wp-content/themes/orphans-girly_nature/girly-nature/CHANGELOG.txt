@@ -1,9 +1,0 @@
-http://www.templatelite.com/girly-nature-free-wordpress-theme/
-
-VERSION DATE        TYPE    CHANGES
-+-------+-----------+-------+----------------------------------------------------------------------------------+
-3.00    2011/02/19  New     Added drop-down menu, ad-widget, Options page, 
-                            advanced automatic thumbnails, custom style, 
-                            custom header menu (works on WP 3+ onwards) and 
-                            enabled localization (translation).
-1.00    2009/07/17  New     New release.

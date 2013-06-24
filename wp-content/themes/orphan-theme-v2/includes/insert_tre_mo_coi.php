@@ -26,6 +26,7 @@ function insert_tre_mo_coi($data){
 		add_post_meta( $post_id, $orphan_prefix.'cv-time', $data["txt-time"] );
 		add_post_meta( $post_id, $orphan_prefix.'cv-content', $data["txt-content"] );
 		add_post_meta( $post_id, $orphan_prefix.'photo', $data["url-hinhanh"] );
+		add_post_meta( $post_id, $orphan_prefix.'cv-auth',$current_user->user_email);
 		wp_redirect(home_url('/nhap-thong-tin-tre-thanh-cong'));
 		exit;
 	} else {

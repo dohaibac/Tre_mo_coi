@@ -19,7 +19,7 @@ $(document).ready(function(){
           'txt_address': "required",
           'txt_district': "required",        
           'txt_province': "required",          
-          'txt_phone': {required:true, minlength: 10},
+          'txt_phone': {required:true, number: true, maxlength: 10},
 		  'txt_job': "required",		  
 		  'txt-captcha': "required"
         },
@@ -30,7 +30,7 @@ $(document).ready(function(){
           'txt_address': "Nhập địa chỉ (số nhà, tên đường, thôn, xóm, phường xã)",
           'txt_district': "Nhập quận (huyện)",
           'txt_province': "Nhập tỉnh (thành), Đất nước",
-          'txt_phone': {required: "Nhập số điện thoại liên hệ.", minlength: "Nhập đầy đủ số điện thoại (+84)."},
+          'txt_phone': {required: "Nhập số điện thoại liên hệ.", number: "Nhập các chữ số hợp lệ", minlength: "Nhập đầy đủ số điện thoại (+84)."},
           'txt_job': "Nhập nghề nghiệp.",
 		  'txt-captcha': "Nhập mã bảo mật."
         },

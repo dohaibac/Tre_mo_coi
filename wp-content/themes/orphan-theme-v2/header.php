@@ -28,8 +28,11 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />	
+	<link rel="alternate" type="text/xml" title="<?php wp_title( '|', true, 'right' ); ?>" href="<?php bloginfo('rss_url'); ?>" />
+	<link rel="alternate" type="application/atom+xml" title="<?php wp_title( '|', true, 'right' ); ?>" href="<?php bloginfo('atom_url'); ?>" />	
+	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />	
+	<link rel="pingback" href="<?php bloginfo('home')?>/xmlrpc.php" />
 	<!-- Add css -->
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/foundation.css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/default.css" media="all"  />

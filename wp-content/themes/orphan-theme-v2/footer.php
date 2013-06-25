@@ -13,7 +13,7 @@
 					</div><!--Begin Menu bottom-->
 					<!--Begin .coppy-right-->
 					<div class="row coppy-right">
-						<p>© <a href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved.</p>
+						<p>© <a class="coppy-right-link" href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved.</p>
 					</div><!--end .coppy-right-->
 				</div>
 			</div><!--end .main-main-->

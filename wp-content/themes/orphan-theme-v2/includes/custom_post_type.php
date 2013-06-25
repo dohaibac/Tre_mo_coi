@@ -217,16 +217,6 @@ $orphan_fields_cv_array = array(
 			'rich_editor'	=> false,
 			'options'		=> null
 		)
-	),
-	orphan_result_meta(
-		array(
-			'name' 			=> 'album-image',
-			'label'			=> 'Hình ảnh',
-			'description' 	=> 'Nhập thông tin người gặp trẻ',
-			'type'			=> 'multiupload',
-			'rich_editor'	=> false,
-			'options'		=> null
-		)
 	)
 );
 $orphan_save_meta_post[] = $orphan_fields_cv_array;
@@ -429,15 +419,6 @@ function orphan_show_meta_box($post, $metabox)	{
                 echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />&nbsp;';
 				echo $field['desc'];
                 break;
-			case 'multiupload': 
-
-				$meta_name =  $field['name'];
-				include('multiuploads/multiuploads.php');
-				
-				if(function_exists('fn_additional_preview_images')){
-					fn_additional_preview_images($field);
-				}
-				break;
         }
         echo     '<td>',
             '</tr>';

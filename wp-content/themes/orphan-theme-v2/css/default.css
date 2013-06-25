@@ -417,3 +417,7 @@ span.date{
 .main-content input[type="radio"] {
     opacity: 0;
 }
+
+.coppy-right-link{
+	color:#fff;
+}

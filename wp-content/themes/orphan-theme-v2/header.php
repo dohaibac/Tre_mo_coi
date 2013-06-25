@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="<?php language_attributes(); ?>" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="<?php language_attributes(); ?>" > <!--<![endif]-->
+<!--[if lt IE 7]><html class="lt-ie9 lt-ie8 lt-ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><![endif]-->
+<!--[if IE 7]><html class="lt-ie9 lt-ie8" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9 " xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html xmlns="http://www.w3.org/1999/xhtml"><!--<![endif]-->
     <head>
         <!-- Title -->
         <title>
@@ -34,6 +36,7 @@
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />	
 	<link rel="pingback" href="<?php bloginfo('home')?>/xmlrpc.php" />
 	<!-- Add css -->
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/foundation.css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/foundation.css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/default.css" media="all"  />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie.css" media="all"  />

@@ -217,7 +217,7 @@ get_header();
 									  <label for="txt_phone" class="inline">Điện thoại di động<span class="require">*</span></label>
 									</div>
 									<div class="small-9 columns">
-									  <input type="text" name="txt_phone" id="txt_phone" placeholder="+84" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
+									  <input type="text" name="txt_phone" id="txt_phone" placeholder="Số điện thoại di động" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
 									</div>
 								</div>
 								<div class="row">
@@ -269,10 +269,10 @@ get_header();
 								
 								<div class="row">
 									<div class="small-3 columns">
-									  <label for="txt_reason" class="inline">Lý do nhận nuôi</label>
+									  <label for="txt_reason" class="inline">Lý do nhận con</label>
 									</div>
 									<div class="small-9 columns">
-										<textarea name="txt_reason" id="txt_reason" placeholder="Lý do nhận con nuôi" rows="12"></textarea>
+										<textarea name="txt_reason" id="txt_reason" placeholder="Lý do nhận con" rows="12"></textarea>
 									</div>
 								</div>
 		
@@ -293,6 +293,7 @@ get_header();
 											<?php endfor; ?>
 										</select>
 									  </div>
+									  <div class="large-6 columns"></div>
 									</div>
 									
 									<div class="row" >
@@ -311,10 +312,12 @@ get_header();
 									</div>
 									
 									<div class="row">
-									  <div class="large-12 columns">
-										<label>Ghi chú</label>
-										<textarea name="txt_note" placeholder="Ghi chú"></textarea>
-									  </div>
+									  	<div class="large-3 columns">
+											<label>Ghi chú</label>
+										</div>
+										<div class="large-9 columns">
+											<textarea name="txt_note" placeholder="Ghi chú"></textarea>
+										</div>
 									</div>
 									
 									<div class="row">

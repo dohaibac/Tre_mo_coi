@@ -14,7 +14,7 @@ get_header();
 
             function my_ads_shortcode($attr) {
                 ob_start();
-                get_template_part('loop', 'archive');
+                get_template_part('loop', 'search');
                 return ob_get_clean();
             }
             ?>
@@ -34,7 +34,7 @@ get_header();
                 <h3 class="wp-tab-title"><?php echo $tab_titile ?></h3>
                 <div class="wp-tab-content">
                     <div class='box-content list-2'>
-<?php get_template_part('loop', 'archive'); ?>
+<?php get_template_part('loop', 'search'); ?>
                     </div>
                 </div>
             </div>

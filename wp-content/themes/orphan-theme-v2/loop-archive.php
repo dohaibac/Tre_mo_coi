@@ -28,8 +28,4 @@ if (have_posts()) :
         <?php } ?>
         <div class="fixed"></div>
     </div>
-<?php else : ?>
-    <div class="errorbox">
-        <?php _e('Sorry, no posts matched your criteria.', 'orphans-theme'); ?>
-    </div>
 <?php endif; ?>

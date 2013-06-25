@@ -44,10 +44,10 @@ $prefix = $captcha['prefix'];
 $file = $captcha['file'];
 wp_enqueue_script('jquery-ui-1.8.16.custom.min',get_bloginfo('template_directory').'/includes/js/jquery-ui-1.8.16.custom.min.js');
 wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includes/js/ui.datepicker-vi.js');
-wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/includes/js/orphan-script-admin.js');
+//wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/includes/js/orphan-script-admin.js');
 ?>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="<?php get_bloginfo('template_directory')?>/includes/css/custom-meta-post.css" />
+<link rel="stylesheet" href="<?php echo get_bloginfo('template_directory')?>/includes/css/custom-meta-post.css" />
 <div class="large-8 columns content">
 	<div class="row">
 		<div class="row shadow-box">
@@ -222,8 +222,8 @@ wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/inc
 						image_id = '#image_'+$(this).attr('data');
 
 						formfield = $(txtBox_id);
-
-						tb_show('Đăng hình ảnh', url_home+'/wp-admin/media-upload.php?type=image&amp;TB_iframe=true');
+						
+						tb_show('Đăng hình ảnh', '<?php echo home_url()?>/wp-admin/media-upload.php?type=image&amp;TB_iframe=true');
 
 						return false;
 

@@ -336,7 +336,7 @@ function orphan_show_meta_box($post, $metabox)	{
 	wp_enqueue_script('jquery-ui-1.8.16.custom.min',get_bloginfo('template_directory').'/includes/js/jquery-ui-1.8.16.custom.min.js');
 	wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includes/js/ui.datepicker-vi.js');
 	wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/includes/js/orphan-script-admin.js');
-	wp_enqueue_script('swfobject',get_bloginfo('template_directory').'/includes/multiuploads/js/myplupload.js');
+	
 	echo '<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />';
 	echo '<link rel="stylesheet" href="'.get_bloginfo('template_directory').'/includes/css/custom-meta-post.css" />';
 
@@ -424,7 +424,7 @@ function orphan_show_meta_box($post, $metabox)	{
             '</tr>';
 
     }
-	echo '</table>';
+	echo '</table><style>.ui-datepicker{}</style>';
 	echo orphan_add_meta_script();
 }
 

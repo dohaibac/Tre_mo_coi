@@ -83,33 +83,33 @@ $orphan_fields_ncn_array = array(
 	// nam sinh
 	// ghi chu
 	// thoi gian nhan mail
-	orphan_result_meta(
+	orphan_result_meta_ncn(
 		array(
-			'name' 			=> 'ncn-ly-do',
+			'name' 			=> 'ncn_ly_do',
 			'label'			=> 'Lý do nhận con nuôi',
-			'description' 	=> 'lý do nhận con nuôi',
+			'description' 	=> '',
 			'type'			=> 'textarea',
 			'required'		=> true,
 			'rich_editor'	=> false,
 			'options'		=> null
 		)
 	),
-	orphan_result_meta(
+	orphan_result_meta_ncn(
 		array(
-			'name' 			=> 'ncn-ngay-sinh',
+			'name' 			=> 'ncn_nam_sinh',
 			'label'			=> 'Năm sinh',
-			'description' 	=> 'Nhập năm sinh',
+			'description' 	=> '',
 			'type'			=> 'date',
 			'rich_editor'	=> false,
 			'options'		=> null
 		)
 	),
 
-	orphan_result_meta(
+	orphan_result_meta_ncn(
 		array(
-			'name' 			=> 'ncn-gioi-tinh',
+			'name' 			=> 'ncn_gioi_tinh',
 			'label'			=> 'Giới tính',
-			'description' 	=> 'Giới tính của trẻ',
+			'description' 	=> '',
 			'type'			=> 'radio',
 			'rich_editor'	=> false,
 			'options'		=> array(
@@ -118,31 +118,42 @@ $orphan_fields_ncn_array = array(
 			)
 		)
 	),
-	orphan_result_meta(
+	orphan_result_meta_ncn(
 		array(
-			'name' 			=> 'ncn-ghi-chu',
+			'name' 			=> 'ncn_ghi_chu',
 			'label'			=> 'Ghi chú thông tin',
-			'description' 	=> 'Nhập thông tin ghi chú',
+			'description' 	=> '',
 			'type'			=> 'textarea',
 			'rich_editor'	=> false,
 			'options'		=> null
 		)
 	)
 	,
-	orphan_result_meta(
+	orphan_result_meta_ncn(
 		array(
-			'name' 			=> 'ncn-month-email',
+			'name' 			=> 'ncn_finished_date',
 			'label'			=> 'Thời gian nhận email',
-			'description' 	=> 'Nhập thời gian nhận email',
+			'description' 	=> '',
+			'type'			=> 'date',
+			'rich_editor'	=> false,
+			'options'		=> null
+		)
+	),
+	/*
+	orphan_result_meta_ncn(
+		array(
+			'name' 			=> 'ncn_finished_date',
+			'label'			=> 'Thời gian nhận email',
+			'description' 	=> 'Số tháng muốn nhận email',
 			'type'			=> 'radio',
 			'rich_editor'	=> false,
 			'options'		=> array(
-				'1 Tháng',
-				'3 Tháng',
-				'6 Tháng'
+				get_finished_date(1),
+				get_finished_date(3),
+				get_finished_date(6)
 			)
 		)
-	)
+	)*/
 );
 
 $orphan_save_meta_post[] = $orphan_fields_ncn_array;
@@ -160,4 +171,24 @@ function orphan_add_meta_box_ncn(){
 		'fields' => $orphan_fields_ncn_array
 	);
 	add_meta_box($orphan_prefix.'metabox_thong_tin_nhan_con_nuoi', 'Thông tin nhận con nuôi', 'orphan_show_meta_box', $post_type_ncn, 'advanced', 'default', $meta_box_fields);
+}
+function orphan_result_meta_ncn($meta_info = null){
+	global $ecpt_prefix;
+	$name = $meta_info['name'];
+	$label = $meta_info['label'];
+	$decription = isset($meta_info['description']) ? $meta_info['description'] :  $label;
+	$type = $meta_info['type'];
+	$rich_editor = $meta_info['rich_editor'];
+	$options = $meta_info['options'];
+	
+	return array(
+			'name' 			=> $name,
+			'desc' 			=> $decription,
+			'label' 		=> $label,
+			'id' 			=> $ecpt_prefix . $name,
+			'class' 		=> $ecpt_prefix . $name,
+			'type' 			=> $type,
+			'rich_editor' 	=> $rich_editor,
+			'options' 		=> $options
+		);
 }

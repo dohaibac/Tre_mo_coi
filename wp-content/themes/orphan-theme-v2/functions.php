@@ -1,5 +1,5 @@
 ﻿<?php
-/*
+/**
 Author: Evizi Team
 URL: htp://evizi.com
 
@@ -7,6 +7,7 @@ This is where you can drop your custom functions or
 just edit things like thumbnail sizes, header images, 
 sidebars, comments, ect.
 */
+
 show_admin_bar( false );	
 include('includes/custom_post_type.php');
 include('includes/post_type_nhan_con_nuoi.php');
@@ -43,7 +44,7 @@ function custom_theme_support() {
 	if(function_exists('register_sidebar')){
 		 register_sidebar(array(
 		  'name' => 'sidebar_main',
-		  'description' => 'Main sidebar',
+		  'description' => 'Sidebar cho game',
 		  'before_widget'  => '<div id="id_%1$s" class="row sidebar-box shadow-box">',
 		  'after_widget'  => '</div></div>',
 		  'before_title'  => '<h2>',

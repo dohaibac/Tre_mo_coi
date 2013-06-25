@@ -84,7 +84,10 @@
                                     <form  method="get" id="searchform" action="<?php echo esc_url(home_url('/')); ?>">
                                         <div class="row collapse">
                                             <div class="small-7 columns">
-                                                <input type="text" name="s" id="s" value="<?php echo get_search_query(); ?>" type="text" placeholder="Nhập từ khóa..." required>
+                                                <input type="text" name="s" id="s" value="<?php echo get_search_query(); ?>" 
+                                                       type="text" placeholder="Nhập từ khóa..." 
+                                                       required='required' oninvalid="setCustomValidity('Vui lòng nhập từ khóa')"
+                                                       oninput="setCustomValidity('')">
                                             </div>
                                             <div class="small-5 columns">
                                                 <button id="search_button" 

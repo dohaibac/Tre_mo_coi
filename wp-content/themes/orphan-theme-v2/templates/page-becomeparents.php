@@ -137,8 +137,6 @@ EOF;
 		wp_redirect(home_url("dang-ky-nhan-mail-thanh-cong"));
 	}	
 }
-
-
 $captcha = create_captcha(); 
 $prefix = $captcha['prefix'];
 $file = $captcha['file'];
@@ -159,16 +157,6 @@ get_header();
 							<input type="hidden" name="become_parent" value="become_parent" />
 							
 							<fieldset>
-								<div class="row">
-									  <div class="large-12 columns">
-										
-										<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
-											Hệ thống sẽ gửi thông tin những trẻ mồ côi phù hợp nhu cầu của bạn vào địa chỉ email trong khoảng thời gian bạn đăng ký nhận email (dưới đây). Bạn có thể hủy chức năng này ngay tại email của bạn bất cứ khi nào bạn muốn.
-										</p>
-									  	<br />
-									  </div>
-								</div>
-								
 								<div class="row">
 									<div class="small-3 columns">
 									  <label for="txt_name" class="inline">Họ tên <span class="require">*</span></label>
@@ -217,7 +205,7 @@ get_header();
 									  <label for="txt_phone" class="inline">Điện thoại di động<span class="require">*</span></label>
 									</div>
 									<div class="small-9 columns">
-									  <input type="text" name="txt_phone" id="txt_phone" placeholder="+84" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
+									  <input type="text" name="txt_phone" id="txt_phone" placeholder="Số điện thoại di động" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
 									</div>
 								</div>
 								<div class="row">
@@ -269,10 +257,10 @@ get_header();
 								
 								<div class="row">
 									<div class="small-3 columns">
-									  <label for="txt_reason" class="inline">Lý do nhận nuôi</label>
+									  <label for="txt_reason" class="inline">Lý do nhận con</label>
 									</div>
 									<div class="small-9 columns">
-										<textarea name="txt_reason" id="txt_reason" placeholder="Lý do nhận con nuôi" rows="12"></textarea>
+										<textarea name="txt_reason" id="txt_reason" placeholder="Lý do nhận con" rows="12"></textarea>
 									</div>
 								</div>
 		
@@ -283,7 +271,7 @@ get_header();
 									  <div class="large-3 columns">
 										<label class="inline">Năm sinh</label>
 									  </div>
-									  <div class="large-3 columns" align="right">
+									  <div class="large-3 columns" align="left">
 										<select name = "txt_birthyear">
 											<?php 
 												$tmpyear = date("Y");
@@ -293,6 +281,7 @@ get_header();
 											<?php endfor; ?>
 										</select>
 									  </div>
+									  <div class="large-6 columns"></div>
 									</div>
 									
 									<div class="row" >
@@ -311,10 +300,12 @@ get_header();
 									</div>
 									
 									<div class="row">
-									  <div class="large-12 columns">
-										<label>Ghi chú</label>
-										<textarea name="txt_note" placeholder="Ghi chú"></textarea>
-									  </div>
+									  	<div class="large-3 columns">
+											<label>Ghi chú</label>
+										</div>
+										<div class="large-9 columns">
+											<textarea name="txt_note" placeholder="Ghi chú"></textarea>
+										</div>
 									</div>
 									
 									<div class="row">
@@ -328,6 +319,14 @@ get_header();
 										</div>
 									</div>
 								  
+								</div>
+								<div class="row">
+									  <div class="large-12 columns">
+										
+										<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
+											Hệ thống sẽ gửi thông tin những trẻ mồ côi phù hợp nhu cầu của bạn vào địa chỉ email trong vòng <span id="email_duration" />3 tháng</span>. Bạn có thể hủy chức năng này ngay tại email của bạn bất cứ khi nào bạn muốn.
+										</p>
+									  </div>
 								</div>
 								<div class="row">
 									<div class="large-12 columns text-center">
@@ -346,11 +345,8 @@ get_header();
 	
 <?php 
 get_footer() ;
-
-
 // ERRORS PROCESSING
-if ( $errors->get_error_code() )
-{
+if ( $errors->get_error_code() ){
 	$error_messages = $errors->get_error_messages();
 	$error_strs = "<ul>";
 	foreach ($error_messages as $error_message): 
@@ -362,6 +358,4 @@ if ( $errors->get_error_code() )
 		$("#becomeparents_error_container").html("<?php echo $error_strs;?>");
 	 	$("#becomeparents_error_container").show();
 	</script>
-	<?php 
-}
-?>
+<?php } ?>

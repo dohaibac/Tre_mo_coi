@@ -349,7 +349,7 @@ img.thumb{
 }
 .list-2 .row{
 	margin-bottom:10px;
-	max-height:100px;
+	max-height:105px;
 	overflow:hidden;
 }
 .list-2 .row:last-child{

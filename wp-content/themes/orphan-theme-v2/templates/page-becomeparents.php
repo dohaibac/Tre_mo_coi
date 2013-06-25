@@ -205,7 +205,7 @@ get_header();
 									  <label for="txt_phone" class="inline">Điện thoại di động<span class="require">*</span></label>
 									</div>
 									<div class="small-9 columns">
-									  <input type="text" name="txt_phone" id="txt_phone" placeholder="+84" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
+									  <input type="text" name="txt_phone" id="txt_phone" placeholder="Số điện thoại di động" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
 									</div>
 								</div>
 								<div class="row">
@@ -281,6 +281,7 @@ get_header();
 											<?php endfor; ?>
 										</select>
 									  </div>
+									  <div class="large-6 columns"></div>
 									</div>
 									
 									<div class="row" >

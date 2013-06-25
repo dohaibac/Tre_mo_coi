@@ -30,6 +30,6 @@ if (have_posts()) :
     </div>
 <?php else : ?>
     <div class="errorbox">
-        <?php _e('Sorry, no posts matched your criteria.', 'orphans-theme'); ?>
+        <?php _e('Hiện thời không có bài viết nào', 'orphans-theme'); ?>
     </div>
 <?php endif; ?>

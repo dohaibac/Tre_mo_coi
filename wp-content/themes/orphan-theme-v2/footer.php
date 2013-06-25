@@ -5,7 +5,7 @@
 					<div class="row">
 						<?php custom_main_nav('footer_links'); // Adjust using Menus in Wordpress Admin ?>		
 						<div class="right socical">
-							<a title="facebook" href="http://www.facebook.com/sharer.php?u=<?php bloginfo('home');?>"><img alt="facebook" src="<?php echo get_template_directory_uri(); ?>/images/facebook.png"/></a>
+							<a title="facebook" href="http://www.facebook.com/tremocoi.org.vn"><img alt="facebook" src="<?php echo get_template_directory_uri(); ?>/images/facebook.png"/></a>
 							<a title="Google" href="https://plus.google.com/share?url=<?php bloginfo('home');?>"><img alt="Google" src="<?php echo get_template_directory_uri(); ?>/images/google.png"/></a>
 							<a title="Twitter" href="https://twitter.com/share?original_referer=<?php bloginfo('home');?>"><img alt="Twitter" src="<?php echo get_template_directory_uri(); ?>/images/twitter.png"/></a>
 							<a title="Rss" href="<?php bloginfo('rss2_url'); ?>"><img alt="Rss" src="<?php echo get_template_directory_uri(); ?>/images/rss.png"/></a>
@@ -34,5 +34,6 @@
 		});
 	</script>
 	<?php endif;?>
+  <?php include_once("analyticstracking.php") ?>
 </body>
 </html>

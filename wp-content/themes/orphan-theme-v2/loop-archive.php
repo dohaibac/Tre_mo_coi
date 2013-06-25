@@ -28,4 +28,8 @@ if (have_posts()) :
         <?php } ?>
         <div class="fixed"></div>
     </div>
+<?php else : ?>
+    <div class="errorbox">
+        <?php _e('Hiện thời không có bài viết nào', 'orphans-theme'); ?>
+    </div>
 <?php endif; ?>

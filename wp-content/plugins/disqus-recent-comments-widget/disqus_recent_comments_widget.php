@@ -307,7 +307,6 @@ EOF;
 		<?php
 		
     }
-
 }
 
 add_action('wp_ajax_nopriv_load_disqus_recent_comment_widget', 'load_disqus_recent_comment_widget');

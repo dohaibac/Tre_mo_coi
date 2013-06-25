@@ -15,7 +15,7 @@ include('includes/insert_tre_mo_coi.php');
 // Adding WP 3+ Functions & Theme Support
 function custom_theme_support() {
 	add_theme_support('post-thumbnails');      // wp thumbnails (sizes handled in functions.php)
-	set_post_thumbnail_size(125, 125, true);   // default thumb size
+	//set_post_thumbnail_size(125, 125, true);   // default thumb size
 	add_theme_support( 'custom-background' );  // wp custom background
 	add_theme_support('automatic-feed-links'); // rss thingy
 	// to add header image support go here: http://themble.com/support/adding-header-background-image-support/
@@ -438,5 +438,16 @@ function get_now_in_option_gmt_offset()
 	$gmdate = gmdate("Y-m-d H:i:s", time()+($ms)); // the "-" can be switched to a plus if that's what your time zone is.
 	
 	return $gmdate;
+}
+
+remove_all_actions( 'do_feed_rss2' );
+add_action( 'do_feed_rss2', 'orphan_product_feed_rss2', 10, 1 );
+
+function orphan_product_feed_rss2( $for_comments ) {
+    $rss_template = get_template_directory() . '/templates/page-rss.php';
+    if( get_query_var( 'post_type' ) == 'post' and file_exists( $rss_template ) )
+        load_template( $rss_template );
+    else
+        do_feed_rss2( $for_comments ); // Call default function
 }
 ?>

@@ -160,6 +160,11 @@ section.top-bar-section ul ul.dropdown li a{
 	border-radius: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius:  0;
+	
+}
+.main-menu .top-bar-section .dropdown li a:hover{
+	opacity:1;
+	color:red;
 }
 .main-menu .top-bar-section .dropdown li:last-child a{
 	
@@ -411,9 +416,13 @@ span.date{
 .box-news .row{  margin-bottom: 10px;}
 .box-news .row:last-child{  margin-bottom: 0px;}
 .main-content textarea{
-	max-width:365px;
+	max-width:371px;
 }
 
 .main-content input[type="radio"] {
     opacity: 0;
+}
+
+.coppy-right-link{
+	color:#fff;
 }

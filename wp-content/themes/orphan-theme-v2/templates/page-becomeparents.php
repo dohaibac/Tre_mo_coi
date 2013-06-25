@@ -283,7 +283,7 @@ get_header();
 									  <div class="large-3 columns">
 										<label class="inline">Năm sinh</label>
 									  </div>
-									  <div class="large-3 columns" align="right">
+									  <div class="large-3 columns" align="left">
 										<select name = "txt_birthyear">
 											<?php 
 												$tmpyear = date("Y");

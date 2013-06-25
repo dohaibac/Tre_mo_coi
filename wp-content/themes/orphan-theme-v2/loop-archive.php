@@ -1,57 +1,4 @@
 <?php
-global $wp_query;
-$total_results = $wp_query->found_posts;
-?>
-<div class="row">
-    <div class="large-7 columns">
-        <h2 style='background-image: none; border: none; 
-            padding: 0;; padding-left: 10px;font-size: 13px;'>
-            <?php echo" Tìm thấy $total_results kết quả" ?>
-        </h2>
-        <h2 style='background-image: none; border: none; 
-            font-size: 10px; padding: 0; padding-left: 10px;'>
-            Bạn có muốn tìm theo: 
-            <?php
-            $pt = get_query_var('post_types');
-            $tab_titile = '';
-            if ($pt == "tre-mo-coi") {
-                $tab_titile = 'Trẻ mồ côi';
-            } elseif ($pt == "post") {
-                $tab_titile = 'Bài viết';
-            } else {
-                $tab_titile = 'Tất cả';
-            }
-            ?>
-            <?php if ($pt == "tre-mo-coi") { ?>
-                <a id="p-search" href="javascript:void(0);">Tất cả? </a>
-                <a id="p-search" post_types="post" 
-                   href="javascript:void(0);">Bài viết?</a>  
-               <?php } elseif ($pt == "post") { ?>
-                <a id="p-search" href="javascript:void(0);">Tất cả? </a>
-                <a id="p-search" post_types="tre-mo-coi" 
-                   href="javascript:void(0);">Trẻ mồ côi? </a>
-               <?php } else { ?>
-                <a id="p-search" post_types="tre-mo-coi" 
-                   href="javascript:void(0);">Trẻ mồ côi? </a>
-                <a id="p-search"
-                   post_types="post" 
-                   href="javascript:void(0);">Bài viết?</a>  
-               <?php } ?>
-        </h2>
-    </div>
-    <div id="pagenavi" style="text-align: right;" class="large-5 columns">
-        <?php
-        if (function_exists('wp_paginate')) {
-            wp_paginate();
-        } else {
-            ?>
-            <span class="newer"><?php previous_posts_link(__('Newer Entries', 'orphans-theme')); ?></span>
-            <span class="older"><?php next_posts_link(__('Older Entries', 'orphans-theme')); ?></span>
-        <?php } ?>  
-        <div class="fixed"></div>
-    </div>
-</div>
-<?php
 if (have_posts()) :
     while (have_posts()) : the_post();
         update_post_caches($posts);
@@ -78,13 +25,11 @@ if (have_posts()) :
             ?>
             <span class="newer"><?php previous_posts_link(__('Newer Entries', 'orphans-theme')); ?></span>
             <span class="older"><?php next_posts_link(__('Older Entries', 'orphans-theme')); ?></span>
-        <?php } ?>  
+        <?php } ?>
         <div class="fixed"></div>
     </div>
 <?php else : ?>
     <div class="errorbox">
-        <?php _e('Xin lỗi, mong bạn vui lòng thử tìm kiếm với từ khóa khác', 'orphans-theme'); ?>
+        <?php _e('Sorry, no posts matched your criteria.', 'orphans-theme'); ?>
     </div>
 <?php endif; ?>
-<?php
-// wp_reset_postdata();?>

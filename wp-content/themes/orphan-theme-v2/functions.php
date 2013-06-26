@@ -47,6 +47,8 @@ require_once('includes/libs/bootstrap_walker.php');
 include('includes/custom_post_type.php');
 include('includes/post_type_nhan_con_nuoi.php');
 include('includes/insert_tre_mo_coi.php');
+include('includes/action-becomeparents.php');
+include('includes/action-profile.php');
 /**
  ~~~~~~~~~~~~ INCLUDE AJAX PROCESSING FILES ~~~~~~~~~~~~
  */

@@ -6,12 +6,75 @@ URL: htp://evizi.com
 This is where you can drop your custom functions or
 just edit things like thumbnail sizes, header images, 
 sidebars, comments, ect.
+
+YOU NEED TO COMMENT AND GROUP THEM IN AN AREA CLEARLY.
 */
 
+
+
+/**
+ ************ CALL GLOBAL FUNCTIONS DIRECTLY ************
+ */
 show_admin_bar( false );	
+
+/*allow redirection, even if my theme starts to send output to the browser
+Cannot modify header information */
+if ( !is_admin() ){
+	add_action('init', 'orphan_do_output_buffer');
+	function orphan_do_output_buffer() {
+			ob_start();
+	}
+}
+/**
+ ~~~~~~~~~~~~ CALL GLOBAL FUNCTIONS DIRECTLY ~~~~~~~~~~~~
+ */
+
+
+
+/**
+ ************ REQUIRE GLOBAL CLASSES ************
+ */
+require_once('includes/libs/bootstrap_walker.php');
+/**
+ ~~~~~~~~~~~~ REQUIRE GLOBAL CLASSES ~~~~~~~~~~~~
+ */
+
+
+
+/**
+ ************ INCLUDE AJAX PROCESSING FILES ************
+ */
 include('includes/custom_post_type.php');
 include('includes/post_type_nhan_con_nuoi.php');
 include('includes/insert_tre_mo_coi.php');
+/**
+ ~~~~~~~~~~~~ INCLUDE AJAX PROCESSING FILES ~~~~~~~~~~~~
+ */
+
+
+
+/**
+ ************ ADD ACTION HOOKS ************
+ */
+remove_all_actions( 'do_feed_rss2' );
+add_action( 'do_feed_rss2', 'orphan_product_feed_rss2', 10, 1 );
+
+function orphan_product_feed_rss2( $for_comments ) {
+    $rss_template = get_template_directory() . '/templates/page-rss.php';
+    if( get_query_var( 'post_type' ) == 'post' and file_exists( $rss_template ) )
+        load_template( $rss_template );
+    else
+        do_feed_rss2( $for_comments ); // Call default function
+}
+/**
+ ~~~~~~~~~~~~ ADD ACTION HOOKS ~~~~~~~~~~~~
+ */
+
+
+
+/**
+ ************ THEME COMMON FUNCTIONS ************
+ */
 // Adding WP 3+ Functions & Theme Support
 function custom_theme_support() {
 	add_theme_support('post-thumbnails');      // wp thumbnails (sizes handled in functions.php)
@@ -90,130 +153,7 @@ function custom_main_nav($theme_location = 'main_nav', $container = false ) {
     );
 }
 // Menu output mods
-/* Bootstrap_Walker for Wordpress 
-     * Author: George Huger, Illuminati Karate, Inc 
-     * More Info: http://illuminatikarate.com/blog/bootstrap-walker-for-wordpress 
-     * 
-     * Formats a Wordpress menu to be used as a Bootstrap dropdown menu (http://getbootstrap.com). 
-     * 
-     * Specifically, it makes these changes to the normal Wordpress menu output to support Bootstrap: 
-     * 
-     *        - adds a 'dropdown' class to level-0 <li>'s which contain a dropdown 
-     *         - adds a 'dropdown-submenu' class to level-1 <li>'s which contain a dropdown 
-     *         - adds the 'dropdown-menu' class to level-1 and level-2 <ul>'s 
-     * 
-     * Supports menus up to 3 levels deep. 
-     *  
-     */ 
-    class Bootstrap_Walker extends Walker_Nav_Menu 
-    {     
- 
-        /* Start of the <ul> 
-         * 
-         * Note on $depth: Counterintuitively, $depth here means the "depth right before we start this menu".  
-         *                   So basically add one to what you'd expect it to be 
-         */         
-        function start_lvl(&$output, $depth) 
-        {
-            $tabs = str_repeat("\t", $depth); 
-            // If we are about to start the first submenu, we need to give it a dropdown-menu class 
-            if ($depth == 0 || $depth == 1) { //really, level-1 or level-2, because $depth is misleading here (see note above) 
-                $output .= "\n{$tabs}<ul class=\"dropdown\">\n"; 
-            } else { 
-                $output .= "\n{$tabs}<ul>\n"; 
-            } 
-            return;
-        } 
- 
-        /* End of the <ul> 
-         * 
-         * Note on $depth: Counterintuitively, $depth here means the "depth right before we start this menu".  
-         *                   So basically add one to what you'd expect it to be 
-         */         
-        function end_lvl(&$output, $depth)  
-        {
-            if ($depth == 0) { // This is actually the end of the level-1 submenu ($depth is misleading here too!) 
- 
-                // we don't have anything special for Bootstrap, so we'll just leave an HTML comment for now 
-                $output .= '<!--.dropdown-->'; 
-            } 
-            $tabs = str_repeat("\t", $depth); 
-            $output .= "\n{$tabs}</ul>\n"; 
-            return; 
-        }
- 
-        /* Output the <li> and the containing <a> 
-         * Note: $depth is "correct" at this level 
-         */         
-        function start_el(&$output, $item, $depth, $args)  
-        {    
-            global $wp_query; 
-            $indent = ( $depth ) ? str_repeat( "\t", $depth ) : ''; 
-            $class_names = $value = ''; 
-            $classes = empty( $item->classes ) ? array() : (array) $item->classes; 
- 
-            /* If this item has a dropdown menu, add the 'dropdown' class for Bootstrap */ 
-            if ($item->hasChildren) { 
-                $classes[] = 'has-dropdown'; 
-                // level-1 menus also need the 'dropdown-submenu' class 
-                if($depth == 1) { 
-                    $classes[] = 'dropdown-submenu'; 
-                } 
-            } 
- 
-            /* This is the stock Wordpress code that builds the <li> with all of its attributes */ 
-            $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) ); 
-            $class_names = ' class="' . esc_attr( $class_names ) . '"'; 
-            $output .= $indent . '<li id="menu-item-'. $item->ID . '"' . $value . $class_names .'>';             
-            $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : ''; 
-            $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : ''; 
-            $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : ''; 
-            $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : ''; 
-            $item_output = $args->before; 
- 
-            /* If this item has a dropdown menu, make clicking on this link toggle it */ 
-            if ($item->hasChildren && $depth == 0) { 
-                $item_output .= '<a'. $attributes .' class="dropdown-toggle" data-toggle="dropdown">'; 
-            } else { 
-                $item_output .= '<a'. $attributes .'>'; 
-            } 
- 
-            $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after; 
- 
-            /* Output the actual caret for the user to click on to toggle the menu */             
-            if ($item->hasChildren && $depth == 0) { 
-                $item_output .= '<b class="caret"></b></a>'; 
-            } else { 
-                $item_output .= '</a>'; 
-            } 
- 
-            $item_output .= $args->after; 
-            $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args ); 
-            return; 
-        }
- 
-        /* Close the <li> 
-         * Note: the <a> is already closed 
-         * Note 2: $depth is "correct" at this level 
-         */         
-        function end_el (&$output, $item, $depth, $args)
-        {
-            $output .= '</li>'; 
-            return;
-        } 
- 
-        /* Add a 'hasChildren' property to the item 
-         * Code from: http://wordpress.org/support/topic/how-do-i-know-if-a-menu-item-has-children-or-is-a-leaf#post-3139633  
-         */ 
-        function display_element ($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) 
-        { 
-            // check whether this item has children, and set $item->hasChildren accordingly 
-            $element->hasChildren = isset($children_elements[$element->ID]) && !empty($children_elements[$element->ID]); 
- 
-            // continue with normal behavior 
-            return parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output); 
-        }         
-    } 
+
 	
 
 // Add Twitter Bootstrap's standard 'active' class name to the active nav link item
@@ -227,7 +167,34 @@ function add_active_class($classes, $item) {
   return $classes;
 }
 
+/**
+* Function name:	tmc_widgets_init
+* Description : 	register a site bar
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 06, 2013		Phi Ho			register a site bar
+*/
+function tmc_widgets_init() {
+	register_sidebar( array(
+		'name' => __( 'Main Sidebar', 'mainsitebar' ),
+		'id' => 'sidebar-m',
+		'description' => __( 'Appears on posts and pages except the optional Front Page template, which has its own widgets', 'mainsitebar' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+}
+add_action( 'widgets_init', 'tmc_widgets_init' );
+/**
+ ~~~~~~~~~~~~ THEME COMMON FUNCTIONS ~~~~~~~~~~~~
+ */
 
+
+
+/**
+ ************ UTIL COMMON FUNCTIONS ************
+ */
 /**
 * Function name:	orphan_utf162utf8
 * Description : 	Convert unf-8
@@ -343,6 +310,7 @@ function orphan_get_json($data = null){
 		$json = json_encode($data); 
 		return orphan_decodeUnicodeString($json);
 }
+<<<<<<< HEAD
 /**
 * Function name:	tmc_widgets_init
 * Description : 	register a site bar
@@ -371,6 +339,8 @@ Cannot modify header information */
 			ob_start();
 	}
 //}
+=======
+>>>>>>> 5ee4b658cb228814dc13587eb0e7e3e01699bde2
 
 function orphan_get_post_thumbnai(){
 	global $post;
@@ -404,6 +374,14 @@ function get_thumbnail_by_post_content(){
 }
 
 
+/**
+* Function name:	get_finished_date
+* Description : 	get finished date of one become parent demand.
+* Params:			int $email_duration
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 15, 2013		Ha.Nguyen		Created
+*/
 function get_finished_date($email_duration)
 {
 	if(is_int($email_duration) && $email_duration > 0)
@@ -414,22 +392,20 @@ function get_finished_date($email_duration)
 		$d->modify( "+".$email_duration." month" );
 		$d->modify( "-1 day" );
 		return $d->format( 'Y-m-d H:i:s' );
-		
-		
-		
-//		$date=("d.m.Y");
-//		$date=strtotime($date);
-//		$date=date('Y-m-1',$date);
-//		$now=strtotime("+".$email_duration." month", strtotime($date));
-//		
-//		$lastdayofnextmonth=strtotime("-1 day", $now);
-//		$nextmonthsfirstdate = date('m.d.Y',$now);//		
-//		return 
 	}
 	
 	return null;
 }
 
+
+/**
+* Function name:	get_now_in_option_gmt_offset
+* Description : 	get current time in offset table wp-option.gmt
+* Params:			
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 15, 2013		Ha.Nguyen		Created
+*/
 function get_now_in_option_gmt_offset()
 {
 	$h = get_option('gmt_offset'); // Hour for time zone goes here e.g. +7 or -4, just remove the + or -
@@ -440,14 +416,7 @@ function get_now_in_option_gmt_offset()
 	return $gmdate;
 }
 
-remove_all_actions( 'do_feed_rss2' );
-add_action( 'do_feed_rss2', 'orphan_product_feed_rss2', 10, 1 );
-
-function orphan_product_feed_rss2( $for_comments ) {
-    $rss_template = get_template_directory() . '/templates/page-rss.php';
-    if( get_query_var( 'post_type' ) == 'post' and file_exists( $rss_template ) )
-        load_template( $rss_template );
-    else
-        do_feed_rss2( $for_comments ); // Call default function
-}
+/**
+ ~~~~~~~~~~~~ UTIL COMMON FUNCTIONS ~~~~~~~~~~~~
+ */
 ?>

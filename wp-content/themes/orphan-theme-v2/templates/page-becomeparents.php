@@ -1,17 +1,16 @@
 <?php 
-
 /**
  * Template Name: Đăng ký nhận trẻ Template
  * Description: A Page Template that shows form register
  * @author Long Nguyen and Ha Nguyen
  */
 
-
 // GLOBAL VAR
- global $current_user, $orphan_prefix;
  //$data = orphan_fields_ncn_array(); 
 $THEME_DIR_URL = get_template_directory_uri();
 $CAPTCHA_PLUGIN_URL = plugins_url() . '/really-simple-captcha/tmp/';
+
+//require( ABSPATH . WPINC . '/ms-functions.php' );
 
  
 // CHECK LOGIN
@@ -50,93 +49,21 @@ add_action('wp_head', 'add_javascript');
 function add_javascript() 
 {
 	global $THEME_DIR_URL;
-	
+    $action_ajax_url = admin_url('admin-ajax.php');
+    
     echo <<<EOF
 	<script type="text/javascript" src="{$THEME_DIR_URL}/js/tre-mo-coi/page-becomeparents.js"></script>
+	<script>
+		var action_ajax_url ='$action_ajax_url';</script>";
+	</script>
 EOF;
 }
 
 
-// FUNCTIONS
-//function create_captcha(){
-//	$CAPTCHA_PLUGIN_URL = plugins_url() . '/really-simple-captcha/tmp/';
-//	$captcha_instance = new ReallySimpleCaptcha();
-//	$captcha_instance->img_size = array( 72, 30 );
-//	$captcha_instance->font_size = 16;
-//	$captcha_instance->base = array( 9, 20 );
-//	$word = $captcha_instance->generate_random_word();
-//	$prefix = mt_rand();	
-//	$file = $captcha_instance->generate_image( $prefix, $word );
-//	
-//	return array('prefix' => $prefix, 'file' => $CAPTCHA_PLUGIN_URL.$file);
-//}
+// OTHER FUNCTIONS
 
 
- $errors = new WP_Error();
- if(isset($_POST["become_parent"]) && $_POST["become_parent"] == "become_parent")
- {		
-	$captcha_instance = new ReallySimpleCaptcha();	
-	if(!$captcha_instance->check( $_POST['captcha_prefix'], $_POST['txt_captcha'] ))
-	{
-		$captcha_error = true;	
-	}
-	$captcha_instance->remove( $_POST['captcha_prefix'] );	
-	if($captcha_error)
-	{
-		$errors->add( 'captcha_error', __( "Mã bảo mật không đúng, vui lòng nhập lại." ) );
-		
-	}
-	else 
-	{	
-	 	/*** AUTHOR INFO ***/
-	    $address_home = $_POST['txt_address']; //dia chi
-	    $address_district = $_POST['txt_district'];  // quan(huyen)
-	    $address_province = $_POST['txt_province']; //tinh
-	    $phone = $_POST['txt_phone']; // dien thoai
-	    $phone_static = $_POST['txt_phone_static']; // dt co dinh
-	    $job = $_POST['txt_job']; // nghe nghiep
-	    $income = $_POST['txt_income'];  // thu nhap
-	  	
-		update_user_meta($current_user->ID, "address", $address_home);
-		update_user_meta($current_user->ID, "district", $address_district);
-		update_user_meta($current_user->ID, "province", $address_province);
-		update_user_meta($current_user->ID, "phone", $phone);
-		update_user_meta($current_user->ID, "phone_static", $phone_static);
-		update_user_meta($current_user->ID, "job", $job);
-		update_user_meta($current_user->ID, "income", $income);    
-	 	/*~~ AUTHOR INFO ~~*/
-		
-		
-	 	/*** POST INFO ***/
-		$reason = $_POST['txt_reason'];
-		$email_duration = $_POST['txt_email_duration']; 
-		$birth_year = $_POST['txt_birthyear']; // nam sinh
-		$gender = $_POST['txt_gender'];
-		$note = $_POST['txt_note'];
-		
-		$my_post = array(
-		  	'post_author'   => $current_user->ID,
-		  	'post_type'     => 'nhan-con-nuoi',
-		  	'post_title'    => 'Đón nhận yêu thương',
-			'post_content' 	=> $reason,
-			'post_status' 	=> 'private'
-		);
-	
-		// Insert the post into the database
-		$post_id = wp_insert_post( $my_post );
-		
-		update_post_meta($post_id, $orphan_prefix .'ncn_ly_do', $reason);
-		update_post_meta($post_id, $orphan_prefix .'ncn_finished_date', get_finished_date(intval($email_duration)));
-		update_post_meta($post_id, $orphan_prefix .'ncn_nam_sinh', $birth_year);
-		update_post_meta($post_id, $orphan_prefix .'ncn_gioi_tinh', $gender);
-		update_post_meta($post_id, $orphan_prefix .'ncn_ghi_chu', $note);
-	 	/*~~ POST INFO ~~*/  
-		
-		
-		// REDIRECT
-		wp_redirect(home_url("dang-ky-nhan-mail-thanh-cong"));
-	}	
-}
+// LOCAL VARIABLES
 $captcha = create_captcha(); 
 $prefix = $captcha['prefix'];
 $file = $captcha['file'];
@@ -151,12 +78,23 @@ get_header();
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
 					<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
 					<div class="box-content">
+						<div data-alert="" class="alert-box alert" style="display:none;margin-bottom:5px;" id="becomeparents_success_container"></div>
 						<div data-alert="" class="alert-box alert" style="display:none;margin-bottom:5px;" id="becomeparents_error_container"></div>
 						
-						<form id="becomeparents_form" class="custom" method="post" onsubmit="becomeparents()">
+						<form id="becomeparents_form" class="custom" method="post">
 							<input type="hidden" name="become_parent" value="become_parent" />
 							
 							<fieldset>
+								<div class="row">
+									  <div class="large-12 columns">
+										
+										<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
+											Hệ thống sẽ gửi thông tin những trẻ mồ côi phù hợp nhu cầu của bạn vào địa chỉ email trong vòng <span id="email_duration" />3 tháng</span>. Bạn có thể hủy chức năng này ngay tại email của bạn bất cứ khi nào bạn muốn.
+										</p>
+										<br />
+									  </div>
+								</div>
+								
 								<div class="row">
 									<div class="small-3 columns">
 									  <label for="txt_name" class="inline">Họ tên <span class="require">*</span></label>
@@ -176,7 +114,8 @@ get_header();
 											<input type="text" name="txt_email" id="txt_email" placeholder="Email liên lạc" value="<?php echo $current_user->user_email; ?>" disabled="disabled" />
 										  </div>
 										  <div class="small-3 columns">
-											<span class="postfix"><a href="<?php echo get_site_url();?>/wp-admin/profile.php?updated=1" >Sửa email</a></span>
+											<span class="postfix" id="edit_email"><a>Sửa email</a></span>
+											<span class="postfix" id="save_email" style="display:none"><a>Lưu email</a></span>
 										  </div>
 										</div>
 									</div>
@@ -312,21 +251,16 @@ get_header();
 										<div class="small-3 columns">
 										  <label for="txt_captcha" class="inline">Mã bảo mật <span class="require">*</span></label>
 										</div>
-										<div class="small-9 columns">
+										<div class="small-3 columns">
 										  <div class="left"><input type="text" style="width:100px;" name="txt_captcha" id="txt_captcha" placeholder="Mã bảo mật"></div>
-										  <div class="left" style="margin-top:1px;"><img id="captcha_file" src="<?php echo $file; ?>" /></div>
-										  <input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />
-										</div>
+										</div>										
+										<div class="small-3 columns">
+										  <div class="left"><img id="captcha_file" src="<?php echo $file; ?>" /></div>
+										</div>										
+										<div class="small-3 columns"></div>
+									  <input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />
 									</div>
 								  
-								</div>
-								<div class="row">
-									  <div class="large-12 columns">
-										
-										<p><span style="color:red;text-decoration:underline;font-weight:900;">Lưu ý:</span>
-											Hệ thống sẽ gửi thông tin những trẻ mồ côi phù hợp nhu cầu của bạn vào địa chỉ email trong vòng <span id="email_duration" />3 tháng</span>. Bạn có thể hủy chức năng này ngay tại email của bạn bất cứ khi nào bạn muốn.
-										</p>
-									  </div>
 								</div>
 								<div class="row">
 									<div class="large-12 columns text-center">
@@ -345,17 +279,3 @@ get_header();
 	
 <?php 
 get_footer() ;
-// ERRORS PROCESSING
-if ( $errors->get_error_code() ){
-	$error_messages = $errors->get_error_messages();
-	$error_strs = "<ul>";
-	foreach ($error_messages as $error_message): 
-		$error_strs .= "<li>".$error_message."</li>";
-	endforeach;
-	$error_strs .= "</ul>";
-	?>
-	<script>
-		$("#becomeparents_error_container").html("<?php echo $error_strs;?>");
-	 	$("#becomeparents_error_container").show();
-	</script>
-<?php } ?>

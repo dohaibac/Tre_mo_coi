@@ -185,13 +185,13 @@ get_header();
 									  <label class="inline">Thời gian nhận email</label>
 									</div>
 									<div class="small-3 columns">
-										<label onClick="email_duration(this);" for="txt_email_duration1" class="inline"><input style="display:none" type="radio" name="txt_email_duration" id="txt_email_duration1" value="1" /> 1 tháng</label>
+										<label onClick="email_duration(this);" for="rbn_email_duration1" class="inline"><input style="display:none" type="radio" name="rbn_email_duration" id="rbn_email_duration1" value="1" /> 1 tháng</label>
 									</div>
 									<div class="small-3 columns">
-										<label onClick="email_duration(this);" for="txt_email-duration3" class="inline"><input style="display:none" type="radio" name="txt_email_duration" id="txt_email_duration3" value="3" checked="checked" /> 3 tháng</label>
+										<label onClick="email_duration(this);" for="rbn_email_duration3" class="inline"><input style="display:none" type="radio" name="rbn_email_duration" id="rbn_email_duration3" value="3" checked="checked" /> 3 tháng</label>
 									</div>
 									<div class="small-3 columns">
-										<label onClick="email_duration(this);" for="txt_email_duration6" class="inline"><input style="display:none" type="radio" name="txt_email_duration" id="txt_email_duration6" value="6" /> 6 tháng</label>
+										<label onClick="email_duration(this);" for="rbn_email_duration6" class="inline"><input style="display:none" type="radio" name="rbn_email_duration" id="rbn_email_duration6" value="6" /> 6 tháng</label>
 									</div>
 								</div>
 								
@@ -229,13 +229,13 @@ get_header();
 										<label class="inline">Giới tính</label>
 									  </div>
 									  <div class="large-3 columns">
-										<label for="gender1" class="inline"><input type="radio" name="txt_gender" id="gender1" value="Nam" /> Nam</label>
+										<label for="gender1" class="inline"><input type="radio" name="rbn_gender" id="gender1" value="Nam" /> Nam</label>
 									  </div>
 									  <div class="large-3 columns">
-										<label for="gender2" class="inline"><input type="radio" name="txt_gender" id="gender2" value="Nữ" /> Nữ</label>
+										<label for="gender2" class="inline"><input type="radio" name="rbn_gender" id="gender2" value="Nữ" /> Nữ</label>
 									  </div>
 									  <div class="large-3 columns">
-										<label for="gender3" class="inline"><input type="radio" name="txt_gender" id="gender3" value="Nam / Nữ" checked="checked" /> Nam / Nữ</label>
+										<label for="gender3" class="inline"><input type="radio" name="rbn_gender" id="gender3" value="Nam / Nữ" checked="checked" /> Nam / Nữ</label>
 									  </div>
 									</div>
 									

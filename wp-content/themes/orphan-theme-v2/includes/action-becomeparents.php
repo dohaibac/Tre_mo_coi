@@ -49,9 +49,9 @@ function insert_becomeparents()
 		
 	 	/*** POST INFO ***/
 		$reason = $_POST['txt_reason'];
-		$email_duration = $_POST['txt_email_duration']; 
+		$email_duration = $_POST['rbn_email_duration']; 
 		$birth_year = $_POST['txt_birthyear']; // nam sinh
-		$gender = $_POST['txt_gender'];
+		$gender = $_POST['rbn_gender'];
 		$note = $_POST['txt_note'];
 		
 		$my_post = array(

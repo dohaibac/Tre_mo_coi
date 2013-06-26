@@ -21,12 +21,13 @@ $(document).ready(function(){
 		  var txt_income = $.trim($("#txt_income").val());
 		  var txt_email = $.trim($("#txt_email").val());
 		  var txt_reason = $.trim($("#txt_reason").val());
-		  var txt_email_duration = $.trim($("#txt_email_duration").val());
+		  var rbn_email_duration = $.trim($("#rbn_email_duration").val());
 		  var txt_birthyear = $.trim($("#txt_birthyear").val());
-		  var txt_gender = $.trim($("#txt_gender").val());
+		  var rbn_gender = $.trim($("#rbn_gender").val());
 		  var txt_note = $.trim($("#txt_note").val());
 		  var captcha_prefix = $.trim($("#captcha_prefix").val());
 		  var txt_captcha = $.trim($("#txt_captcha").val());
+		  var rbn_email_duration = $.trim($("#rbn_email_duration").val());
 		  
 		  jQuery.post(
 			  action_ajax_url, 
@@ -35,7 +36,7 @@ $(document).ready(function(){
 				  txt_address: txt_address, txt_district: txt_district, txt_province: txt_province,
 				  txt_phone: txt_phone, txt_phone_static: txt_phone_static, txt_job: txt_job, txt_income: txt_income, 
 				  txt_email: txt_email,
-				  txt_reason: txt_reason, txt_email_duration: txt_email_duration, txt_birthyear: txt_birthyear, txt_gender: txt_gender, txt_note: txt_note,
+				  txt_reason: txt_reason, rbn_email_duration: rbn_email_duration, txt_birthyear: txt_birthyear, rbn_gender: rbn_gender, txt_note: txt_note,
 				  captcha_prefix: captcha_prefix, txt_captcha: txt_captcha
 			   }, 
 			   function(response){
@@ -69,7 +70,7 @@ $(document).ready(function(){
 					else{
 
 						$('#txt_captcha_error').hide();
-						$('#becomeparents_success_container').html('Chúc mừng bạn đã đăng ký nhận thông tin trẻ thành công. Chúng tôi đã sẽ gửi cho bạn email những trẻ phù hợp với nhu cầu của ban đến địa chỉ <i>' + txt_email + '</i> trong vòng '+  txt_email_duration+' tháng. Hãy kiểm tra và hủy chức năng nhận email theo đường dẫn ngay trong email mà bạn nhận.');
+						$('#becomeparents_success_container').html('Chúc mừng bạn đã đăng ký nhận thông tin trẻ thành công. Chúng tôi đã sẽ gửi cho bạn email những trẻ phù hợp với nhu cầu của ban đến địa chỉ <i>' + txt_email + '</i> trong vòng '+  rbn_email_duration+' tháng. Hãy kiểm tra và hủy chức năng nhận email theo đường dẫn ngay trong email mà bạn nhận được.');
 						$('#becomeparents_success_container').show();
 					}
 					

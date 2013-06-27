@@ -310,37 +310,7 @@ function orphan_get_json($data = null){
 		$json = json_encode($data); 
 		return orphan_decodeUnicodeString($json);
 }
-<<<<<<< HEAD
-/**
-* Function name:	tmc_widgets_init
-* Description : 	register a site bar
-* HISTORIES:
-* DATE				AUTH			DESCRIPTION
-* June 06, 2013		Phi Ho			register a site bar
-*/
-function tmc_widgets_init() {
-	register_sidebar( array(
-		'name' => __( 'Main Sidebar', 'mainsitebar' ),
-		'id' => 'sidebar-m',
-		'description' => __( 'Appears on posts and pages except the optional Front Page template, which has its own widgets', 'mainsitebar' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-}
-add_action( 'widgets_init', 'tmc_widgets_init' );
 
-/*allow redirection, even if my theme starts to send output to the browser
-Cannot modify header information */
-//if ( !is_admin() ){
-	add_action('init', 'orphan_do_output_buffer');
-	function orphan_do_output_buffer() {
-			ob_start();
-	}
-//}
-=======
->>>>>>> 5ee4b658cb228814dc13587eb0e7e3e01699bde2
 
 function orphan_get_post_thumbnai(){
 	global $post;

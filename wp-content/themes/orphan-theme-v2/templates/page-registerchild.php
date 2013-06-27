@@ -213,6 +213,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 					wp_enqueue_style('thickbox');
 				?>
 				<script type="text/javascript">
+	
 					jQuery(function($){
 					var txtBox_id = '';
 					var image_id = '';
@@ -286,10 +287,41 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 				  });
 				
 				function registerchild(){
-					
-				  if(registerchild_validator.form()){
-					  $('#registerchild_form').submit();
-				  }
+					if(registerchild_validator.form()){
+						jQuery.ajax({  
+							type: 'POST',  
+							url: ajaxurl,  
+							data: {  
+								action: 'insert_tre_mo_coi',  
+								data_from : $("form#registerchild_form").serialize()
+							},  
+							dataType: 'json',
+							beforeSend: function() {
+								
+							},
+							success: function(response){ 
+								
+								if(response.status_login == 'true'){
+									if(response.status == 'true'){
+										$("#registerchild_error_container").text(response.message);
+										$("#registerchild_error_container").show();
+										alert(response.message);
+										setTimeout(function() {
+											window.location = url_home;
+									   }, 3000);
+									}
+									else{
+										alert(response.message);
+										$("#registerchild_error_container").text(response.message);
+										$("#registerchild_error_container").show();
+									}
+								} 
+								else{
+									jQuery('a#tmc_login_button').click();
+								}
+							}
+						}); 
+					}
 				}
 			});
 				

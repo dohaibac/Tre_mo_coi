@@ -2,7 +2,8 @@
 add_action('wp_ajax_insert_becomeparents', 'insert_becomeparents');
 function insert_becomeparents()
 {
-	echo get_current_template();
+	global $current_user;
+	
 	$errors = new WP_Error();
 
 	$captcha_instance = new ReallySimpleCaptcha();		
@@ -48,9 +49,9 @@ function insert_becomeparents()
 		
 	 	/*** POST INFO ***/
 		$reason = $_POST['txt_reason'];
-		$email_duration = $_POST['txt_email_duration']; 
+		$email_duration = $_POST['rbn_email_duration']; 
 		$birth_year = $_POST['txt_birthyear']; // nam sinh
-		$gender = $_POST['txt_gender'];
+		$gender = $_POST['rbn_gender'];
 		$note = $_POST['txt_note'];
 		
 		$my_post = array(
@@ -75,4 +76,6 @@ function insert_becomeparents()
 		// REDIRECT
 		echo json_encode(array('Success' => true));
 	}
+	
+	exit();
 }

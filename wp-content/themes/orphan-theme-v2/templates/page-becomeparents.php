@@ -77,7 +77,8 @@ get_header();
 			<div class="row shadow-box">
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
 					<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
-					<div class="box-content">
+					<div class="box-content">	
+						
 						<div data-alert="" class="alert-box alert" style="display:none;margin-bottom:5px;" id="becomeparents_success_container"></div>
 						<div data-alert="" class="alert-box alert" style="display:none;margin-bottom:5px;" id="becomeparents_error_container"></div>
 						
@@ -184,13 +185,13 @@ get_header();
 									  <label class="inline">Thời gian nhận email</label>
 									</div>
 									<div class="small-3 columns">
-										<label onClick="email_duration(this);" for="txt_email_duration1" class="inline"><input style="display:none" type="radio" name="txt_email_duration" id="txt_email_duration1" value="1" /> 1 tháng</label>
+										<label onClick="email_duration(this);" for="rbn_email_duration1" class="inline"><input style="display:none" type="radio" name="rbn_email_duration" id="rbn_email_duration1" value="1" /> 1 tháng</label>
 									</div>
 									<div class="small-3 columns">
-										<label onClick="email_duration(this);" for="txt_email-duration3" class="inline"><input style="display:none" type="radio" name="txt_email_duration" id="txt_email_duration3" value="3" checked="checked" /> 3 tháng</label>
+										<label onClick="email_duration(this);" for="rbn_email_duration3" class="inline"><input style="display:none" type="radio" name="rbn_email_duration" id="rbn_email_duration3" value="3" checked="checked" /> 3 tháng</label>
 									</div>
 									<div class="small-3 columns">
-										<label onClick="email_duration(this);" for="txt_email_duration6" class="inline"><input style="display:none" type="radio" name="txt_email_duration" id="txt_email_duration6" value="6" /> 6 tháng</label>
+										<label onClick="email_duration(this);" for="rbn_email_duration6" class="inline"><input style="display:none" type="radio" name="rbn_email_duration" id="rbn_email_duration6" value="6" /> 6 tháng</label>
 									</div>
 								</div>
 								
@@ -228,13 +229,13 @@ get_header();
 										<label class="inline">Giới tính</label>
 									  </div>
 									  <div class="large-3 columns">
-										<label for="gender1" class="inline"><input type="radio" name="txt_gender" id="gender1" value="Nam" /> Nam</label>
+										<label for="gender1" class="inline"><input type="radio" name="rbn_gender" id="gender1" value="Nam" /> Nam</label>
 									  </div>
 									  <div class="large-3 columns">
-										<label for="gender2" class="inline"><input type="radio" name="txt_gender" id="gender2" value="Nữ" /> Nữ</label>
+										<label for="gender2" class="inline"><input type="radio" name="rbn_gender" id="gender2" value="Nữ" /> Nữ</label>
 									  </div>
 									  <div class="large-3 columns">
-										<label for="gender3" class="inline"><input type="radio" name="txt_gender" id="gender3" value="Nam / Nữ" checked="checked" /> Nam / Nữ</label>
+										<label for="gender3" class="inline"><input type="radio" name="rbn_gender" id="gender3" value="Nam / Nữ" checked="checked" /> Nam / Nữ</label>
 									  </div>
 									</div>
 									
@@ -248,23 +249,35 @@ get_header();
 									</div>
 									
 									<div class="row">
-										<div class="small-3 columns">
+										<div class="large-3 columns">
 										  <label for="txt_captcha" class="inline">Mã bảo mật <span class="require">*</span></label>
 										</div>
 										<div class="small-3 columns">
-										  <div class="left"><input type="text" style="width:100px;" name="txt_captcha" id="txt_captcha" placeholder="Mã bảo mật"></div>
+										  <div class="left">
+										  	<input type="text" style="width:100px;" name="txt_captcha" id="txt_captcha" placeholder="Mã bảo mật">
+										  </div>
 										</div>										
 										<div class="small-3 columns">
-										  <div class="left"><img id="captcha_file" src="<?php echo $file; ?>" /></div>
+										  <div class="left"><img id="captcha_file" style="padding:0px; margin:0px 0 4px 0;" src="<?php echo $file; ?>" /></div>
 										</div>										
 										<div class="small-3 columns"></div>
-									  <input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />
+									  	<input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />
+									</div>
+									
+								  	<div id="txt_captcha_error" style="display: none;">
+								  		<div class="small-3 columns"></div>
+										<label class="error" id="txt_captcha_error_label">Mã bảo mật không đúng, vui lòng nhập lại.</label>
 									</div>
 								  
 								</div>
 								<div class="row">
-									<div class="large-12 columns text-center">
-										<button id="becomeparents_submit_button" >Đăng ký</button>
+									<div class="large-12 columns "><center>
+										<button id="becomeparents_submit_button">Đăng ký</button>										
+						
+										<div style="z-index:10;display:none;" id="waiting">
+											<div><img width="32" src="<?php echo $THEME_DIR_URL; ?>/images/wait.gif"></div>
+											<div style="margin-top:5px;color:#999999;font-style:italic;">Đang xử lý thông tin...</div>
+										</div></center>
 									</div>
 								</div>
 		

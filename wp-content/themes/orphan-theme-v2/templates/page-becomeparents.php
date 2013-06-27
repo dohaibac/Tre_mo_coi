@@ -258,7 +258,7 @@ get_header();
 										  </div>
 										</div>										
 										<div class="small-3 columns">
-										  <div class="left"><img id="captcha_file" src="<?php echo $file; ?>" /></div>
+										  <div class="left"><img id="captcha_file" style="padding:0px; margin:0px 0 4px 0;" src="<?php echo $file; ?>" /></div>
 										</div>										
 										<div class="small-3 columns"></div>
 									  	<input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />

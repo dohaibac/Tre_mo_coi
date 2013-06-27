@@ -333,7 +333,7 @@ function orphan_process_string_post($name = null, $character = null){
 function orphan_show_meta_box($post, $metabox)	{
 	global $post,$orphan_prefix,$meta_name;
 	
-	wp_enqueue_script('jquery-ui-1.8.16.custom.min',get_bloginfo('template_directory').'/includes/js/jquery-ui-1.8.16.custom.min.js');
+	wp_enqueue_script('jquery-ui',get_bloginfo('template_directory').'/includes/js/jquery-ui.js');
 	wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includes/js/ui.datepicker-vi.js');
 	wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/includes/js/orphan-script-admin.js');
 	

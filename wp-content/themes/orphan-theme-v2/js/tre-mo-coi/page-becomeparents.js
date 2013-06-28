@@ -40,6 +40,12 @@ $(document).ready(function(){
 				  captcha_prefix: captcha_prefix, txt_captcha: txt_captcha
 			   }, 
 			   function(response){
+
+					$('#txt_captcha_error').hide();
+					$('#txt_captcha_error_label').hide();
+					$("#becomeparents_error_container").html('');
+					$("#becomeparents_error_container").hide();
+					
 					var result = jQuery.parseJSON(response);
 					if(result.errors)
 					{
@@ -52,10 +58,6 @@ $(document).ready(function(){
 						}
 					}
 					else{
-
-						$('#txt_captcha_error').hide();
-						$("#becomeparents_error_container").html('');
-						$("#becomeparents_error_container").hide();
 						
 						$('#becomeparents_success').fancybox({scrolling: 'no', beforeShow: function(){
 							$('#email-and-duration').html('<i><b>' + txt_email + '</b></i> trong vòng <i><b>'+  rbn_email_duration+'</b></i> tháng.');

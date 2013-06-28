@@ -287,22 +287,22 @@ get_header();
 									<div class="row">
 										<div class="large-3 columns">
 										  <label for="txt_captcha" class="inline">Mã bảo mật <span class="require">*</span></label>
-										</div>
+										</div>								
 										<div class="small-3 columns">
+										  <div class="left"><img id="captcha_file" style="padding:0px; margin:0px 0 4px 0;" src="<?php echo $file; ?>" /></div>
+										</div>		
+										<div class="small-6 columns">
 										  <div class="left">
 										  	<input type="text" style="width:100px;" name="txt_captcha" id="txt_captcha" placeholder="Mã bảo mật">
 										  </div>
-										</div>										
-										<div class="small-3 columns">
-										  <div class="left"><img id="captcha_file" style="padding:0px; margin:0px 0 4px 0;" src="<?php echo $file; ?>" /></div>
-										</div>										
-										<div class="small-3 columns"></div>
+										</div>								
 									  	<input type="hidden" name="captcha_prefix" id="captcha_prefix" value="<?php echo $prefix; ?>" />
 									</div>
 									
 								  	<div id="txt_captcha_error" style="display: none;">
 								  		<div class="small-3 columns"></div>
-										<label class="error" id="txt_captcha_error_label">Mã bảo mật không đúng, vui lòng nhập lại.</label>
+								  		<div class="small-3 columns"></div>
+										<label class="error" id="txt_captcha_error_label">Mã bảo mật không đúng.</label>
 									</div>
 								  
 								</div>

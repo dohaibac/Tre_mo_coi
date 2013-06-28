@@ -470,3 +470,6 @@ margin: 0px 0px 3px 0px;
 .columns div label.error{
 margin-bottom:5px;
 }
+form.custom .custom.dropdown{
+text-align:center;
+}

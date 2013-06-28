@@ -57,14 +57,14 @@ $(document).ready(function(){
 						$("#becomeparents_error_container").html('');
 						$("#becomeparents_error_container").hide();
 						
-						$("#waiting").hide();
-						
 						$('#becomeparents_success').fancybox({scrolling: 'no', beforeShow: function(){
 							$('#email-and-duration').html('<i><b>' + txt_email + '</b></i> trong vòng <i><b>'+  rbn_email_duration+'</b></i> tháng.');
 							$('#becomeparents_success').show();
 						}, autoDimensions : false,fitToView: false, helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}});
 						$("#becomeparents_success").trigger('click');
 					}
+					
+					$("#waiting").hide();
 
 					$('#captcha_prefix').val(result.captcha_new.prefix);
 					$('#captcha_file').attr('src', result.captcha_new.file);

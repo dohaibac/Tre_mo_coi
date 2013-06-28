@@ -80,6 +80,7 @@ $(document).ready(function(){
 	
 	becomeparents_validator = $('#becomeparents_form').bind("invalid-form.validate", function() {
 		
+		 $("#txt_captcha_error").hide();
          $("#becomeparents_error_container").text("Bạn cần phải điền đầy đủ và hợp lệ các thông tin bên dưới.");
 		 $("#becomeparents_error_container").show();
      }).validate({
@@ -100,18 +101,23 @@ $(document).ready(function(){
         	
           'txt_name': "Nhập họ và tên.",
           'txt_email': {required: "Nhập email.", email: "Địa chỉ email không hợp lệ."},
-          'txt_address': "Nhập địa chỉ (số nhà, tên đường, thôn, xóm, phường xã)",
-          'txt_district': "Nhập quận (huyện)",
-          'txt_province': "Nhập tỉnh (thành), Đất nước",
-          'txt_phone': {required: "Nhập số điện thoại liên hệ.", number: "Nhập các chữ số hợp lệ", maxlength: "Độ dài tối đa của số điện thoại là 11 ký tự", minlength: "Độ dài tối thiểu của số điện thoại là 10 ký tự"},
-          'txt_phone_static': {number: "Nhập các chữ số hợp lệ", maxlength: "Độ dài tối đa của số điện thoại là 11 ký tự", minlength: "Độ dài tối thiểu của số điện thoại là 9 ký tự"},
+          'txt_address': "Nhập địa chỉ (số nhà, tên đường, thôn, xóm, phường xã).",
+          'txt_district': "Nhập quận (huyện).",
+          'txt_province': "Nhập tỉnh (thành), Đất nước.",
+          'txt_phone': {required: "Nhập số điện thoại liên hệ.", number: "Nhập các chữ số hợp lệ.", maxlength: "Độ dài tối đa của số điện thoại là 11 ký tự.", minlength: "Độ dài tối thiểu của số điện thoại là 10 ký tự."},
+          'txt_phone_static': {number: "Nhập các chữ số hợp lệ.", maxlength: "Độ dài tối đa của số điện thoại là 11 ký tự.", minlength: "Độ dài tối thiểu của số điện thoại là 9 ký tự."},
           'txt_job': "Nhập nghề nghiệp.",
-          'txt_income': {number: "Nhập các chữ số hợp lệ"},
+          'txt_income': {number: "Nhập các chữ số hợp lệ."},
           'txt_captcha': "Nhập mã bảo mật."
         },
         wrapper : 'div',
         debug: false
       });
+	
+	$("#txt_captcha").keyup(function(){
+
+		 $("#txt_captcha_error").hide();
+	});
 	
 	$("#edit_email").click(function(){
 		

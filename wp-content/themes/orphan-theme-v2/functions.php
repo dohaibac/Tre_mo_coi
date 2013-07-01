@@ -399,4 +399,5 @@ function short_the_title($title, $chars = 30){
 /**
  ~~~~~~~~~~~~ UTIL COMMON FUNCTIONS ~~~~~~~~~~~~
  */
+ include('includes/theme-option.php');
 ?>

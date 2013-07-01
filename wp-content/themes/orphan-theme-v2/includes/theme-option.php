@@ -241,9 +241,9 @@ function orphan_theme_option_callback(){
 							<table class="form-table" border="1">
 							<thead>
 								<tr valign="top">
-									<th scope="row">$opntion['key']</th>
+									<th scope="row">$option['key']</th>
 									<td>
-										$opntion['value']
+										$option['value']
 									</td>
 								</tr>
 							</thead>

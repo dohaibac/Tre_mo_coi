@@ -113,7 +113,7 @@ function isovn_save_media_post_action_links( $links, $file ) {
 	if ( $file != plugin_basename( __FILE__ ))
 		return $links;
 		
-	$settings_link = '<a href="options-general.php?page=save-media-post-page">' . __( 'Settings', 'save_media_post' ) . '</a>';
+	$settings_link = '<a href="options-general.php?page=save-media-post-page">' . __( 'Setting', 'save_media_post' ) . '</a>';
 	array_unshift( $links, $settings_link );
 	return $links;
 }

@@ -53,7 +53,7 @@
 									</a>
 								</div>
 								<div class="large-8 columns">
-									<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo short_the_title(get_the_title(),35); ?></a></h3>
+									<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 									<p> <?php the_content_rss('',true,'', 10); ?></p>
 								</div>
 							</div>
@@ -63,11 +63,11 @@
 						</div>
 						<div class="large-5 columns meta-list">
 							<ul class="meta">
-								<li><a href="<?php the_permalink(); ?>"  title="<?php the_title(); ?>"><?php echo short_the_title(get_the_title(),45); ?></a>
+								<li><a href="<?php the_permalink(); ?>"  title="<?php the_title(); ?>"><?php the_title(); ?></a>
 								<?php $my_date = the_date('d-m-Y', '<span class="date">', '</span>', FALSE); if($my_date != '') echo '('.$my_date.')' ?></li>
 						<?php }
 						else{ ?>
-								<li><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo short_the_title(get_the_title(),45); ?></a>
+								<li><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
 								<?php $my_date = the_date('d-m-Y', '<span class="date">', '</span>', FALSE); if($my_date != '') echo '('.$my_date.')' ?></li>
 						<?php }
 						}
@@ -98,7 +98,7 @@
 							<a href="<?php the_permalink(); ?>"><img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" class="thumb" src="<?php echo $image ?>"/></a>
 						</div>
 						<div class="large-9 columns">
-							<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo short_the_title(get_the_title(),70); ?></a></h3>
+							<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 							<p><?php the_content_rss('',true,'', 30); ?></p>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 				while ($lawPost->have_posts()) : $lawPost->the_post();		
 				?>
 					<div class="row">
-						<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo short_the_title(get_the_title(),100); ?></a></h3>
+						<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 						<p><?php the_content_rss('',true,'', 30); ?></p>
 					</div>
 				<?php endwhile; wp_reset_query();?>

@@ -10,7 +10,7 @@ while (have_posts()) : the_post();
 			</a>
 		</div>
 		<div class="large-9 columns">
-			<h3><a rel="tooltip" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="btn"><?php echo short_the_title(get_the_title(),70); ?></a></h3>
+			<h3><a rel="tooltip" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="btn"><?php the_title(); ?></a></h3>
 			<p><?php the_content_rss('', true, '', 30); ?></p>
 		</div>
 	</div>

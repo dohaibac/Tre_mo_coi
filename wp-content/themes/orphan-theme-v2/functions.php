@@ -35,6 +35,7 @@ if ( !is_admin() ){
  ************ REQUIRE GLOBAL CLASSES ************
  */
 require_once('includes/libs/bootstrap_walker.php');
+include('includes/theme-option.php');
 /**
  ~~~~~~~~~~~~ REQUIRE GLOBAL CLASSES ~~~~~~~~~~~~
  */
@@ -399,5 +400,4 @@ function short_the_title($title, $chars = 30){
 /**
  ~~~~~~~~~~~~ UTIL COMMON FUNCTIONS ~~~~~~~~~~~~
  */
- include('includes/theme-option.php');
 ?>

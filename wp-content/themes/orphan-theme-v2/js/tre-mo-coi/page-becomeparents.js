@@ -93,8 +93,7 @@ $(document).ready(function(){
           'txt_province': "required",          
           'txt_phone': {required:true, number: true, maxlength: 11, minlength: 10},
           'txt_phone_static': {number: true, maxlength: 11, minlength: 9},
-		  'txt_job': "required",		
-		  'txt_income': {number: true},
+		  'txt_job': "required",	
 		  'txt_captcha': "required"
         },
         messages: {
@@ -107,7 +106,6 @@ $(document).ready(function(){
           'txt_phone': {required: "Nhập số điện thoại liên hệ.", number: "Nhập các chữ số hợp lệ.", maxlength: "Độ dài tối đa của số điện thoại là 11 ký tự.", minlength: "Độ dài tối thiểu của số điện thoại là 10 ký tự."},
           'txt_phone_static': {number: "Nhập các chữ số hợp lệ.", maxlength: "Độ dài tối đa của số điện thoại là 11 ký tự.", minlength: "Độ dài tối thiểu của số điện thoại là 9 ký tự."},
           'txt_job': "Nhập nghề nghiệp.",
-          'txt_income': {number: "Nhập các chữ số hợp lệ."},
           'txt_captcha': "Nhập mã bảo mật."
         },
         wrapper : 'div',

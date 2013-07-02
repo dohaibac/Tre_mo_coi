@@ -181,7 +181,7 @@ get_header();
 									  <label for="txt_phone" class="inline">Điện thoại di động<span class="require">*</span></label>
 									</div>
 									<div class="small-9 columns">
-									  <input type="text" name="txt_phone" id="txt_phone" placeholder="Số điện thoại di động" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
+									  <input type="text" name="txt_phone" id="txt_phone" placeholder="Ví dụ: 097 123 1233" value="<?php echo get_user_meta($current_user->ID, "phone", true); ?>" />
 									</div>
 								</div>
 								<div class="row">
@@ -189,7 +189,7 @@ get_header();
 									  <label for="txt_phone_static" class="inline">Điện thoại cố định</label>
 									</div>
 									<div class="small-9 columns">
-									  <input type="text" name="txt_phone_static" id="txt_phone_static" placeholder="Số điện thoại cố định (tùy chọn)" value="<?php echo get_user_meta($current_user->ID, "phone_static", true); ?>" />
+									  <input type="text" name="txt_phone_static" id="txt_phone_static" placeholder="Ví dụ: 043 1234123" value="<?php echo get_user_meta($current_user->ID, "phone_static", true); ?>" />
 									</div>
 								</div>
 								<div class="row">
@@ -322,6 +322,17 @@ get_header();
 		</div>
 	</div><!--end .large-8-->
 	<?php get_sidebar(); ?>
+	<script type="text/javascript" src="<?php echo $THEME_DIR_URL; ?>/js/accounting.js"></script>
+	<script type="text/javascript">
+
+			$('#txt_income').keyup(function(){
+				$(this).val( accounting.formatNumber($(this).val(),0," "));
+			});
+			$(document).ready(function(){
+				$('#txt_income').val( accounting.formatNumber($('#txt_income').val(),0," "));
+			});
+
+	</script>
 	
 <?php 
 get_footer() ;

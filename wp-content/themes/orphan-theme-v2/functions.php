@@ -35,6 +35,7 @@ if ( !is_admin() ){
  ************ REQUIRE GLOBAL CLASSES ************
  */
 require_once('includes/libs/bootstrap_walker.php');
+include('includes/theme-option.php');
 /**
  ~~~~~~~~~~~~ REQUIRE GLOBAL CLASSES ~~~~~~~~~~~~
  */
@@ -388,6 +389,15 @@ function get_now_in_option_gmt_offset()
 	return $gmdate;
 }
 
+function short_the_title($title, $chars = 30){
+	if(strlen($title) > $chars){
+		$title = $title." ";
+		$title = substr($title,0,$chars);
+		$title = substr($title,0,strrpos($title,' '));
+		$title = $title."...";
+	}
+	return $title;
+}
 /**
  ~~~~~~~~~~~~ UTIL COMMON FUNCTIONS ~~~~~~~~~~~~
  */

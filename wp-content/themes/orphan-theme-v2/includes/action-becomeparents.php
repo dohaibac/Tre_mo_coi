@@ -13,17 +13,16 @@ function insert_becomeparents()
 	}
 	$captcha_instance->remove( $_POST['captcha_prefix'] );	
 	
+	// Gen new captcha		
+	$captcha = create_captcha(); 
+	$prefix = $captcha['prefix'];
+	$file = $captcha['file'];
+	
 	if($captcha_error)
 	{
 		$errors->add( 'captcha_error', __( "Mã bảo mật không đúng, vui lòng nhập lại." ) );
-//		echo json_encode($errors);
 		
-		// Gen new captcha		
-		$captcha = create_captcha(); 
-		$prefix = $captcha['prefix'];
-		$file = $captcha['file'];
 		echo json_encode(array_merge(array('captcha_new' => $captcha), (array)$errors));
-		
 		die();
 	}
 	else 
@@ -50,7 +49,7 @@ function insert_becomeparents()
 	 	/*** POST INFO ***/
 		$reason = $_POST['txt_reason'];
 		$email_duration = $_POST['rbn_email_duration']; 
-		$birth_year = $_POST['txt_birthyear']; // nam sinh
+		$birth_year = $_POST['sel_birthyear']; // nam sinh
 		$gender = $_POST['rbn_gender'];
 		$note = $_POST['txt_note'];
 		
@@ -74,7 +73,7 @@ function insert_becomeparents()
 		
 		
 		// REDIRECT
-		echo json_encode(array('Success' => true));
+		echo json_encode(array_merge(array('captcha_new' => $captcha), array('Success' => true)));
 	}
 	
 	exit();

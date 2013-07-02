@@ -41,7 +41,7 @@
 						<?php 
 						$i=0;
 						$newsPost = new WP_Query();
-						$newsPost->query('showposts=10&cat=1,5&orderby=DESC');
+						$newsPost->query('showposts=8&cat=1,5&orderby=DESC');
 						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
 						$image = orphan_get_post_thumbnai();//wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 						if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
@@ -64,11 +64,11 @@
 						<div class="large-5 columns meta-list">
 							<ul class="meta">
 								<li><a href="<?php the_permalink(); ?>"  title="<?php the_title(); ?>"><?php the_title(); ?></a>
-								<?php $my_date = the_date('d-m-Y', '<span class="date">', '</span>', FALSE); if($my_date != '') echo '('.$my_date.')' ?></li>
+								<i>(<?php $my_date = the_time('d-m-Y'); if($my_date != '') echo ''.$my_date.'' ?>)</i></li>
 						<?php }
 						else{ ?>
 								<li><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
-								<?php $my_date = the_date('d-m-Y', '<span class="date">', '</span>', FALSE); if($my_date != '') echo '('.$my_date.')' ?></li>
+								<i>(<?php $my_date = the_time('d-m-Y'); if($my_date != '') echo ''.$my_date.'' ?>)</i></li>
 						<?php }
 						}
 						?>

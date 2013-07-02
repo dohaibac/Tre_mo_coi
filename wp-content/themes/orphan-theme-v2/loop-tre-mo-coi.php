@@ -6,8 +6,8 @@ if (have_posts()) :
 		if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
 		$birdthday = get_post_meta( get_the_ID(), 'orphan_birthday', true );
 		$gender = get_post_meta( get_the_ID(), 'orphan_gender', true );
-		$address = get_post_meta( get_the_ID(), 'orphan_cv-address', true );
-		$time_meet = get_post_meta( get_the_ID(), 'orphan_cv-time', true );
+		//$address = get_post_meta( get_the_ID(), 'orphan_cv-address', true );
+		//$time_meet = get_post_meta( get_the_ID(), 'orphan_cv-time', true );
 		//$content = get_post_meta( get_the_ID(), 'orphan_cv-content', true );
         ?>
         <div class="row">
@@ -20,8 +20,7 @@ if (have_posts()) :
                 <h3><a rel="tooltip" href="<?php the_permalink(); ?>" class="btn"><?php the_title(); ?></a></h3>
                 <p>Ngày sinh: <?php echo $birdthday ?></p>
 				<p>Giới : <?php echo $gender ?></p>
-				<p>Địa điểm gặp trẻ: <?php echo $address ?></p>
-				<p>Thời gian gặp trẻ: <?php echo $time_meet ?></p>
+				
             </div>
         </div>
     <?php endwhile; ?>

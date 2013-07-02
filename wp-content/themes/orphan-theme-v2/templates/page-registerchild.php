@@ -47,7 +47,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 //wp_enqueue_script('orphan-script-admin',get_bloginfo('template_directory').'/includes/js/orphan-script-admin.js');
 ?>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="<?php get_bloginfo('template_directory')?>/includes/css/custom-meta-post.css" />
+<link rel="stylesheet" href="<?php echo get_bloginfo('template_directory')?>/includes/css/custom-meta-post.css" />
 <div class="large-8 columns content">
 	<div class="row">
 		<div class="row shadow-box">
@@ -213,6 +213,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 					wp_enqueue_style('thickbox');
 				?>
 				<script type="text/javascript">
+	
 					jQuery(function($){
 					var txtBox_id = '';
 					var image_id = '';
@@ -222,8 +223,8 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 						image_id = '#image_'+$(this).attr('data');
 
 						formfield = $(txtBox_id);
-
-						tb_show('Đăng hình ảnh', url_home+'/wp-admin/media-upload.php?type=image&amp;TB_iframe=true');
+						
+						tb_show('Đăng hình ảnh', '<?php echo home_url()?>/wp-admin/media-upload.php?type=image&amp;TB_iframe=true');
 
 						return false;
 
@@ -286,10 +287,41 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 				  });
 				
 				function registerchild(){
-					
-				  if(registerchild_validator.form()){
-					  $('#registerchild_form').submit();
-				  }
+					if(registerchild_validator.form()){
+						jQuery.ajax({  
+							type: 'POST',  
+							url: ajaxurl,  
+							data: {  
+								action: 'insert_tre_mo_coi',  
+								data_from : $("form#registerchild_form").serialize()
+							},  
+							dataType: 'json',
+							beforeSend: function() {
+								
+							},
+							success: function(response){ 
+								
+								if(response.status_login == 'true'){
+									if(response.status == 'true'){
+										$("#registerchild_error_container").text(response.message);
+										$("#registerchild_error_container").show();
+										alert(response.message);
+										setTimeout(function() {
+											window.location = url_home;
+									   }, 3000);
+									}
+									else{
+										alert(response.message);
+										$("#registerchild_error_container").text(response.message);
+										$("#registerchild_error_container").show();
+									}
+								} 
+								else{
+									jQuery('a#tmc_login_button').click();
+								}
+							}
+						}); 
+					}
 				}
 			});
 				

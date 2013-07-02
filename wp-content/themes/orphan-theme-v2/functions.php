@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
 Author: Evizi Team
 URL: htp://evizi.com
@@ -313,6 +313,7 @@ function orphan_get_json($data = null){
 		$json = json_encode($data); 
 		return orphan_decodeUnicodeString($json);
 }
+
 
 function orphan_get_post_thumbnai(){
 	global $post;

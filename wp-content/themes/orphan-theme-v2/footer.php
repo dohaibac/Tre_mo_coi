@@ -28,10 +28,11 @@
 	<?php wp_footer() ?>
 	<?php if(!is_user_logged_in()):?>
 	<script type="text/javascript">
+	
 		jQuery(document).ready(function(){
 			$('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').attr('data-link',function(){return this.href});
 			$('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').click(function(){
-				console.log($(this).data('link'));
+				tmc_backurl = $(this).data('link');
 			});
 			$('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').attr('href', '#login');
 			$(".don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi, #menu-item-304 a, #menu-item-303 a").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){$('#tmc_username').focus();jQuery('#login #tmc_login_error_container').html('Bạn phải đăng nhập trước khi thực hiện chức năng này').show();}});

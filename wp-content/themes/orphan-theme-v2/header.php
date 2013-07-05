@@ -47,6 +47,7 @@
 	ajaxurl = '<?php echo admin_url( 'admin-ajax.php'); ?>';
 	url_theme = '<?php echo get_bloginfo('template_directory'); ?>';
 	url_home = '<?php echo get_bloginfo('home'); ; ?>';
+	tmc_backurl = '';
 	//]]>
 	</script>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/vendor/jquery.js"></script>	

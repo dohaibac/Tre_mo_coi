@@ -84,7 +84,10 @@ $(document).ready(function(){
 		   function(response){
 				var result = jQuery.parseJSON(response);
 				if(result.Success){
-					location.href = result.Redirect;
+					if(tmc_backurl == '')
+						location.href = result.Redirect;
+					else
+						location.href = tmc_backurl;
 				}else{
 					$('#tmc_login_error_container').text('Tên đăng nhập/mật khẩu không đúng.');
 					$('#tmc_login_error_container').show();

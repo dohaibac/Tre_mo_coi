@@ -453,4 +453,4 @@ add_filter('wp_mail_from_name','wp_mail_smtp_mail_from_name');
 
 load_plugin_textdomain('wp_mail_smtp', false, dirname(plugin_basename(__FILE__)) . '/langs');
 
-?>
+?>

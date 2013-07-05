@@ -18,6 +18,20 @@ $orphan_prefix = 'orphan_';
 global $post_type_name, $post_type_label;
 $post_type_name = 'tre-mo-coi';
 $post_type_label = 'Trẻ mồ côi';
+<<<<<<< HEAD
+=======
+
+
+global $missing_children_prefix; $missing_children_prefix = 'missing_children_';
+global $missing_parent_prefix; $missing_parent_prefix = 'missing_parent_';
+
+
+global $recruitment_prefix; $recruitment_prefix = "recruitment_";
+global $post_type_recruitment_name; $post_type_recruitment_label;
+$post_type_recruitment_name = 'viec-lam'; $post_type_recruitment_label = "Việc làm cho em";
+
+
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 function orphan_register_orphan_posttype() { 
 	global $post_type_name, $post_type_label;
 	$label = $post_type_label;
@@ -31,12 +45,13 @@ function orphan_register_orphan_posttype() {
 		'new_item' => __( 'New '.$label), 
 		'view_item' => __( 'View '.$label), 
 		'search_items' => __( 'Search '.$label),
-		'not_found' => __( 'No Service found' ),
+		'not_found' => __( 'No '.$label.' found' ),
 		'not_found_in_trash'=> __( 'No '.$label.' found in Trash' ),
 		'parent_item_colon' => ''
 	);
  
-	$supports = array('title','editor','author','thumbnail','excerpt'); 
+ 
+	$supports = array('title',/*'editor','thumbnail',*/'author','excerpt'); 
 	$post_type_args = array(
 		'labels' => $labels, 
 		'singular_label' => __($label),
@@ -96,25 +111,44 @@ function orphan_register_chuyen_muc_tre_mo_coi_taxonomy() {
 add_action('init', 'orphan_register_chuyen_muc_tre_mo_coi_taxonomy');
 
 /* META BOX */
+<<<<<<< HEAD
 global $orphan_fields_array;
 
 $orphan_fields_array = array(
+=======
+/*==========Begin Info Meta======================*/
+global $orphan_save_meta_post;
+global $orphan_fields_info_array;
+
+$orphan_fields_info_array = array(
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 	// Name
 	// tên, năm sinh, giới tính, hoàn cảnh (trc khi nhận vào trại trẻ), user id (người bảo trợ), ảnh,
 	orphan_result_meta(
 		array(
+<<<<<<< HEAD
 			'name' 			=> 'ho-ten',
 			'label'			=> 'Họ tên',
 			'description' 	=> 'Nhập họ tên của trẻ',
 			'type'			=> 'text',
 			'required'		=> true,
+=======
+			'name' 			=> 'photo',
+			'label'			=> 'Photo',
+			'description' 	=> 'Nhập đường dẫn ảnh',
+			'type'			=> 'upload',
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 			'rich_editor'	=> false,
 			'options'		=> null
 		)
 	),
 	orphan_result_meta(
 		array(
+<<<<<<< HEAD
 			'name' 			=> 'ngay-sinh',
+=======
+			'name' 			=> 'birthday',
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 			'label'			=> 'Ngày sinh',
 			'description' 	=> 'Nhập ngày sinh',
 			'type'			=> 'date',
@@ -122,10 +156,16 @@ $orphan_fields_array = array(
 			'options'		=> null
 		)
 	),
+<<<<<<< HEAD
 
 	orphan_result_meta(
 		array(
 			'name' 			=> 'gioi-tinh',
+=======
+	orphan_result_meta(
+		array(
+			'name' 			=> 'gender',
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 			'label'			=> 'Gới tính',
 			'description' 	=> 'Chọn giới tính của trẻ',
 			'type'			=> 'radio',
@@ -135,6 +175,7 @@ $orphan_fields_array = array(
 				'Nữ'
 			)
 		)
+<<<<<<< HEAD
 	),
 	orphan_result_meta(
 		array(
@@ -142,18 +183,86 @@ $orphan_fields_array = array(
 			'label'			=> 'Thông tin người bảo trợ',
 			'description' 	=> 'Thông tin người bảo trợ',
 			'type'			=> 'text',
+=======
+	)
+);
+$orphan_save_meta_post[] = $orphan_fields_info_array;
+/**
+* Function name:	orphan_get_info_meta_box
+* Description : 	get info fields of post type orphan
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			get info fields of post type orphan
+*/
+function orphan_get_info_meta_box(){
+	global $orphan_fields_info_array;
+	return $orphan_fields_info_array;
+}
+
+/**
+* Function name:	orphan_add_meta_box
+* Description : 	Add custom field to wordpress
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			add meta post
+*/
+add_action('admin_menu', 'orphan_add_info_meta_box');
+function orphan_add_info_meta_box(){
+	global $orphan_prefix, $orphan_fields_info_array, $post_type_name;
+	
+	$meta_box_fields = array(
+		'context' => 'normal',
+		'priority' => 'high',
+		'fields' => $orphan_fields_info_array
+	);
+	add_meta_box($orphan_prefix.'metabox_info_orphan', 'Thông tin trẻ em', 'orphan_show_meta_box', $post_type_name, 'advanced', 'default', $meta_box_fields);
+}
+
+/*==========End Info Meta======================*/
+
+/*==========Begin Info Meta CV======================*/
+global $orphan_fields_cv_array;
+
+$orphan_fields_cv_array = array(
+	// Name
+	// tên, năm sinh, giới tính, hoàn cảnh (trc khi nhận vào trại trẻ), user id (người bảo trợ), ảnh,
+	orphan_result_meta(
+		array(
+			'name' 			=> 'cv-address',
+			'label'			=> 'Địa điểm',
+			'description' 	=> 'Nhập địa điểm khi gặp trẻ',
+			'type'			=> 'text',
+			'rich_editor'	=> false,
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 			'options'		=> null
 		)
 	),
 	orphan_result_meta(
 		array(
+<<<<<<< HEAD
 			'name' 			=> 'ghi-chu',
 			'label'			=> 'Ghi chú thông tin',
 			'description' 	=> 'Nhập thông tin ghi chú',
+=======
+			'name' 			=> 'cv-time',
+			'label'			=> 'Thời gian gặp trẻ',
+			'description' 	=> 'Nhập thời gian khi gặp trẻ',
+			'type'			=> 'date',
+			'rich_editor'	=> false,
+			'options'		=> null
+		)
+	),
+	orphan_result_meta(
+		array(
+			'name' 			=> 'cv-content',
+			'label'			=> 'Tình trạng khi gặp trẻ',
+			'description' 	=> 'Nhập tình trạng khi gặp trẻ',
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 			'type'			=> 'textarea',
 			'rich_editor'	=> true,
 			'options'		=> null
 		)
+<<<<<<< HEAD
 	)
 );
 
@@ -167,6 +276,31 @@ $orphan_fields_array = array(
 function orphan_get_field_meta_box(){
 	global $orphan_prefix;
 	return $orphan_prefix;
+=======
+	),
+	orphan_result_meta(
+		array(
+			'name' 			=> 'cv-auth',
+			'label'			=> 'Người gặp trẻ',
+			'description' 	=> 'Nhập thông tin người gặp trẻ',
+			'type'			=> 'text',
+			'rich_editor'	=> false,
+			'options'		=> null
+		)
+	)
+);
+$orphan_save_meta_post[] = $orphan_fields_cv_array;
+/**
+* Function name:	orphan_get_all_meta_box
+* Description : 	get all fields of post type orphan
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			get all fields of post type orphan
+*/
+function orphan_fields_cv_array(){
+	global $orphan_fields_cv_array;
+	return $orphan_fields_cv_array;
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 }
 
 /**
@@ -176,18 +310,32 @@ function orphan_get_field_meta_box(){
 * DATE				AUTH			DESCRIPTION
 * June 4, 2013		Vinh.le			add meta post
 */
+<<<<<<< HEAD
 add_action('admin_menu', 'orphan_add_meta_box');
 function orphan_add_meta_box(){
 	global $orphan_prefix, $orphan_fields_array, $post_type_name;
+=======
+add_action('admin_menu', 'orphan_add_info_meta_cv_box');
+function orphan_add_info_meta_cv_box(){
+	global $orphan_prefix, $orphan_fields_cv_array, $post_type_name;
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 	
 	$meta_box_fields = array(
 		'context' => 'normal',
 		'priority' => 'high',
+<<<<<<< HEAD
 		'fields' => $orphan_fields_array
 	);
 	add_meta_box($orphan_prefix.'metabox_info_orphan', 'Thông tin trẻ em', 'orphan_show_meta_box', $post_type_name, 'advanced', 'default', $meta_box_fields);
 }
 
+=======
+		'fields' => $orphan_fields_cv_array
+	);
+	add_meta_box($orphan_prefix.'metabox_info_cv_orphan', 'Hoàn cảnh nhận trẻ', 'orphan_show_meta_box', $post_type_name, 'advanced', 'default', $meta_box_fields);
+}
+/*==========End Info Meta CV======================*/
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 /**
 * Function name:	orphan_show_meta_box
 * Description : 	Add custom field to wordpress
@@ -375,13 +523,21 @@ function orphan_show_meta_box($post, $metabox)	{
 add_action('save_post', 'orphan_save_meta_data');
 function orphan_save_meta_data($post_id) {
 
+<<<<<<< HEAD
     global $wpdb,$orphan_fields_array, $orphan_prefix;
+=======
+    global $wpdb,$orphan_save_meta_post, $orphan_prefix;
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 
     if (isset($_POST[$orphan_prefix.'meta_box_nonce']) && (!wp_verify_nonce($_POST[$orphan_prefix.'meta_box_nonce'], basename(__FILE__)))) {
 
         return $post_id;
 
     }
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
     // check autosave
 
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
@@ -408,6 +564,7 @@ function orphan_save_meta_data($post_id) {
     if(isset($_POST['post_type'])){
 
 	// first get the metaboxes associated with this post
+<<<<<<< HEAD
 		foreach( $orphan_fields_array as $key => $field){
 			$old = get_post_meta($post_id, $orphan_prefix . $field['name'], true);
 			$data = $_POST[$orphan_prefix . $field['name']];
@@ -422,6 +579,29 @@ function orphan_save_meta_data($post_id) {
 				delete_post_meta($post_id, $orphan_prefix . $field['name'], $old);
 			}
 		}
+=======
+		if($orphan_save_meta_post){
+			
+			foreach( $orphan_save_meta_post as $fields_meta){
+				foreach( $fields_meta as $key => $field){
+					$old = get_post_meta($post_id, $orphan_prefix . $field['name'], true);
+					$data = $_POST[$orphan_prefix . $field['name']];
+					if($field->type == 'textarea') {
+						$new = wpautop($data);
+					}  else {
+						$new = $data;
+					}
+					if ($new && $new != $old) {
+						update_post_meta($post_id, $orphan_prefix . $field['name'], $new);
+					} elseif ('' == $new && $old) {
+						delete_post_meta($post_id, $orphan_prefix . $field['name'], $old);
+					}
+				}
+			}
+		}
+		
+		
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 	}
 }
 
@@ -439,7 +619,11 @@ function orphan_add_meta_script(){
 		jQuery(document).ready(function(){
 				jQuery(".<?php echo $orphan_prefix; ?>datepicker").datepicker({
 					dateFormat: "dd/mm/yy",
+<<<<<<< HEAD
 					yearRange: "-18:+0",
+=======
+					yearRange: "-90:+0",
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9
 					changeMonth: true, 
 					changeYear: true
 				});
@@ -459,4 +643,63 @@ function orphan_shortcode_meta_box(){
 	global $orphan_prefix;
 	return $orphan_prefix;
 }
+<<<<<<< HEAD
 /* ========END TRE MO COI=============== */
+=======
+
+/**
+* Function name:	orphan_meta_box_to_manage_post
+* Description : 	add data meta_box to manage post
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			add data meta_box to manage post
+*/
+    function orphan_meta_box_to_manage_post($column_name, $post_id) {
+		global $orphan_prefix, $orphan_fields_info_array;
+            $width = (int) 60;
+            $height = (int) 60;
+			if(isset($orphan_fields_info_array)){
+				foreach($orphan_fields_info_array as $field_value){
+					$key_value = $orphan_prefix.$field_value['name'];
+					if ( $key_value == $column_name ) {
+						$meta_values = get_post_meta($post_id, $key_value, true);
+						if($meta_values){
+							if($field_value['type'] == 'upload'){
+								echo ('<img width="60" src="'.$meta_values.'"/>');
+							} else {
+								echo $meta_values;
+							}
+						} else {
+							echo 'Update...';
+						}
+					}
+				}
+			}
+    }
+	
+/**
+* Function name:	orphan_add_new_manage_columns
+* Description : 	add columns meta_box to manage post
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* June 4, 2013		Vinh.le			add columns meta_box to manage post
+*/
+	function orphan_add_new_manage_columns($my_columns) {
+		global $orphan_prefix, $orphan_fields_info_array;
+			$new_my_columns['cb'] = '<input type="checkbox" />';	 
+			$new_my_columns['title'] = __('Họ tên');
+			foreach($orphan_fields_info_array as $field_value){
+				$key_colum = $orphan_prefix.$field_value['name'];
+				$new_my_columns[$key_colum] = ($field_value['label']);
+			}
+			$new_my_columns['author'] = __('Người đăng');			
+			$new_my_columns['date'] = ('Ngày đăng');		
+			return $new_my_columns;
+		}
+	// Add to admin_init function $post_type_name
+if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == $post_type_name){
+	add_filter('manage_posts_columns', 'orphan_add_new_manage_columns');
+	add_action('manage_posts_custom_column', 'orphan_meta_box_to_manage_post', 10, 2);
+}
+/* ========END TRE MO COI=============== */
+>>>>>>> 9abad1de5bda0c946b66f262a4b238add48472a9

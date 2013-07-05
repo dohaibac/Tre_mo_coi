@@ -306,6 +306,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 										$("#registerchild_error_container").text(response.message);
 										$("#registerchild_error_container").show();
 										alert(response.message);
+										$("#submit_form_register_child").attr('disabled', 'disabled');
 										setTimeout(function() {
 											window.location = url_home;
 									   }, 3000);

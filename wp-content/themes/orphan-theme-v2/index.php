@@ -95,7 +95,7 @@
 				?>
 					<div class="row">
 						<div class="large-3 columns">
-							<a href="<?php the_permalink(); ?>"><img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" class="thumb" src="<?php echo $image ?>"/></a>
+							<a href="<?php the_permalink(); ?>"><img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" class="thumb" src="<?php echo $image ?>" width="226" height="93"/></a>
 						</div>
 						<div class="large-9 columns">
 							<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>

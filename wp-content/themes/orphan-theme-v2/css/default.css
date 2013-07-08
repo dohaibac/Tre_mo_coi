@@ -73,7 +73,10 @@ a:hover{
 	 -webkit-border-radius: 10px 0 0 0;
 	 -moz-border-radius: 10px 0 0 0;
     display: block;
-    overflow: hidden;
+    /*overflow: hidden;*/
+}
+ul#menu-main-menu li:first-child, ul#menu-main-menu li.current-menu-item:first-child a, ul#menu-main-menu li#menu-item-133 ul#menu-main-menu li#menu-item-133 a{
+	overflow: hidden;
 }
 .main-menu ul li:last-child{
 	background:none;
@@ -472,4 +475,9 @@ margin-bottom:5px;
 }
 form.custom .custom.dropdown{
 text-align:center;
+}
+
+#searchform input#s:invalid {
+    box-shadow: none; /* FF */
+    outline: 0;       /* IE 10 */
 }

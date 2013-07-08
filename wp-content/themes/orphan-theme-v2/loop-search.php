@@ -6,18 +6,16 @@ $total_results = $wp_query->found_posts;
 jQuery(document).ready(function() {
     jQuery('.page').live('click', function(e) {
         e.preventDefault();
-//        jQuery('.wp-tab-content').html('Vui lòng đợi...');
+		jQuery(".content .box-content.list-2").html('<div style="text-align:center;padding:30px"><h2>Vui lòng chờ ...</h2></div>');
         post_types = jQuery(this).attr("post_types");
         page = jQuery(this).attr("title");
         jQuery.get(document.pathname, {
             post_types: post_types, paged: page}, function(data) {
             if (data.length > 0) {
                 var $response = $(data);
-                jQuery(".wp-tab-content").html(
-                        $response.find('.wp-tab-content').html());
-                jQuery(".ui-tabs-anchor").html(
-                        $response.find('.wp-tab-title').html());
-                jQuery('.wp-tab-content').fadeToggle(1000);
+                jQuery(".content .box-content.list-2").html(
+                        $response.find('.content .box-content.list-2').html());
+                jQuery('.content .box-content.list-2').fadeIn(1000);
             }
         });
     });
@@ -29,6 +27,8 @@ jQuery(document).ready(function() {
             padding: 0;; padding-left: 10px;font-size: 13px;'>
             <?php echo" Tìm thấy $total_results kết quả" ?>
         </h2>
+		<?php 
+		/**
         <h2 style='background-image: none; border: none; 
             font-size: 10px; padding: 0; padding-left: 10px;'>
             Bạn có muốn tìm theo: 
@@ -59,6 +59,8 @@ jQuery(document).ready(function() {
                    href="javascript:void(0);">Bài viết?</a>  
                <?php } ?>
         </h2>
+		*/
+		?>
     </div>
     <div id="pagenavi" style="text-align: right;" class="large-5 columns">
         <?php

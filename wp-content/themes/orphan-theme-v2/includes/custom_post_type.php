@@ -41,7 +41,8 @@ function orphan_register_orphan_posttype() {
 	$post_type_args = array(
 		'labels' => $labels, 
 		'singular_label' => __($label),
-		'public' => true, 'show_ui' => true, 
+		'public' => false, 'show_ui' => true,
+		'exclude_from_search' => true,
 		'publicly_queryable'=> true, 
 		'query_var' => true,
 		'capability_type' => 'post',

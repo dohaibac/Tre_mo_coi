@@ -90,7 +90,7 @@
                                         <div class="row collapse">
                                             <div class="small-7 columns" style="position: relative;">
                                                 <input type="text" name="s" id="s" value="<?php echo get_search_query(); ?>" type="text" placeholder="Nhập từ khóa..."/>
-												<span class="tooltip" style="display: none;left: 0;min-width: 170px;position: absolute;top: 41px;visibility: visible;width: 138px;">Vui lòng nhập từ khóa<span class="nub"></span></span>
+												<span class="tooltip" style="display: none;left: 0;min-width: 140px;width: 140px;position: absolute;top: 41px;visibility: visible; font-size:12px;">Vui lòng nhập từ khóa<span class="nub"></span></span>
                                             </div>
                                             <div class="small-5 columns">
                                                 <button id="search_button" 

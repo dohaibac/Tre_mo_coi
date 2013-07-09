@@ -14,7 +14,7 @@
 			<ul class="list_video">
 			<?php
 			$videoPost = new WP_Query();
-			$videoPost->query('showposts=3&cat=11&orderby=DESC');
+			$videoPost->query('showposts=4&cat=11&orderby=DESC');
 			while ($videoPost->have_posts()) : $videoPost->the_post();		
 			?>
 				<li class="video"><a data="<?php echo get_post_meta( get_the_ID(), 'url_video', true ) ?>" href="#view_video"><?php the_title(); ?></a></li>
@@ -43,7 +43,7 @@
 							'controlbar': 'bottom',
 							'icons': 'false',
 							'width': '100%',
-							'height': '225'
+							'height': '218'
 						});
 				}
 			});

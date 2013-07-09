@@ -138,7 +138,7 @@ $orphan_fields_info_array = array(
 	orphan_result_meta(
 		array(
 			'name' 			=> 'gender',
-			'label'			=> 'Gới tính',
+			'label'			=> 'Giới tính',
 			'description' 	=> 'Chọn giới tính của trẻ',
 			'type'			=> 'radio',
 			'rich_editor'	=> false,

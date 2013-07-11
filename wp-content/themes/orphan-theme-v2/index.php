@@ -41,7 +41,7 @@
 						<?php 
 						$i=0;
 						$newsPost = new WP_Query();
-						$newsPost->query('showposts=8&cat=1,5&orderby=DESC');
+						$newsPost->query('showposts=7&cat=1,5&orderby=DESC');
 						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
 						$image = orphan_get_post_thumbnai();//wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 						if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
@@ -49,7 +49,7 @@
 							<div class="row">
 								<div class="large-4 columns">
 									<a href="<?php the_permalink(); ?>">
-										<img class="thumb" src="<?php echo $image; ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" width="226" height="93">
+										<img class="thumb" src="<?php echo $image; ?>" title="<?php the_title(); ?>" alt="<?php the_title(); ?>" style="width:90px; height:70px; overflow:hidden; margin-bottom:10px;">
 									</a>
 								</div>
 								<div class="large-8 columns">
@@ -81,13 +81,40 @@
 					
 				</div>
 			</div><!--End Tin tức -->
+			<!--Begin Widget Home Page -->
+			<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Home Page') ) { ?>
+			<!--End Widget Home Page -->
+			<!--Begin Các trung tâm -->
+			<div class="row shadow-box">
+				<h2>Các trung tâm Trẻ mồ côi <a href="<?php echo home_url( '/category/dia-chi-cac-trung-tam')?>" class="read-more">Xem tiếp...</a></h2>
+				<div class="box-content list-2">
+				<?php
+				$acNewsPost = new WP_Query();
+				$acNewsPost->query('showposts=4&cat=10&orderby=DESC');
+				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
+				$image = orphan_get_post_thumbnai(); //wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				
+				if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;
+				?>
+					<div class="row">
+						<div class="large-3 columns">
+							<a href="<?php the_permalink(); ?>"><img alt="<?php the_title(); ?>" title="<?php the_title(); ?>" class="thumb" src="<?php echo $image ?>" width="226" height="93"/></a>
+						</div>
+						<div class="large-9 columns">
+							<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
+							<p><?php the_content_rss('',true,'', 30); ?></p>
+						</div>
+					</div>
+				<?php endwhile; wp_reset_query();?>
+				</div>
+			</div><!--End Các trung tâm -->
 			<!--Begin Chương trình hoạt động -->
 			<div class="row shadow-box">
 				<h2>Chương trình hoạt động <a href="<?php echo home_url( '/category/chuong-trinh-hoat-dong')?>" class="read-more">Xem tiếp...</a></h2>
 				<div class="box-content list-2">
 				<?php
 				$acNewsPost = new WP_Query();
-				$acNewsPost->query('showposts=7&cat=8&orderby=DESC');
+				$acNewsPost->query('showposts=4&cat=8&orderby=DESC');
 				while ($acNewsPost->have_posts()) : $acNewsPost->the_post();		
 				$image = orphan_get_post_thumbnai(); //wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 				
@@ -111,7 +138,7 @@
 				<div class="box-content">
 				<?php
 				$lawPost = new WP_Query();
-				$lawPost->query('showposts=7&cat=9&orderby=DESC');
+				$lawPost->query('showposts=4&cat=9&orderby=DESC');
 				while ($lawPost->have_posts()) : $lawPost->the_post();		
 				?>
 					<div class="row">
@@ -121,6 +148,7 @@
 				<?php endwhile; wp_reset_query();?>
 				</div>
 			</div><!--End Văn bản luật -->
+			<?php } ?>
 		</div>
 	</div><!--end .large-8-->
 	<?php get_sidebar(); ?>

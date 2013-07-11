@@ -60,6 +60,7 @@ function orphan_theme_option_callback(){
 	if($options){
 		$options = unserialize(base64_decode($options));
 	}
+	
 ?>
 	<div class="wrap">
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -95,6 +96,7 @@ function orphan_theme_option_callback(){
 														<br/>
 														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
 															<?php wp_dropdown_categories(array('hide_empty' => 0, 'show_count'=> 1, 'selected' => $options['show_tin_tuc'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_tin_tuc', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
+														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_tin_tuc_num_post'], 'show_tin_tuc_num_post'); ?></p>
 													</th>
 												</tr>
 												<tr valign="top">
@@ -103,6 +105,7 @@ function orphan_theme_option_callback(){
 														<br/>
 														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
 															<?php wp_dropdown_categories(array('hide_empty' => 1, 'show_count'=> 1, 'selected' => $options['show_chuong_trinh_hoat_dong'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_chuong_trinh_hoat_dong', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
+														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_chuong_trinh_hoat_dong_num_post'], 'show_chuong_trinh_hoat_dong_num_post'); ?></p>
 													</th>
 												</tr>
 												<tr valign="top">
@@ -111,6 +114,7 @@ function orphan_theme_option_callback(){
 														<br/>
 														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
 															<?php wp_dropdown_categories(array('hide_empty' => 1, 'show_count'=> 1, 'selected' => $options['show_van_ban_phap_luat'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_van_ban_phap_luat', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
+														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_van_ban_phap_luat_num_post'], 'show_van_ban_phap_luat_num_post'); ?></p>
 													</th>
 												</tr>
 												<tr valign="top">
@@ -119,6 +123,7 @@ function orphan_theme_option_callback(){
 														<br/>
 														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
 															<?php wp_dropdown_categories(array('hide_empty' => 1, 'show_count'=> 1, 'selected' => $options['show_tam_long_vang'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_tam_long_vang', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
+														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_tam_long_vang_num_post'], 'show_tam_long_vang_num_post'); ?></p>
 													</th>
 												</tr>
 											</tbody>
@@ -304,4 +309,17 @@ function orphan_theme_option_callback(){
 <?php
 }
 
+function orphan_show_num_post($begin = 3,$end=20, $select, $select_name){
+	
+	$html = '<select id="select_'.$select_name.'" name="'.$select_name.'">';
+	for($begin; $begin<= $end; $begin++){
+		$selected = '';
+		if( $select == $begin){
+			$selected = 'selected="selected"';
+		}
+		$html .='<option '.$selected.' value="'.$begin.'">'.$begin.'</option>';
+	}
+	$html .= '</select>';
+	return $html;
+}
 ?>

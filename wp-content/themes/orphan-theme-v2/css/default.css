@@ -372,7 +372,7 @@ span.date{
 	list-style:none;
 	margin:0px;
 }
-.sidebar-box img.thumb{}
+.sidebar-box img.thumb{width:80px; height:55px;}
 .sidebar-box .large-4{
 	padding: 0;
     width: 30%;
@@ -480,4 +480,22 @@ text-align:center;
 #searchform input#s:invalid {
     box-shadow: none; /* FF */
     outline: 0;       /* IE 10 */
+}
+
+/* slider */
+.croll_news{
+	height:267px!important;
+}
+
+ul.sb_slider {
+    margin:0px;
+    padding:0;
+    position:relative;
+    width:100%;
+}
+ul.sb_slider li {
+    list-style:none;
+    color:white;
+    overflow: hidden;
+	height:69px;
 }

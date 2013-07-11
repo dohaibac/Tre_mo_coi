@@ -56,22 +56,40 @@
 	<div class="row sidebar-box shadow-box">
 		<h2>Tấm lòng vàng</h2>
 		<div class="box-content list-2">
-			<?php
-			$slicePost = new WP_Query();
-			$slicePost->query('showposts=3&cat=6&orderby=DESC');
-			while ($slicePost->have_posts()) : $slicePost->the_post();
-			$image = orphan_get_post_thumbnai();// wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
-			if($image == '') $image = get_template_directory_uri().'/img/images/toystory.jpg' ;
-			?>
-			<div class="row">
-				<div class="large-4 columns">
-					<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image; ?>"/></a>
-				</div>
-				<div class="large-8 columns">
-					<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-				</div>
+			<div id="sidebar_slider_1" class="croll_news">
+				<ul class="sb_slider">
+				<?php
+				$slicePost = new WP_Query();
+				$slicePost->query('showposts=9&cat=6&orderby=DESC');
+				while ($slicePost->have_posts()) : $slicePost->the_post();
+				$image = orphan_get_post_thumbnai();// wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+				if($image == '') $image = get_template_directory_uri().'/img/images/toystory.jpg' ;
+				?>
+				<li>
+					<div class="row">
+						<div class="large-4 columns">
+							<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image; ?>"/></a>
+						</div>
+						<div class="large-8 columns">
+							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+						</div>
+					</div>
+				</li>
+				<?php endwhile; wp_reset_query();?>
+				</ul>
 			</div>
-			<?php endwhile; wp_reset_query();?>	
+			<script language="javascript">
+			$(".croll_news").jCarouselLite({
+				btnNext: ".croll_news .prev",
+				btnPrev: ".croll_news .next",
+				speed: 7000,
+				hoverPause: false,
+				scroll: 4,
+				auto: true,
+				visible: 4,
+				vertical: true
+			});
+			</script>
 		</div>
 	</div><!--End widget Tấm lòng vàng -->
 	<!--Begin widget  Bình luận mới nhất -->

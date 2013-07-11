@@ -55,6 +55,11 @@ include('includes/action-profile.php');
  */
 
 
+/**
+ ************ INCLUDE WIDGET ************
+ */
+ include('includes/widget-index-page.php');
+ 
 
 /**
  ************ ADD ACTION HOOKS ************
@@ -110,7 +115,7 @@ function custom_theme_support() {
 	if(function_exists('register_sidebar')){
 		 register_sidebar(array(
 		  'name' => 'sidebar_main',
-		  'description' => 'Sidebar cho game',
+		  'description' => 'Sidebar cho tin tức',
 		  'before_widget'  => '<div id="id_%1$s" class="row sidebar-box shadow-box">',
 		  'after_widget'  => '</div></div>',
 		  'before_title'  => '<h2>',
@@ -127,7 +132,7 @@ function custom_theme_support() {
 		 ));
 		  register_sidebar(array(
 		  'name' => 'sidebar_bottom',
-		  'description' => 'Sidebar cho game',
+		  'description' => 'Sidebar cho tin tức',
 		  'before_widget'  => '<div id="id_%1$s" class="row sidebar-box shadow-box">',
 		  'after_widget'  => '</div></div>',
 		  'before_title'  => '<h2>',

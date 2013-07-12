@@ -1,9 +1,9 @@
 
 <div class="large-4 columns">
-	<div class="shadow-box" style="margin-bottom: 18px !important">
+	<div class="shadow-box hide-for-small" style="margin-bottom: 18px !important">
 		<a class="don-nhan-yeu-thuong" href="<?php echo get_permalink( get_page_by_path( 'don-nhan-yeu-thuong' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/don-nhan-yeu-thuong.png"/></a>
 	</div>
-	<div class="shadow-box">
+	<div class="shadow-box hide-for-small">
 		<a class="nhap-thong-tin-tre-mo-coi" href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
 	</div>
 	
@@ -67,11 +67,15 @@
 				?>
 				<li>
 					<div class="row">
-						<div class="large-4 columns">
+						<div class="large-4 columns hide-for-small">
 							<a href="<?php the_permalink(); ?>"><img alt="title" class="thumb" src="<?php echo $image; ?>"/></a>
 						</div>
-						<div class="large-8 columns">
+						<div class="large-8 columns hide-for-small">
 							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+						</div>
+						<div class="large-12 columns hide-for-medium-up" style="text-align:justify">
+							<a href="<?php the_permalink(); ?>"><img align="left" alt="title" class="thumb" src="<?php echo $image; ?>"/></a>
+							<h3 style="display: inline"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 						</div>
 					</div>
 				</li>

@@ -137,3 +137,9 @@
                         </section>
                     </div><!--end .main-->
                     <div class="row main-content">
+						<div class="shadow-box hide-for-medium-up" style="margin-bottom: 18px !important;text-align:center">
+							<a class="don-nhan-yeu-thuong" href="<?php echo get_permalink( get_page_by_path( 'don-nhan-yeu-thuong' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/don-nhan-yeu-thuong.png"/></a>
+						</div>
+						<div class="shadow-box hide-for-medium-up" style="text-align:center">
+							<a class="nhap-thong-tin-tre-mo-coi" href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
+						</div>

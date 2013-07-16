@@ -76,8 +76,8 @@ function historychildren_email_alert($demand){
 		$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 		$headers .= 'Content-Transfer-Encoding: 8bit' . "\r\n";
 		$linka = '<a href="'.home_url().'/cap-nhat-tre/?unsubscripbe='.base64_encode($demand->ID."|".md5($user_id.$user_email."aJ#FTUkk")).'" style="color:orange;">tại đây.</a>';
-		$message ="Chào bạn, <br />Cảm ơn bạn thời gian qua đã cung cấp thông tin về trẻ ".$demand->post_title." cách đây 6 tháng tại website tremocoi.org.vn, nếu trẻ đã tìm được cha mẹ, hãy giúp chúng tôi cập nhật thông tin<br />";
-		$message .= "bạn vui lòng cập nhật thông tin trẻ ".$linka;
+		$message ="Chào bạn, <br />Cảm ơn bạn thời gian qua đã cung cấp thông tin về trẻ ".$demand->post_title." (cách đây 6 tháng) tại website tremocoi.org.vn, nếu trẻ đã tìm được cha mẹ, hãy giúp chúng tôi cập nhật thông tin<br />";
+		$message .= "Bạn vui lòng cập nhật thông tin trẻ ".$linka;
 		$message .= "<br /> Một lần nữa chúng tôi cảm ơn sự đóng góp của bạn. <br /> Thân ái, <br/> BQT website tremocoi.org.vn.";
 		
 		// Additional headers

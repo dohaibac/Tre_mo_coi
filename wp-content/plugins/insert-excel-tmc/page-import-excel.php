@@ -6,6 +6,20 @@
  */
 
 global $current_user, $orphan_prefix; 
+	if($current_user->ID == null)
+	{
+		?>
+		<script>
+		alert("Bạn cần đăng nhập và kích hoạt tài khoản trước khi sử dụng chức năng này.");
+		document.location.href = '<?php echo home_url()?>';
+		</script>
+		<?php
+		exit();
+	}
+	if(isset($_POST['accept_insert'])){
+		require(dirname(__FILE__)."/insert.php");
+		exit();
+	}
 	if(isset($_POST['upfile_ok']) && $_POST['upfile_ok'] == 'Upload') {
 		$tmp_name = $_FILES["file_tmc"]["tmp_name"];
 		$up_name = $_FILES["file_tmc"]["name"];
@@ -30,17 +44,33 @@ get_header();
 			<div class="row shadow-box">
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
 					<h2>Upload File Excel</h2>
-					<div class="box-content list-2">
+					<div class="box-content list-2" style="text-align:center;">
 						<?php
 							if((isset($upfile_mess)) && ($upfile_mess != "")){
 								echo '<p style="color:red">'.$upfile_mess.'</p>';
 							}
 						?>
-						<form method="post" enctype="multipart/form-data">
-							<label for="file-tmc">Chọn File Excel (*.xls)</label>
-							<input type="file" name="file_tmc" id="file_tmc" />
-							<input type="submit" name="upfile_ok" value="Upload" class="button" />
-						</form>
+						<table width="100%">
+						<tr>
+							<td colspan="2">Bạn có thể tải file mẫu <a href="<?php echo  plugins_url('data/datatmc.xls' , __FILE__ ); ?>">tại đây</a> .</td>
+						</tr>
+						
+							
+							<form method="post" enctype="multipart/form-data">
+							<tr>
+								<td>
+								<label for="file-tmc">Chọn File Excel (*.xls)</label>
+								</td>
+								<td>
+								<input type="file" name="file_tmc" id="file_tmc" />
+								</td>
+							</tr>
+							<td colspan="2">
+								<input type="submit" name="upfile_ok" value="Upload" class="button" />
+							</tr>
+							</form>
+						
+						</table>
 			
 					</div>
 				<?php endif; ?>	

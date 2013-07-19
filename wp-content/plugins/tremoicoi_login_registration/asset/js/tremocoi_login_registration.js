@@ -16,14 +16,7 @@ $(document).ready(function(){
 	
 	$('#tmc_login_form_signup_link').click(function(){
 		$.fancybox.close();
-		$.fancybox(
-			$("#register").html(),
-			{scrolling: 'no', beforeShow: function(){
-			$('#tmc_register_form_container').show();
-			$('#tmc_register_waiting').hide();
-			$('#tmc_register_error_container').hide();
-			$('#tmc_register_success').hide();
-		}, autoDimensions : false,fitToView: false, helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}});
+		$("#tmc_register_button").trigger("click");
 	});
 	
 	
@@ -56,6 +49,7 @@ $(document).ready(function(){
 	$('#tmc_register_reset_button').click(function() {
 		$('#tmc_register_form').find("input[type=text], input[type=password], textarea").val("");
 		$('#txt-username').focus();
+		$("#tmc_register_form").data('validator').resetForm();
 		return false;
 	});
 	

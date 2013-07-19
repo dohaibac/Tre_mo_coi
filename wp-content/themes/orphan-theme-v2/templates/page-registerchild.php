@@ -54,7 +54,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 			<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
 			<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
 			<div class="box-content">
-				
+				<?php do_action('insert_excel_link'); ?>
 				<hr />
 				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.<br /></span>
 				

@@ -14,6 +14,7 @@
 					<!--Begin .coppy-right-->
 					<div class="row coppy-right">
 						<p>© <a class="coppy-right-link" href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved.</p>
+						<p>Hosting được tài trợ bởi <a class="coppy-right-link" href="http://iwebvn.net/">iwebvn.net</a>.</p>
 					</div><!--end .coppy-right-->
 				</div>
 			</div><!--end .main-main-->

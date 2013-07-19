@@ -50,6 +50,7 @@ $(document).ready(function(){
 		$('#tmc_register_form').find("input[type=text], input[type=password], textarea").val("");
 		$('#txt-username').focus();
 		$("#tmc_register_form").data('validator').resetForm();
+		$('#tmc_register_error_container').css({display:"none"});
 		return false;
 	});
 	

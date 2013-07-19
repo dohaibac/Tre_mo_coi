@@ -6,7 +6,9 @@
 	<div class="shadow-box">
 		<a class="nhap-thong-tin-tre-mo-coi" href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
 	</div>
-	
+	<div class="shadow-box">
+		<a class="nhap-thong-tin-tre-mo-coi" href="<?php echo get_permalink( get_page_by_path( 'tim-nguoi-than' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/tim-nguoi-than.png"/></a>
+	</div>
 	<div class="row sidebar-box shadow-box">
 		<h2>Videos</h2>
 		<div class="box-content video">
@@ -14,7 +16,7 @@
 			<ul class="list_video">
 			<?php
 			$videoPost = new WP_Query();
-			$videoPost->query('showposts=4&cat=11&orderby=DESC');
+			$videoPost->query('showposts=5&cat=11&orderby=DESC');
 			while ($videoPost->have_posts()) : $videoPost->the_post();		
 			?>
 				<li class="video"><a data="<?php echo get_post_meta( get_the_ID(), 'url_video', true ) ?>" href="#view_video"><?php the_title(); ?></a></li>
@@ -60,7 +62,7 @@
 				<ul class="sb_slider">
 				<?php
 				$slicePost = new WP_Query();
-				$slicePost->query('showposts=9&cat=6&orderby=DESC');
+				$slicePost->query('showposts=20&cat=6&orderby=DESC');
 				while ($slicePost->have_posts()) : $slicePost->the_post();
 				$image = orphan_get_post_thumbnai();// wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 				if($image == '') $image = get_template_directory_uri().'/img/images/toystory.jpg' ;

@@ -1,5 +1,4 @@
 <?php
-if (have_posts()) :
     while (have_posts()) : the_post();
         update_post_caches($posts);
         $image = get_post_meta( get_the_ID(), 'orphan_photo', true );//orphan_get_post_thumbnai(); // wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
@@ -24,20 +23,4 @@ if (have_posts()) :
             </div>
         </div>
     <?php endwhile; ?>
-    <div style="clear: both;"></div>
-    <div id="pagenavi">
-        <?php
-        if (function_exists('wp_paginate')) {
-            wp_paginate();
-        } else {
-            ?>
-            <span class="newer"><?php previous_posts_link(__('Newer Entries', 'orphans-theme')); ?></span>
-            <span class="older"><?php next_posts_link(__('Older Entries', 'orphans-theme')); ?></span>
-        <?php } ?>
-        <div class="fixed"></div>
-    </div>
-<?php else : ?>
-    <div class="errorbox">
-        <?php _e('Sorry, no posts matched your criteria.', 'orphans-theme'); ?>
-    </div>
-<?php endif; ?>
+    

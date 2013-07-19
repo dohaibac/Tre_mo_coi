@@ -430,6 +430,10 @@ function orphan_show_meta_box($post, $metabox)	{
                 echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />&nbsp;';
 				echo $field['desc'];
                 break;
+			default:
+				 echo '<input type="'.$field['type'].'" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30"  /><br/>', '
+', $field['desc'];
+                break;
         }
         echo     '</td>',
             '</tr>';

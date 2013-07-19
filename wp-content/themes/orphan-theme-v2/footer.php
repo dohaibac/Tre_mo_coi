@@ -40,5 +40,14 @@
 	</script>
 	<?php endif;?>
   <?php include_once("analyticstracking.php") ?>
+  <div style="" class="message_overflow">
+		<div class="content_message_overflow">
+			<img src="<?php bloginfo('template_directory'); ?>/images/register-header.png" class="logo">
+			<p>
+				<img src="<?php bloginfo('template_directory'); ?>/images/loading_timer.gif" class="loading">
+				<strong class="info">Đang xử lý thông tin.</strong>
+			</p>
+		</div>
+	</div>
 </body>
 </html>

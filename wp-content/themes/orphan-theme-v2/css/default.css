@@ -499,3 +499,43 @@ ul.sb_slider li {
     overflow: hidden;
 	height:69px;
 }
+
+
+.message_overflow {
+    background: none repeat scroll 0 0 #FCFEFC;
+    border: 4px solid #2481ED;
+    height: 170px;
+    left: 30%;
+    margin: 0 auto;
+    padding: 0px;
+    position: fixed;
+    top: 30%;
+    width: 370px;
+    z-index: 99999;
+	display:none;
+}
+
+.content_message_overflow {
+    position: relative;
+}
+.content_message_overflow .logo {
+}
+.content_message_overflow .loading {
+    margin: 15px 35px;
+    width: 65px;
+}
+.content_message_overflow .info {
+    font-size: 1.2em;
+    left: 140px;
+    position: absolute;
+    top: 90px;
+}
+.style_border_bottom{
+	border-bottom:1px dotted #d5d5d5;
+}
+.style_border_bottom:last-child{
+	border-bottom:none;
+}
+span.require{
+	color:red;
+}

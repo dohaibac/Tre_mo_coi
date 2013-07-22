@@ -539,3 +539,107 @@ ul.sb_slider li {
 span.require{
 	color:red;
 }
+
+/* garden_dreams */
+.garden_dreams {
+    background: url("../images/garden-dreams-baner.png") no-repeat scroll right top transparent;
+    margin-top: -15px;
+    min-height: 370px;
+	position:relative;
+	padding-top:100px;
+	margin-bottom: 50px;
+}
+.add-new-garden-dreams{
+	background: url("../images/dang-bai-viet.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 56px;
+    position: absolute;
+    right: 0;
+    text-indent: -99999px;
+    width: 165px;
+	
+	top:0px;
+}
+.add-new-garden-dreams:hover{
+	opacity:1;
+}
+.content-dream-item{
+	position:relative;
+	height: 295px;
+	float: left !important;
+}
+.dream-item{
+	background: url("../images/note-01.png") no-repeat scroll -10px 0 transparent;
+    height: 290px;
+    width: 318px;
+	position: absolute;
+}
+.dream-item-2{
+	background: url("../images/note-02.png") no-repeat scroll -10px 0 transparent;
+    height: 290px;
+    width: 318px;
+	position: absolute;
+}
+img.auth-dream{
+	  height: 69px;
+    position: absolute;
+    right: 63px;
+    top: 11px;
+    width: 69px;
+}
+.dream-item h4{
+	font-size: 0.9em;
+	line-height: 17px;
+	margin-bottom: 11px;
+	margin-left: 15px;
+	margin-top: 35px;
+	width: 50%;
+	max-height: 35px;
+	overflow: hidden;
+}
+.dream-item h4 a{color:#010101;}
+.dream-item .info-dream{
+	 display: block;
+    height: 120px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    margin-left: 22px;
+    overflow: hidden;
+	font-size: 0.9em;
+    width: 72%;
+}
+.dream-item .info-meta-dream{
+	  margin-left: 25px;
+    width: 255px;
+}
+
+.dream-item .info-meta-dream span{
+	color: #ED265E;
+    float: left;
+    font-size: 0.9em;
+    font-style: italic;
+}
+.dream-item .info-meta-dream a{
+	color: #ED265E;
+	float: right;
+	font-size: 0.9em;
+    font-style: italic;
+}
+.wp-switch-editor{
+	height:26px !important;
+}
+.editor-full{}
+.editor-full .wp-editor-area{
+	width: 563px;
+	max-width:563px;
+	background:#fff;
+}
+.dang-bai-viet-title{
+    background: url("../images/dang-bai-viet-01.png") repeat scroll 0 0 transparent;
+    display: block;
+    height: 71px;
+    position: absolute;
+    top: 80px;
+    width: 225px;
+    z-index: 9;
+}

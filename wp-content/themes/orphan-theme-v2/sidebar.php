@@ -1,14 +1,6 @@
 
 <div class="large-4 columns">
-	<div class="shadow-box hide-for-small" style="margin-bottom: 18px !important">
-		<a class="don-nhan-yeu-thuong" href="<?php echo get_permalink( get_page_by_path( 'don-nhan-yeu-thuong' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/don-nhan-yeu-thuong.png"/></a>
-	</div>
-	<div class="shadow-box hide-for-small">
-		<a class="nhap-thong-tin-tre-mo-coi" href="<?php echo get_permalink( get_page_by_path( 'nhap-thong-tin-tre-mo-coi' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/dang-thong-tin-tre-em.png"/></a>
-	</div>
-	<div class="shadow-box">
-		<a class="nhap-thong-tin-tre-mo-coi" href="<?php echo get_permalink( get_page_by_path( 'tim-nguoi-than' ) );?>"><img alt="title" src="<?php echo get_template_directory_uri(); ?>/images/tim-nguoi-than.png"/></a>
-	</div>
+	<?php include('include-quick-link.php');?>
 	<div class="row sidebar-box shadow-box">
 		<h2>Videos</h2>
 		<div class="box-content video">

@@ -37,7 +37,6 @@
 	<link rel="pingback" href="<?php bloginfo('home')?>/xmlrpc.php" />
 	<!-- Add css -->
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/foundation.css" />
-	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/foundation.css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/default.css" media="all"  />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie.css" media="all"  />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url');?>" media="screen" />

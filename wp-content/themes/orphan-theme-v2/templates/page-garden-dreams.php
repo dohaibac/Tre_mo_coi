@@ -37,13 +37,14 @@ else {
 ?>
 <div class="garden_dreams">
 	<a href="<?php echo get_permalink( get_page_by_path( 'viet-bai-vuon-uoc-mo' ) );?>" class="add-new-garden-dreams fancybox-vuon-yeu-thuong">Đăng bài viết</a>
-	<span class="dang-bai-viet-title"></span>
+
 	<div class="large-8 columns content">
 		<div class="row">
 			<div class="row shadow-box">
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
+					<h2>Đăng bài viết</h2>
 					<div class="box-content list-2">
-						<br/><br/><br/>
+						<br/>
 						<?php echo form_add_new_garden_dream(); ?>
 					</div>
 				<?php endif; ?>	

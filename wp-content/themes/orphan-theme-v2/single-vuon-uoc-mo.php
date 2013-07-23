@@ -2,7 +2,7 @@
 get_header();
 ?>
 <div class="garden_dreams">
-	<a href="<?php echo get_permalink( get_page_by_path( 'viet-bai-vuon-uoc-mo' ) );?>" class="add-new-garden-dreams fancybox-vuon-yeu-thuong">Đăng bài viết</a>
+	<a href="<?php echo get_permalink( get_page_by_path( 'viet-bai-vuon-uoc-mo' ) );?>" class="add-new-garden-dreams don-nhan-yeu-thuong">Đăng bài viết</a>
 	<div class="large-8 columns content">
 		<div class="row">
 			<div class="row shadow-box">

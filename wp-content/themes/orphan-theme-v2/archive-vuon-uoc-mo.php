@@ -3,7 +3,7 @@ get_header();
 ?>
 <div class="garden_dreams">
 	<?php	if (have_posts()) :	?>
-		<a href="<?php echo get_permalink( get_page_by_path( 'viet-bai-vuon-uoc-mo' ) );?>" class="add-new-garden-dreams">Đăng bài viết</a>
+		<a href="<?php echo get_permalink( get_page_by_path( 'viet-bai-vuon-uoc-mo' ) );?>" class="add-new-garden-dreams don-nhan-yeu-thuong">Đăng bài viết</a>
 		<div class="row">
 			<?php 
 				/* Run the loop for the archives page to output the posts.

@@ -569,7 +569,7 @@ span.require{
 	float: left !important;
 }
 .dream-item{
-	background: url("../images/note-01.png") no-repeat scroll -10px 0 transparent;
+	background: url("../images/note-02.png") no-repeat scroll -10px 0 transparent;
     height: 290px;
     width: 318px;
 	position: absolute;
@@ -597,7 +597,10 @@ img.auth-dream{
 	max-height: 35px;
 	overflow: hidden;
 }
-.dream-item h4 a{color:#010101;}
+.dream-item h4 a{   
+	color: #424141;
+    font-family: tahoma;
+}
 .dream-item .info-dream{
 	 display: block;
     height: 120px;

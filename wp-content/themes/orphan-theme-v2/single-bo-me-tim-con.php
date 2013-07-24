@@ -105,7 +105,8 @@ get_header();
 						</div>
 						<div class="row">
 							<div class="large-12 columns">
-								<?php echo get_post_meta( get_the_ID(), 'orphan_description', true ); ?>
+								<h3>Đặc điểm chung:</h3>
+								<?php echo get_post_meta( get_the_ID(), 'orphan_children_description', true ); ?>
 							</div>
 						</div>
 						

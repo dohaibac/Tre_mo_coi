@@ -180,6 +180,7 @@ function ajax_insert_parent_looking_for_children(){
 			$results = $check_captcha;
 	   } else {
 		   if(isset($dataForm['txt-name']) && isset($dataForm["txt-children_name"])){
+				//var_dump($dataForm); die;
 				//Update info user
 				$user_id = $current_user->ID;
 				$data_user_update = array();
@@ -261,13 +262,12 @@ function ajax_insert_parent_looking_for_children(){
 add_filter('get_avatar', 'orphan_custom_avatars', 10, 3);
 
 function orphan_custom_avatars($avatar, $id_or_email, $size){
-  if(is_user_logged_in()){
-    $current_user = wp_get_current_user();
-    $image_url = get_user_meta($current_user->ID, 'user_avatars', true);
-    if($user_avatar !== false)
-      return '<img src="'.$image_url.'" class="avatar photo" width="'.$size.'" height="'.$size.'" alt="'.$current_user->display_name .'" />';
+  if(is_numeric($id_or_email)){
+    $image_url = get_user_meta($id_or_email, 'user_avatars', true);
+    if($image_url !== ''){
+      return '<img src="'.$image_url.'" class="avatar photo" width="'.$size.'" height="'.$size.'" />';
+	}
   }
-
   return $avatar;
 }
 
@@ -524,6 +524,17 @@ function orphan_parent_looking_for_relatives(){
 					  });
 					
 					function parent_looking_for_children(){
+						var content;
+						inputid = 'children_description';
+						var editor = tinyMCE.get(inputid);
+						if (editor) {
+							// Ok, the active tab is Visual
+							content = editor.getContent();
+						} else {
+							// The active tab is HTML, so just query the textarea
+							content = $('#'+inputid).val();
+						}
+						jQuery('form#lfr_parent_form textarea#'+inputid).html(content);
 						if(check_parent_looking_for_children.form()){
 							jQuery.ajax({  
 								type: 'POST',  
@@ -537,7 +548,6 @@ function orphan_parent_looking_for_relatives(){
 									jQuery('div.message_overflow').fadeIn();
 								},
 								success: function(response){ 
-									
 									if(response.status_login == 'true'){
 										if(response.status == 'true'){
 											$("#message_error_container_parent").text(response.message);
@@ -571,7 +581,6 @@ function orphan_parent_looking_for_relatives(){
 			
 				</script>
 				<style>
-					#wp-children_description-editor-tools{display:none;}
 					#children_description_ifr{background:#fff;}
 				</style>
 		</div>
@@ -580,13 +589,12 @@ function orphan_parent_looking_for_relatives(){
 <?php }
 
     function orphan_meta_box_parent_tnt_to_manage_post($column_name, $post_id) {
-		global $orphan_prefix, $orphan_fields_info_array;
+		global $orphan_prefix, $orphan_fields_parent_tnt_children_array;
 		$get_post = get_post($post_id, ARRAY_A);
 		if($column_name == 'parent_photo'){
-			$photo = get_user_meta($get_post['post_author'], "user_avatars", true);
-			if($photo){
-				echo ('<img width="60" height="60" src="'.$photo.'"/>');
-			}
+			$photo = get_avatar(  $get_post['post_author'], 60 );
+			//$photo = get_user_meta($get_post['post_author'], "user_avatars", true);
+			echo $photo;
 		} else if($column_name == 'children_photo'){
 			$photo =  get_post_meta($post_id, $orphan_prefix.$column_name, true);
 			if($photo){
@@ -597,7 +605,7 @@ function orphan_parent_looking_for_relatives(){
 			if($get_post && isset($get_post['post_author'])){
 				$html = '';
 				$get_userdata =  get_userdata( $get_post['post_author'] ); 
-		
+				$html .= '<li>Tên bố/mẹ : '.$get_userdata->display_name.'</li>';
 				$phone = get_user_meta($get_post['post_author'], "phone", true);
 				if($phone){
 					$html .= '<li>Điện thoại : '.$phone.'</li>';
@@ -638,13 +646,13 @@ function orphan_parent_looking_for_relatives(){
     }
 
 function orphan_add_new_parent_tnt_manage_columns($my_columns) {
-	global $orphan_prefix, $orphan_fields_info_array;
+	global $orphan_prefix, $orphan_fields_parent_tnt_children_array;
 	$new_my_columns['cb'] = '<input type="checkbox" />';	 
-	$new_my_columns['title'] = __('Họ tên bố/mẹ');
-	$new_my_columns['parent_photo'] = __('Hình ảnh bố/mẹ');
-	$new_my_columns['parent_info'] = __('Thông tin bố mẹ');
+	$new_my_columns['title'] = __('Họ tên con');
+	$new_my_columns['children_photo'] = __('Hình ảnh con');		
 	$new_my_columns['children_info'] = __('Thông tin con');
-	$new_my_columns['children_photo'] = __('Hình ảnh con');			
+	$new_my_columns['parent_photo'] = __('Hình ảnh bố/mẹ');
+	$new_my_columns['parent_info'] = __('Thông tin bố mẹ');	
 	$new_my_columns['date'] = __('Ngày đăng');		
 	return $new_my_columns;
 }
@@ -884,7 +892,7 @@ function ajax_insert_children_looking_for_parent(){
 					if($dataForm["txt-parent_job"] !=''){
 						add_post_meta( $post_id, $orphan_prefix.'parent_job', $dataForm["txt-parent_job"]);
 					}
-					if($dataForm["txt-parent_photo"] !=''){
+					if($dataForm["url-parent_photo"] !=''){
 						add_post_meta( $post_id, $orphan_prefix.'parent_photo', $dataForm["url-parent_photo"]);
 					}
 					if($dataForm["txt-parent_time_lost"] !=''){
@@ -1044,7 +1052,7 @@ function orphan_children_looking_for_relatives(){
 						  <label for="txt-parent_time_lost" class="inline">Thời gian thất lạc</label>
 						</div>
 						<div class="small-6 columns"  style="margin-bottom: 15px;">
-						  <input style="margin:0px 0 4px 0;" type="text" name="txt-parent_time_lost" id="txt-parent_time_lost" placeholder="Nhập thời gian thất lạc" readonly="readonly"/>
+						  <input style="margin:0px 0 4px 0;" type="text" name="txt-parent_time_lost" id="txt-parent_time_lost" placeholder="Nhập thời gian thất lạc"/>
 						</div>
 						<div class="small-3 columns"></div>
 					</div>
@@ -1170,6 +1178,17 @@ function orphan_children_looking_for_relatives(){
 					  });
 					
 					function children_looking_for_parent(){
+						var content;
+						inputid = 'parent_description';
+						var editor = tinyMCE.get(inputid);
+						if (editor) {
+							// Ok, the active tab is Visual
+							content = editor.getContent();
+						} else {
+							// The active tab is HTML, so just query the textarea
+							content = $('#'+inputid).val();
+						}
+						jQuery('form#lfr_children_form textarea#'+inputid).html(content);
 						if(check_children_looking_for_parent.form()){
 							jQuery.ajax({  
 								type: 'POST',  
@@ -1216,7 +1235,6 @@ function orphan_children_looking_for_relatives(){
 			
 				</script>
 				<style>
-					#wp-parent_description-editor-tools{display:none;}
 					#parent_description_ifr{background:#fff;}
 				</style>
 		</div>
@@ -1233,15 +1251,18 @@ function orphan_children_looking_for_relatives(){
 				echo ('<img width="60" height="60" src="'.$meta_values.'"/>');
 			}
 		} else if($column_name == 'children_photo'){
-			$photo = get_user_meta($get_post['post_author'], "user_avatars", true);
-			if($photo){
-				echo ('<img width="60" height="60" src="'.$photo.'"/>');
-			}
+			$photo = get_avatar(  $get_post['post_author'], 60 );
+			//$photo = get_user_meta($get_post['post_author'], "user_avatars", true);
+			echo $photo;
 		} else if($column_name == 'children_info'){
 			
 			if($get_post && isset($get_post['post_author'])){
 				$html = '';
 				$get_userdata =  get_userdata( $get_post['post_author'] ); 
+				$user_name = $get_userdata->display_name;
+				if($user_name){
+					$html .= '<li>Tên con : '.$user_name.'</li>';
+				}
 				$gender = get_user_meta($get_post['post_author'], "gender", true);
 				if($gender){
 					$html .= '<li>Giới tính : '.$gender.'</li>';
@@ -1291,12 +1312,11 @@ function orphan_children_looking_for_relatives(){
 function orphan_add_new_children_tnt_manage_columns($my_columns) {
 	global $orphan_prefix, $orphan_fields_info_array;
 	$new_my_columns['cb'] = '<input type="checkbox" />';	 
-	$new_my_columns['title'] = __('Họ tên con');
-	$new_my_columns['children_photo'] = __('Hình ảnh con');
-	$new_my_columns['children_info'] = __('Thông tin con');
+	$new_my_columns['title'] = __('Họ tên bố/mẹ');
+	$new_my_columns['parent_photo'] = __('Hình ảnh Bố/Mẹ');	
 	$new_my_columns['parent_info'] = __('Thông tin bố mẹ');
-	
-	$new_my_columns['parent_photo'] = __('Hình ảnh Bố/Mẹ');			
+	$new_my_columns['children_photo'] = __('Hình ảnh con');
+	$new_my_columns['children_info'] = __('Thông tin con');		
 	$new_my_columns['date'] = __('Ngày đăng');		
 	return $new_my_columns;
 }

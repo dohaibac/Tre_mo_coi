@@ -114,8 +114,8 @@ function ajax_insert_vuon_uoc_mo(){
 			$check_captcha['captcha_error'] = 'true';
 			$results = $check_captcha;
 	   } else {
-		   if(isset($dataForm['txt-title']) && isset($dataForm["post-content"])){
-				$title = $title = $dataForm["txt-title"];
+		   if(($dataForm['txt-title']!='') && ($dataForm["post-content"] !='')){
+				$title = $title = $dataForm["txt-title"]; 
 				// Create post object
 				$my_post = array(
 				  'post_title'    => $title,
@@ -183,6 +183,7 @@ function form_add_new_garden_dream(){
 					);
 					wp_editor( '', $field, $settings );
 				?>
+				<div class="div-post-content"><label for="post-content" class="error post-content" style="display: none;">Nhập nội dung bài viết.</label></div>
 				</div>
 			</div>
 		</div>
@@ -222,7 +223,8 @@ function form_add_new_garden_dream(){
 				messages: {
 					'txt-title': "Nhập tiêu đề bài viết.",
 					'post-content': {
-						required: 'Nhập nội dung bài viết.'
+						required: 'Nhập nội dung bài viết.',
+						minlength:'Nội dung ít nhất 1 ký tự.'
 					},
 					'txt-captcha': {
 						required:"Nhập mã bảo mật.",
@@ -245,46 +247,51 @@ function form_add_new_garden_dream(){
 					// The active tab is HTML, so just query the textarea
 					content = $('#'+inputid).val();
 				}
-				jQuery('form#fn_submit_form textarea#post-content').html(content);
+				jQuery('form#fn_submit_form textarea#'+inputid).html(content);
 				if(check_post_content.form()){
-					jQuery.ajax({  
-						type: 'POST',  
-						url: ajaxurl,  
-						data: {  
-							action: 'ajax_insert_vuon_uoc_mo',  
-							data_from : $("form#fn_submit_form").serialize()
-						},   
-						dataType: 'json',
-						beforeSend: function(){
-							jQuery('div.message_overflow').fadeIn();
-						},
-						success: function(response){ 
-							
-							if(response.status_login == 'true'){
-								if(response.status == 'true'){
-									$("#message_error_container").text(response.message);
-									$("#message_error_container").show();
-									jQuery('div.message_overflow strong.info').html(response.message).fadeIn();
-									$("#submit_fn_submit_form").attr('disabled', 'disabled');
-									setTimeout(function() {
-										window.location = url_home+'/vuon-uoc-mo';
-								   }, 3000);
-								} else{ 
-									jQuery('div.message_overflow').fadeOut();
-									$("#message_error_container").text(response.message);
-									$("#message_error_container").show();
-									if(response.captcha_error == 'true'){
-										$('form#fn_submit_form input#txt-captcha').val('');
-										$('form#fn_submit_form img#captcha_file').attr('src', response.captcha_file).fadeIn();
-										$('form#fn_submit_form input#captcha_prefix2').val(response.captcha_prefix);
+					if(content != ''){
+						jQuery('label.post-content').fadeOut();
+						$("#message_error_container").fadeOut();
+						jQuery.ajax({  
+							type: 'POST',  
+							url: ajaxurl,  
+							data: {  
+								action: 'ajax_insert_vuon_uoc_mo',  
+								data_from : $("form#fn_submit_form").serialize()
+							},   
+							dataType: 'json',
+							beforeSend: function(){
+								jQuery('div.message_overflow').fadeIn();
+							},
+							success: function(response){ 
+								if(response.status_login == 'true'){
+									if(response.status == 'true'){
+										$("#message_error_container").text(response.message).fadeIn();
+										jQuery('div.message_overflow strong.info').html(response.message).fadeIn();
+										$("#submit_fn_submit_form").attr('disabled', 'disabled');
+										setTimeout(function() {
+											window.location = url_home+'/vuon-uoc-mo';
+									   }, 3000);
+									} else{ 
+										jQuery('div.message_overflow').fadeOut();
+										$("#message_error_container").text(response.message).fadeIn();
+										if(response.captcha_error == 'true'){
+											$('form#fn_submit_form input#txt-captcha').val('');
+											$('form#fn_submit_form img#captcha_file').attr('src', response.captcha_file).fadeIn();
+											$('form#fn_submit_form input#captcha_prefix2').val(response.captcha_prefix);
+										}
 									}
+								} 
+								else{
+									jQuery('a#tmc_login_button').click();
 								}
-							} 
-							else{
-								jQuery('a#tmc_login_button').click();
 							}
-						}
-					}); 
+						});
+					} else {
+						jQuery('label.post-content').text('Nhập nội dung bài viết').fadeIn();
+						jQuery('div.div-post-content').fadeIn();
+						$("#message_error_container").text('Nhập nội dung bài viết').fadeIn();
+					}
 				}
 			}
 		});

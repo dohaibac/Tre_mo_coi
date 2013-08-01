@@ -2,7 +2,8 @@
 add_action('wp_ajax_insert_becomeparents', 'insert_becomeparents');
 function insert_becomeparents()
 {
-	global $current_user;
+	global $current_user,$orphan_prefix;
+	$orphan_prefix = 'orphan_';
 	
 	$errors = new WP_Error();
 

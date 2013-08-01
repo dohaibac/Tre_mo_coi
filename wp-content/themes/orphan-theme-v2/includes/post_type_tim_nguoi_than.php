@@ -185,6 +185,7 @@ function ajax_insert_parent_looking_for_children(){
 				$user_id = $current_user->ID;
 				$data_user_update = array();
 				$data_user_update['ID'] = $user_id;
+				update_usermeta( $user_id, 'status_sendmail_tnt', true);
 				if($dataForm['txt-email'] != ''){
 					//$data_user_update['user_email'] = $dataForm['txt-email'];
 				}
@@ -661,7 +662,388 @@ if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == $post_type_parent_
 	add_filter('manage_posts_columns', 'orphan_add_new_parent_tnt_manage_columns');
 	add_action('manage_posts_custom_column', 'orphan_meta_box_parent_tnt_to_manage_post', 10, 2);
 }
+/* Mapping info parent loooking for chilren */
 
+function orphan_maping_parent_with_children(){
+	global $post_type_parent_tnt, $post_type_children_tnt;
+	//get all post type : bo-me-tim-con
+	$args = array(
+		'post_type' => $post_type_parent_tnt,
+		'post_status' => array(
+			'publish',
+			'pending',
+			'future',
+			'private'
+		),
+		'order'	=>'DESC',
+		'posts_per_page' => -1,
+		'caller_get_posts'=> 1
+	);
+	$the_query_parent_looking_for = new WP_Query();
+	$the_query_parent_looking_for->query($args);
+	// The Loop
+	if ( $the_query_parent_looking_for->have_posts() ) :
+		while ( $the_query_parent_looking_for->have_posts() ) : $the_query_parent_looking_for->the_post();
+			//get children with conditions
+			$info_children = array();
+			$meta_query = array();
+			$user_id = get_the_author_meta( 'ID' );
+			if(get_user_meta($user_id, "status_sendmail_tnt", true) == true){
+				$get_userdata =  get_userdata($user_id ); 
+				$info_parent = array();
+				$info_parent['name'] = $get_userdata->display_name;
+				$info_parent['phone'] = get_user_meta($user_id, "phone", true);
+				$info_parent['email'] = $get_userdata->user_email;
+				$info_parent['subject'] = 'Thông tin tìm người thân';
+				$info_parent['sender'] = 'Kính gởi Ông/Bà: '.$info_parent['parent_name'];		
+				$code = base64_encode($user_id."|".md5($user_id.$get_userdata->user_email."aJ#FTUkk"));
+				$info_children['mailing_cancel']	= $code;					
+				if(get_post_meta( get_the_ID(), 'orphan_children_name', true )){
+					$meta_query[] = array(
+						'key'     => 'display_name',
+						'value'   => get_post_meta( get_the_ID(), 'orphan_children_name', true ),
+						'compare' => 'LIKE'
+					);
+				}
+				
+				if(get_post_meta( get_the_ID(), 'orphan_children_birthday', true )){
+					$info_children['children_birthday'] = get_post_meta( get_the_ID(), 'orphan_children_birthday', true );
+					$meta_query[] = array(
+						'key'     => 'birthday',
+						'value'   => get_post_meta( get_the_ID(), 'orphan_children_birthday', true ),
+						'compare' => 'LIKE'
+					);
+				}
+				
+				if(get_post_meta( get_the_ID(), 'orphan_children_gender', true )){
+					$info_children['children_gender'] = get_post_meta( get_the_ID(), 'orphan_children_gender', true );
+					$meta_query[] = array(
+						'key'     => 'gender',
+						'value'   => get_post_meta( get_the_ID(), 'orphan_children_gender', true ),
+						'compare' => '='
+					);
+				}
+				
+				if($meta_query){
+					$meta_query['relation'] = 'OR';
+					if(get_post_meta( get_the_ID(), 'orphan_children_time_lost', true )){
+						$info_children['children_time_lost'] = get_post_meta( get_the_ID(), 'orphan_children_time_lost', true );
+					}
+					
+					if(get_post_meta( get_the_ID(), 'orphan_children_place_lost', true )){
+						$info_children['children_place_lost'] = get_post_meta( get_the_ID(), 'orphan_children_place_lost', true );
+					}
+					
+
+					$args_meta_user_query = array(
+						'meta_query' => $meta_query
+					);
+					$user_query = new WP_User_Query( $args_meta_user_query );
+					$result_users = $user_query->get_results();
+					if($result_users ){
+						$id_users = array();
+						foreach($result_users  as $user_info){
+							$id_users[$user_info->ID] = $user_info->ID;
+						}
+						if($id_users){
+							$str_id_user = implode(',',$id_users);
+							$args = array();
+							$args = array(
+								'post_type' => $post_type_children_tnt,
+								'author' => $str_id_user,
+								'order'	=>'DESC',
+								'post_status' => array(
+									'publish',
+									'pending',
+									'future',
+									'private'
+								),
+								'posts_per_page' => -1,
+								'caller_get_posts'=> 1
+							);
+							
+							$children_meta_query = array();
+							if(isset($info_children['children_time_lost'] )){
+								$children_meta_query[] = array(
+									'key'   => 'orphan_parent_time_lost',
+									'value' => $info_children['children_time_lost'],
+									'compare' => "LIKE"
+								);
+							}
+							if(isset($info_children['children_place_lost'] )){
+								$children_meta_query[] = array(
+									'key'   => 'orphan_parent_place_lost',
+									'value' => $info_children['children_place_lost'],
+									'compare' => "LIKE"
+								);
+							}
+							if($children_meta_query){
+								$children_meta_query['relation'] = 'AND';
+								$args['meta_query'] = $children_meta_query;
+							}
+							$children_query = new WP_Query( $args );
+							if ( $children_query->have_posts() ) : 
+								$args_children = array();
+								$i=0;
+								while ( $children_query->have_posts() ) : $children_query->the_post();
+									$user_id = get_the_author_meta( 'ID' );
+									$get_userdata =  get_userdata($user_id ); 
+									$args_children[$i]['link'] = get_permalink();
+									if(isset($get_userdata->display_name)){
+										$args_children[$i]['name'] = $get_userdata->display_name;
+									}
+									if(isset($get_userdata->user_email)){
+										$args_children[$i]['email'] = $get_userdata->user_email;
+									}
+									if(get_user_meta($user_id, "address", true)){
+										$args_children[$i]['address'] = get_user_meta($user_id, "address", true);
+									}
+									if(get_user_meta($user_id, "phone", true)){
+										$args_children[$i]['phone'] = get_user_meta($user_id, "phone", true);
+									}
+									$args_children[$i]['avatar'] = get_avatar( get_the_author_meta( 'ID' ), 50 );
+									$args_children[$i]['info'] = '
+										<h3><a href="'.$args_children[$i]['link'].'">'.$args_children[$i]['name'].'</a></h3>
+										<p>Giới tính : '.get_user_meta($user_id, "orphan_children_gender", true).'</p>
+										<p>Ngày sinh : '.get_user_meta($user_id, "orphan_children_birthday", true).'</p>
+									';
+									$i++;
+								endwhile ;
+								wp_reset_query(); 
+								$info_parent['content'] = 'Ông bà đã đăng thông tin tìm con là một pé '.(isset($info_children['children_gender']) ? $info_children['children_gender'] : null ). 'Chúng tôi đã tìm thấy được một số thông tin:';
+								if($args_children){
+									orphan_sendmail_tnt($info_parent,$args_children);
+								}
+							endif;
+						}
+					}
+					//Call send mail
+				}
+			}
+		endwhile ;
+		wp_reset_query(); 
+	endif;
+}
+
+function orphan_sendmail_tnt($info_sendmail = null,$list_data = null){
+	$to  = $info_sendmail['email'];		
+	$subject = $info_sendmail['title'];
+	
+	// message
+	$message = '
+	<html>
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>Thông tin trẻ mồ côi đang chờ đón yêu thương</title>
+	<style>
+	h1 {color: #547159 !important; font-size: 48px; text-shadow: 1px 1px 1px #fff; font-family: Georgia, "Times New Roman", Times, serif; margin: 0; padding: 0;}
+	h2 {color: #9faf78 !important; font-size: 30px; margin-bottom: 10px; font-family: Georgia, "Times New Roman", Times, serif; padding: 0;}
+	.content p {font-size: 13px; color: #686f64; font-family: Arial, Helvetica, sans-serif; padding: 0; margin: 0 0 10px 0;}
+	.content ul, .content ol{margin:0 0 0 30px; padding:0;}
+	.content ul li, .content ol li{font-size: 13px; color: #686f64; font-family: Arial, Helvetica, sans-serif; padding: 0; margin: 0 0 10px 0;}
+	.content a {color: #9faf78 !important; text-decoration: underline !important;}
+	.content a:hover {color: #9faf78 !important; text-decoration: underline !important;}
+	.footer p {color: #fff; font-size: 13px; font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0; }
+	table.table-border-tpo, .table-border-tpo tr, .table-border-tpo td{
+		border:1px solid #888888;
+		text-align:left;
+		font-size:13px;
+	}
+	</style>
+	
+	<!--[if gte mso 9]>
+	<style type="text/css">
+	.body{background: #353732 url("'.get_template_directory_uri().'/images/body-bg.jpg");}	     
+	.case {background:none;}
+	</style>
+	<![endif]-->
+	</head>
+	<body style="background-color:#58A9F0; background-image: url('.get_template_directory_uri().'/images/bg.png); background-repeat: repeat-x;" class="body" marginheight="0" topmargin="0" marginwidth="0" leftmargin="0">
+	
+	<!--100% body table-->
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#58A9F0; background-image: url('.get_template_directory_uri().'/images/bg.png); background-repeat: repeat-x;" >
+	  <tr>
+		<td class="case" style="background: url('.get_template_directory_uri().'/images/bg_header.png) no-repeat scroll center 0 transparent;"><!--[if gte mso 9]>
+					<td style="background: none;">
+					<![endif]--> 
+		  <!--header text-->
+		  
+		  <table id="top" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td><table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+				  <tr>
+					<td valign="middle" align="center" style="text-align:center;"> 
+							<a href="#"> <img src="'.get_template_directory_uri().'/images/logo.png" alt="logo" /></a>
+					</td>
+				  </tr>
+				</table></td>
+			</tr>
+		  </table>
+		  <!--/header text--> 
+		  
+		  <!--masthead-->
+		  
+		  <table style="background: none repeat scroll 0 0 #FFFFFF;border-radius: 4px 4px 0px 0px;box-shadow: 0 0 3px #888888;overflow: hidden;" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td style="background: #ECFAFE;border-radius: 4px 4px 0px 0px;" valign="top" height="77"><!--date-->
+				
+				
+				<!--title-->
+				
+				<table width="600" border="0" cellspacing="0" cellpadding="00">
+				  <tr>
+					<td height="25"></td>
+				  </tr>
+				  <tr>
+					<td><h1 style="font-size:28px;text-align:center;display:block;">
+						<singleline label="Title">Đón Nhận Yêu Thương</singleline>
+					  </h1></td>
+				  </tr>
+				</table>
+				<!--/title--></td>
+			</tr>
+		  </table>
+		  <!--/masthead--> 
+		  
+		  <!--top intro-->
+		  
+		  <table style="background: #ECFAFE;border-top:2px solid blue;box-shadow: 0 0 3px #888888;overflow: hidden;" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td height="35"><!--break-->
+				
+				<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+				  <tr>
+					<td height="10">&nbsp;</td>
+				  </tr>
+				</table>
+				<!--/break-->
+				
+				<repeater>
+				<table class="content" width="540" border="0" align="center" cellpadding="0" cellspacing="0">
+				  <tr>
+					<td style="text-align:left;"> 
+					  <multiline label="Description">
+					  <p style="text-align:left;">
+						  Xin chào '. $info_sendmail['name'].',
+						  <br />
+						  '.$info_sendmail['content'].'
+						  <br />';
+					  if($list_data):
+	$message .=         	
+							'Dưới đây là những trẻ phù hợp với nhu cầu tìm kiếm của bạn:
+							<table class="table-border-tpo" style = "border-collapse:collapse;text-align:left;border-color:#cccccc;margin-bottom:10px;" border="1" align="left" width="100%">
+								<tr style="border-color:#cccccc; font-weight:bold">
+									<td style="border-color:#cccccc">STT</td>
+									<td style="border-color:#cccccc">Ảnh hiện tại</td>
+									<td style="border-color:#cccccc">Thông tin</td>
+								</tr>';
+$i = 0;
+foreach ($list_data as $item):
+	$i ++;
+	$message .=         	
+								'<tr style="border-color:#cccccc">
+									<td style="border-color:#cccccc">'. $i .'</td>
+									<td style="border-color:#cccccc">'. $item['avatar'] .'</td>
+									<td style="border-color:#cccccc">'. $item['info'] .'</td>
+								</tr>';
+endforeach;
+	$message .=         				                  	
+						  '</table>
+						  <br />
+						  <br />
+						  Bạn tham khảo thông tin trên và liên lạc, gặp gỡ và tìm hiểu để biết thông tin.
+						  ';		                  
+					  endif;
+	$message .=         			
+						  'Hoặc mời bạn liên lạc với <a href="'.home_url().'/lien-he" title="trẻ mồ côi">chúng tôi</a> để biết thêm chi tiết.
+						  <br />Chúc bạn sớm tìm được người thân của mình!
+						  <br />
+						  <br />
+						  Cảm ơn bạn đã sử dụng website '.home_url().'
+					  
+					  </p>
+					  </multiline>
+						<br />
+					</td>
+				  </tr>
+				  <!--line-->    
+				  <tr>
+					<td valign="top" align="center" height="25">
+					<hr />
+					<p align="right" style="float:right; clear:both; margin: 0; padding: 0;"><a href="#top"><img src="'.get_template_directory_uri().'/images/up.gif" height="22" width="21" alt="back to top" border="0" /></a></p>
+					</td>
+				  </tr>
+				  <!--/line--> 
+				</table>
+				</repeater>
+				
+							<!--break-->
+				
+				<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+				  <tr>
+					<td height="20">&nbsp;</td>
+				  </tr>
+				</table>
+				<!--/break-->
+			  </td>
+			</tr>
+		  </table>
+		  <!--/top intro--> 
+	 
+		  
+		  <!--footer-->
+		  
+		  <table class="footer" style="color:white; font-size:13px;background: #1979EC;border-radius: 0px 0px 4px 4px;border-top:2px solid blue;box-shadow: 0 0 3px #888888;overflow: hidden;" width="600" border="0" align="center" cellpadding="20" cellspacing="0">
+			<tr>
+			  <td class="footer" valign="top"><multiline label="Description">
+			  <p>
+					Nếu bạn đã tìm được người thân, phiền bạn hồi âm hoặc <a style="color:orange;" href="'.home_url().'/lien-he">liên hệ</a> với chúng tôi, để thông tin của gia đình cũng như con bạn được bảo mật tuyệt đối.
+			  </p>
+			  </multiline>
+			  <hr/>
+			  <p>
+					Website <a href="'.home_url().'" style="color:orange;">'.home_url().'</a> giúp kết nối những gia đình đang tìm người thân.          
+			  </p>
+			  </multiline>
+			  <hr/>
+				<p>
+				
+					Nếu cảm thấy những email như thế này làm phiền bạn và bạn không muốn nhận thông tin từ website nữa, vui lòng hủy chức năng gửi email 
+				  <a href="'.home_url().'/huy-nhan-email-tim-nguoi-than/?unsubscripbe='.$info_sendmail['mailing_cancel'].'" style="color:orange;">tại đây.</a>
+				</p></td>
+			</tr>
+		  </table>
+		  <!--footer--> 
+		  
+		  <!--break-->
+		  
+		  <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td height="25">&nbsp;</td>
+			</tr>
+		  </table>
+		  <!--/break--></td>
+	  </tr>
+	</table>
+	<!--/100% body table-->
+	</body>
+	</html>
+	';
+	
+	// To send HTML mail, the Content-type header must be set
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+	$headers .= 'Content-Transfer-Encoding: 8bit' . "\r\n";
+	
+	// Additional headers
+	$headers .= 'To: '.$info_sendmail['name'].' <'. $info_sendmail['email'] .'>' . "\r\n";
+	$headers .= 'From: TreMoCoi <tremocoi.org.vn@gmail.com>' . "\r\n";
+	
+	$b64subject = "=?UTF-8?B?" . base64_encode($info_sendmail['subject']) . "?=";
+	$headers .= 'Subject: '. $b64subject . "\r\n";
+	// Mail it		
+	wp_mail( $to, $subject, $message, $headers );
+}
 
  /*Children looking for parent */
 global $orphan_prefix;
@@ -850,6 +1232,7 @@ function ajax_insert_children_looking_for_parent(){
 				$user_id = $current_user->ID;
 				$data_user_update = array();
 				$data_user_update['ID'] = $user_id;
+				update_usermeta( $user_id, 'status_sendmail_tnt', true);
 				if($dataForm['txt-email'] != ''){
 					//$data_user_update['user_email'] = $dataForm['txt-email'];
 				}
@@ -859,6 +1242,9 @@ function ajax_insert_children_looking_for_parent(){
 				wp_update_user( $data_user_update) ;
 				if($dataForm['txt-gender']!=''){
 					update_usermeta( $user_id, 'gender', $dataForm['txt-gender']);
+				}
+				if($dataForm['txt-birthday']!=''){
+					update_usermeta( $user_id, 'birthday', $dataForm['txt-birthday']);
 				}
 				if($dataForm['txt-phone']!=''){
 					update_usermeta( $user_id, 'phone', $dataForm['txt-phone']);
@@ -1326,5 +1712,363 @@ if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == $post_type_childre
 	add_action('manage_posts_custom_column', 'orphan_meta_box_children_tnt_to_manage_post', 10, 2);
 }
 
-/* Children looking for parent */
+function orphan_maping_children_with_parent(){
+	global $post_type_parent_tnt, $post_type_children_tnt;
+	//get all post type : bo-me-tim-con
+	$args = array(
+		'post_type' => $post_type_children_tnt,
+		'post_status' => array(
+			'publish',
+			'pending',
+			'future',
+			'private'
+		),
+		'order'	=>'DESC',
+		'posts_per_page' => -1,
+		'caller_get_posts'=> 1
+	);
+	$the_query_children_looking_for = new WP_Query();
+	$the_query_children_looking_for->query($args);
+	// The Loop
+	if ( $the_query_children_looking_for->have_posts() ) :
+		while ( $the_query_children_looking_for->have_posts() ) : $the_query_children_looking_for->the_post();
+			//get children with conditions
+			$info_parent = array();
+			$meta_query = array();
+			$user_id = get_the_author_meta( 'ID' );
+			if(get_user_meta($user_id, "status_sendmail_tnt", true) == true){
+				$get_userdata =  get_userdata($user_id ); 
+				$info_children = array();
+				$info_children['name'] = $get_userdata->display_name;
+				$info_children['phone'] = get_user_meta($user_id, "phone", true);
+				$info_children['email'] = $get_userdata->user_email;
+				$info_children['subject'] = 'Thông tin tìm người thân';
+				$info_children['sender'] = 'Kính gởi Ông/Bà: '.$info_children['children_name'];		
+				$code = base64_encode($user_id."|".md5($user_id.$get_userdata->user_email."aJ#FTUkk"));
+				$info_children['mailing_cancel']	= $code;		
+				if(get_post_meta( get_the_ID(), 'orphan_parent_name', true )){
+					$meta_query[] = array(
+						'key'     => 'display_name',
+						'value'   => get_post_meta( get_the_ID(), 'orphan_parent_name', true ),
+						'compare' => 'LIKE'
+					);
+				}
+				
+				if(get_post_meta( get_the_ID(), 'orphan_parent_job', true )){
+					$info_parent['parent_job'] = get_post_meta( get_the_ID(), 'orphan_parent_job', true );
+					$meta_query[] = array(
+						'key'     => 'job',
+						'value'   => get_post_meta( get_the_ID(), 'orphan_parent_job', true ),
+						'compare' => 'LIKE'
+					);
+				}
+				
+				if($meta_query){
+					$meta_query['relation'] = 'OR';
+					if(get_post_meta( get_the_ID(), 'orphan_parent_time_lost', true )){
+						$info_parent['parent_time_lost'] = get_post_meta( get_the_ID(), 'orphan_parent_time_lost', true );
+					}
+					
+					if(get_post_meta( get_the_ID(), 'orphan_parent_place_lost', true )){
+						$info_parent['parent_place_lost'] = get_post_meta( get_the_ID(), 'orphan_parent_place_lost', true );
+					}
+					
+
+					$args_meta_user_query = array(
+						'meta_query' => $meta_query
+					);
+					$user_query = new WP_User_Query( $args_meta_user_query );
+					$result_users = $user_query->get_results();
+					if($result_users ){
+						$id_users = array();
+						foreach($result_users  as $user_info){
+							$id_users[$user_info->ID] = $user_info->ID;
+						}
+						if($id_users){
+							$str_id_user = implode(',',$id_users);
+							$args = array();
+							$args = array(
+								'post_type' => $post_type_children_tnt,
+								'author' => $str_id_user,
+								'order'	=>'DESC',
+								'post_status' => array(
+									'publish',
+									'pending',
+									'future',
+									'private'
+								),
+								'posts_per_page' => -1,
+								'caller_get_posts'=> 1
+							);
+							
+							$parent_meta_query = array();
+							if(isset($info_parent['parent_time_lost'] )){
+								$parent_meta_query[] = array(
+									'key'   => 'orphan_children_time_lost',
+									'value' => $info_parent['parent_time_lost'],
+									'compare' => "LIKE"
+								);
+							}
+							if(isset($info_parent['parent_place_lost'] )){
+								$parent_meta_query[] = array(
+									'key'   => 'orphan_children_place_lost',
+									'value' => $info_parent['parent_place_lost'],
+									'compare' => "LIKE"
+								);
+							}
+							if($parent_meta_query){
+								$parent_meta_query['relation'] = 'AND';
+								$args['meta_query'] = $parent_meta_query;
+							}
+							$parent_query = new WP_Query( $args );
+							if ( $parent_query->have_posts() ) : 
+								$args_parent = array();
+								$i=0;
+								while ( $parent_query->have_posts() ) : $parent_query->the_post();
+									$user_id = get_the_author_meta( 'ID' );
+									$get_userdata =  get_userdata($user_id ); 
+									$args_parent[$i]['link'] = get_permalink();
+									if(isset($get_userdata->display_name)){
+										$args_parent[$i]['name'] = $get_userdata->display_name;
+									}
+									if(isset($get_userdata->user_email)){
+										$args_parent[$i]['email'] = $get_userdata->user_email;
+									}
+									if(get_user_meta($user_id, "address", true)){
+										$args_parent[$i]['address'] = get_user_meta($user_id, "address", true);
+									}
+									if(get_user_meta($user_id, "phone", true)){
+										$args_parent[$i]['phone'] = get_user_meta($user_id, "phone", true);
+									}
+									$args_parent[$i]['avatar'] = get_avatar( get_the_author_meta( 'ID' ), 50 );
+									$args_parent[$i]['info'] = '
+										<h3><a href="'.$args_parent[$i]['link'].'">'.$args_children[$i]['children_name'].'</a></h3>
+										<p>Giới tính : '.get_user_meta($user_id, "orphan_children_gender", true).'</p>
+										<p>Ngày sinh : '.get_user_meta($user_id, "orphan_children_birthday", true).'</p>
+									';
+									$i++;
+								endwhile ;
+								wp_reset_query(); 
+								$info_children['content'] = 'Ông bà đã đăng thông tin tìm bố mẹ. Chúng tôi đã tìm thấy được một số thông tin:';
+								if($args_parent){
+									orphan_sendmail_tnt($info_children,$args_parent);
+								}
+							endif;
+						}
+					}
+					//Call send mail
+				}
+			}
+		endwhile ;
+		wp_reset_query(); 
+	endif;
+}
+
+/* add menu */
+if(is_admin()){
+	add_action('admin_menu', 'orphan_menu_settings');
+	function orphan_menu_settings() {
+		if (function_exists('add_menu_page')) {
+			add_menu_page('Cấu hình hệ thống','Cấu hình hệ thống', 'orphan_manage_options', 'orphan_menu_setting-handle', '' ,get_bloginfo('template_directory').'/images/family.png');
+		}
+	}
+	// Hook for adding admin menus
+	add_action('admin_menu', 'orphan_add_menu_settings'); 
+}
+function orphan_add_menu_settings() {
+	global $uc_message; 
+	/* save setting */
+	if(isset($_POST['action_setting']) && $_POST['action_setting'] == 'Save Settings'){
+			$status = update_option('setting_active_cron_tnt',$_POST['cronenable']);
+			$status1 = update_option('setting_time_tnt',$_POST['cronint']);
+			if($status || $status1){
+				$uc_message = 'Save successfully!'; 
+			} else {
+				$uc_message = 'Can not save. Please try again!'; 
+			}
+	}
+	add_submenu_page('orphan_menu_setting-handle', 'Cấu hình lịch gởi mail tìm người thân', 'Cấu hình lịch gởi mail tìm người thân', 'manage_options', 'option-setting_looking_for_relativies', 'get_display_form_setting_looking_for_relativies');
+}
+function get_display_form_setting_looking_for_relativies(){
+	global $uc_message;
+	if (!current_user_can( 'manage_options' ) ) {
+		wp_die ( __( 'You do not have sufficient permissions to access this page' ) );
+	}
+	orphan_int_cron_job_looking_for_relativies();
+	$setting_active_cron_tnt = get_option('setting_active_cron_tnt');
+	$check_setting_active_cron = '';
+	if($setting_active_cron_tnt == 'Yes'){
+		$check_setting_active_cron = 'checked="checked"';
+	}
+	$setting_time_tnt = get_option('setting_time_tnt');
+
+	$cronint = array(
+		'hourly'=> 'Hourly',
+		'twicedaily'=> 'Twice Daily',
+		'daily'=> 'Daily'
+	);
+	// Calculate next cron execution
+	$next_cron = wp_next_scheduled('orphan_process_cron_looking_for_relativies');
+	$next_execution = 'Not set';
+	if ( !empty($next_cron) ) {
+		$datetime = get_option('date_format') . ' @ ' . get_option('time_format');
+		$next_execution = gmdate($datetime, $next_cron + (get_option('gmt_offset') * 3600));    
+	}
+?>
+	<div class="wrap">
+		<div class="icon32" id="icon-options-general"><br></div>
+		<h2>Cấu hình lịch gởi mail tìm người thân</h2>
+		<p class="message_action" style="display:none; border: 1px solid green;  color: blue;  padding: 10px;"></p>
+		<form class="get_form_setting_looking_for_relativies" action="#" method="post" name="form_setting_looking_for_relativies" id="form_setting_looking_for_relativies">
+		<p><br/></p>
+			<fieldset>
+			<legend>Cấu hình:</legend>
+			<table class="form-table">
+				<tr valign="top">
+					<td width="100">Tùy chọn</td>
+					<td>
+						<input type="checkbox" name="cronenable" <?php echo $check_setting_active_cron; ?> value="Yes" /><label class="opt">&nbsp;Yes</label>
+						<select size="1" name="cronint" id="cronint">
+							<?php
+							
+							foreach($cronint as $cronint_key=>$cronint_tiem ){
+								$cronint_selected ='';
+								if($setting_time_tnt == $cronint_key ){
+									$cronint_selected = 'selected="selected"';
+								}
+							?>
+							<option value="<?php echo $cronint_key ?>" <?php echo $cronint_selected ?>><?php echo $cronint_key ?></option>
+						 <?php } ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="100">Thời gian chạy lịch tiếp theo</td>
+					<td><?php echo $next_execution ?></td>
+				</tr>
+				<tr>
+					<td width="100"></td>
+					<td>
+						<p class="submit">
+						<input class="button-primary" type="submit" name="action_setting" value="Save Settings" />
+						</p>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			jQuery(document).ready(function(){
+				<?php if(isset($uc_message) && $uc_message !=''){ ?>
+					jQuery('p.message_action').text('<?php echo $uc_message; ?>').show().fadeOut(6000);
+				<?php $uc_message ='';	}  ?>
+			});
+		</script>
+		<style>
+			legend,fieldset{border:1px solid #d5d5d5; padding:5px;}
+			legend{margin-left:10px;}
+		</style>
+	</div>
+<?php
+}
+
+function orphan_int_cron_job_looking_for_relativies(){
+	$cronenable = get_option('setting_active_cron_tnt');
+	$croninterval = get_option('setting_time_tnt');
+	// Check if Cron is activated...
+    if ($cronenable == 'Yes') {
+		// Check if cron is scheduled
+		if (wp_next_scheduled('orphan_process_cron_looking_for_relativies')) {
+			// Delete cron first
+			wp_clear_scheduled_hook('orphan_process_cron_looking_for_relativies');
+		}
+		// Set new cron
+		wp_schedule_event(time(), $croninterval, 'orphan_process_cron_looking_for_relativies');
+    }
+    else {
+	  wp_clear_scheduled_hook('orphan_process_cron_looking_for_relativies');
+    }
+}
+
+add_action('orphan_process_cron_looking_for_relativies', 'orphan_process_cron_running_looking_for_relativies');
+function orphan_process_cron_running_looking_for_relativies(){
+	//running maping looking for relativies
+	orphan_maping_children_with_parent();
+	orphan_maping_parent_with_children();
+	orphan_convert_information_children_into_orphan_children();
+}
+function orphan_convert_information_children_into_orphan_children(){
+	global $post_type_parent_tnt, $post_type_children_tnt,$orphan_prefix;
+	
+	$args = array(
+		'post_type' => $post_type_children_tnt,
+		'post_status' => array(
+			'publish',
+			'pending',
+			'future',
+			'private'
+		),
+		'order'	=>'DESC',
+		'posts_per_page' => -1,
+		'caller_get_posts'=> 1
+	);
+	$the_query_children_looking_for = new WP_Query();
+	$the_query_children_looking_for->query($args);
+	// The Loop
+	if ( $the_query_children_looking_for->have_posts() ) :
+		while ( $the_query_children_looking_for->have_posts() ) : $the_query_children_looking_for->the_post();
+			$user_post_id = get_the_ID();
+			$now = date('Y-m-d H:i:s');
+			$startDate = get_the_date('Y-m-d H:i:s');
+			$days = round(((strtotime($now) - strtotime($startDate)) / (60 * 60 * 24)),1, PHP_ROUND_HALF_UP); 
+			if($days>90){
+				$title = get_the_author_meta( 'user_email');
+				$user_id = get_the_author_meta( 'ID' );
+				$content = get_post_meta( $user_post_id, 'orphan_parent_description', true );
+				$photo =  orphan_get_avatar_url(get_avatar( $user_id, 150 ));
+				$birthday =  get_user_meta($user_id, "birthday", true);
+				
+				$my_post = array(
+				  'post_title'    => $title,
+				  'post_type'    => 'tre-mo-coi',
+				  'post_content'  => $content,
+				  'post_status'   => 'pending',
+				  'post_author'   => get_the_author_meta( 'ID' )
+				);
+				
+				// Insert the post into the database
+				$post_id  = wp_insert_post( $my_post );
+				//echo $post_id;
+				if($post_id){
+					add_post_meta( $post_id, $orphan_prefix.'birthday', $birthday );
+					
+					$gender = get_user_meta($user_id, "gender", true);
+					add_post_meta( $post_id, $orphan_prefix.'gender', $gender );
+					
+					$address = get_post_meta( $user_post_id, 'orphan_parent_place_lost', true );
+					add_post_meta( $post_id, $orphan_prefix.'cv-address', $address ); 
+					
+					$time_lost = get_post_meta( $user_post_id, 'orphan_parent_time_lost', true );
+					add_post_meta( $post_id, $orphan_prefix.'cv-time', $time_lost );
+					
+					add_post_meta( $post_id, $orphan_prefix.'cv-content', $content );
+					
+					add_post_meta( $post_id, $orphan_prefix.'photo', $photo);
+					
+					add_post_meta( $post_id, $orphan_prefix.'cv-auth',$get_userdata->user_email);
+				}
+				//Set post to draft
+				$children_post['ID'] = $user_post_id;
+				$children_post['post_status'] = 'draft';
+				wp_update_post( $children_post );
+			}
+		endwhile ;
+		wp_reset_query(); 
+	endif;
+	
+}
+
+function orphan_get_avatar_url($get_avatar){
+    preg_match("/src='(.*?)'/i", $get_avatar, $matches);
+    return isset($matches[1]) ? $matches[1] : get_template_directory_uri().'/images/no_image.png';
+}
  ?>

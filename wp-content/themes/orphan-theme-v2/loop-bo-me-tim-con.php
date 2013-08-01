@@ -3,7 +3,7 @@
         update_post_caches($posts);
         $children_photo = get_post_meta( get_the_ID(), 'orphan_children_photo', true );
 		if($children_photo == '') $children_photo = get_template_directory_uri().'/images/no_image.png' ;
-		$user_post_id = isset($posts[0]->post_author) ? $posts[0]->post_author : null;
+		$user_post_id = get_the_author_meta( 'ID' );
 		$get_userdata =  get_userdata( $user_post_id); 
 		$user_avatars = get_avatar( get_the_author_meta( 'ID' ), 50 );
         ?>
@@ -49,6 +49,12 @@
 								}
 							?>
 							<?php 
+								$children_clothing = get_post_meta( get_the_ID(), 'orphan_children_clothing', true );
+								if($children_clothing!=''){
+									echo '<li>Áo quần lúc lạc: '.$children_clothing.'</li>';
+								}
+							?>
+							<?php 
 								$children_place_lost = get_post_meta( get_the_ID(), 'orphan_children_place_lost', true );
 								if($children_place_lost!=''){
 									echo '<li>Địa điểm lạc: '.$children_place_lost.'</li>';
@@ -79,7 +85,7 @@
 							}
 							$gender = get_user_meta($user_post_id, "gender", true);
 							if($gender){
-								$html .= '<li>Địa chỉ : '.$gender.'</li>';
+								$html .= '<li>Giới tính : '.$gender.'</li>';
 							}
 							if(isset($get_userdata->user_email)){
 								$html .= '<li>Email : '.$get_userdata->user_email.'</li>';

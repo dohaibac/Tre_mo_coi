@@ -96,34 +96,7 @@ function orphan_theme_option_callback(){
 														<br/>
 														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
 															<?php wp_dropdown_categories(array('hide_empty' => 0, 'show_count'=> 1, 'selected' => $options['show_tin_tuc'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_tin_tuc', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
-														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_tin_tuc_num_post'], 'show_tin_tuc_num_post'); ?></p>
-													</th>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<?php _e('Chương trình hoạt động ', 'theme_option'); ?>
-														<br/>
-														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
-															<?php wp_dropdown_categories(array('hide_empty' => 1, 'show_count'=> 1, 'selected' => $options['show_chuong_trinh_hoat_dong'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_chuong_trinh_hoat_dong', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
-														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_chuong_trinh_hoat_dong_num_post'], 'show_chuong_trinh_hoat_dong_num_post'); ?></p>
-													</th>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<?php _e('Văn bản luật về trẻ em', 'theme_option'); ?>
-														<br/>
-														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
-															<?php wp_dropdown_categories(array('hide_empty' => 1, 'show_count'=> 1, 'selected' => $options['show_van_ban_phap_luat'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_van_ban_phap_luat', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
-														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_van_ban_phap_luat_num_post'], 'show_van_ban_phap_luat_num_post'); ?></p>
-													</th>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<?php _e('Tấm lòng vàng', 'theme_option'); ?>
-														<br/>
-														<small style="font-weight:normal;"><?php _e('Chọn chuyên mục', 'theme_option'); ?></small>
-															<?php wp_dropdown_categories(array('hide_empty' => 1, 'show_count'=> 1, 'selected' => $options['show_tam_long_vang'],'hide_if_empty' => true, 'taxonomy' => 'category', 'name' => 'show_tam_long_vang', 'orderby' => 'name', 'hierarchical' => true, 'show_option_none' => __('--Chọn chuyên mục--'))); ?>
-														<p>Num post: <?php echo orphan_show_num_post(3,20,$options['show_tam_long_vang_num_post'], 'show_tam_long_vang_num_post'); ?></p>
+														<p>Num post: <?php echo orphan_show_num_post(5,20,$options['show_tin_tuc_num_post'], 'show_tin_tuc_num_post'); ?></p>
 													</th>
 												</tr>
 											</tbody>
@@ -191,27 +164,6 @@ function orphan_theme_option_callback(){
 									</tr>
 								</tbody>
 							</table>
-							
-							<hr/><h4>Bản đồ địa chỉ liên hệ</h4>					
-							<table class="form-table">						
-								<tbody>							
-									<tr valign="top">								
-										<th scope="row">									
-											<?php _e('Thông tin', 'theme_option'); ?>									<br/>	
-											<small style="font-weight:normal;"><?php _e('Thông tin được hiển thị trên trang liên hệ', 'theme_option'); ?></small>
-										</th>								
-										<td>									
-											<label>										
-											<textarea name="show_google_map" cols="50" rows="2" id="show_google_map" class="code" style="width:98%;font-size:12px;">
-												<?php echo($options['show_google_map']); ?></textarea>									</label>									
-												Để thay đổi thông tin website có thể truy cập vào địa chỉ sau: <a target="_blank" href="http://maps.google.com/maps/empw?url=http:%2F%2Fmaps.google.com%2Fmaps%3Ff%3Dq%26source%3Ds_q%26hl%3Den%26geocode%3D%26q%3DAustralia%2Bjervis%2Bbay%26sll%3D-35.065973">Bản đồ</a>
-											<br/>									
-											Sau khi truy cập tìm địa chỉ để hiển thị thông tin của bạn trong bản dồ. Sau đó copy code trong textbox và dán vào ô trên.								
-										</td>
-									</tr>						
-								</tbody>					
-							</table>
-
 							<hr/><h4>Thông tin bản quyền website</h4>
 
 							<table class="form-table">
@@ -224,7 +176,7 @@ function orphan_theme_option_callback(){
 										</th>
 										<td>
 											<label>
-												<textarea name="show_footer_address" cols="50" rows="2" id="show_footer_address" class="code" style="width:98%;font-size:12px;"><?php echo($options['show_footer_address']); ?></textarea>
+												<textarea name="show_footer_info" cols="50" rows="2" id="show_footer_info" class="code" style="width:98%;font-size:12px;"><?php echo($options['show_footer_info']); ?></textarea>
 											</label>
 										</td>
 									</tr>

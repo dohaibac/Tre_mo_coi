@@ -38,10 +38,18 @@
 				<div class="box-content">
 					<div class="row">
 						<div class="large-7 columns">
-						<?php 
+						<?php
+						$category_news_id = '1,5';
+						$show_news_post = 7;
+						if(isset($options['show_tin_tuc'])){
+							$category_news_id = $options['show_tin_tuc'];
+						}
+						if(isset($options['show_tin_tuc_num_post'])){
+							$show_news_post = $options['show_tin_tuc_num_post'];
+						}
 						$i=0;
 						$newsPost = new WP_Query();
-						$newsPost->query('showposts=7&cat=1,5&orderby=DESC');
+						$newsPost->query('showposts='.$show_news_post.'&cat='.$category_news_id.'&orderby=DESC');
 						while ($newsPost->have_posts()) : $newsPost->the_post(); update_post_caches($posts); 		
 						$image = orphan_get_post_thumbnai();//wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
 						if($image == '') $image = get_template_directory_uri().'/images/no_image.png' ;

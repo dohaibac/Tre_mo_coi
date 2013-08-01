@@ -78,7 +78,7 @@ while (have_posts()) : the_post();
 						}
 						$gender = get_user_meta($user_post_id, "gender", true);
 						if($gender){
-							$html .= '<li>Địa chỉ : '.$gender.'</li>';
+							$html .= '<li>Giới tính : '.$gender.'</li>';
 						}
 						if(isset($get_userdata->user_email)){
 							$html .= '<li>Email : '.$get_userdata->user_email.'</li>';

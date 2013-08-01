@@ -13,8 +13,7 @@
 					</div><!--Begin Menu bottom-->
 					<!--Begin .coppy-right-->
 					<div class="row coppy-right">
-						<p>© <a class="coppy-right-link" href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved.</p>
-						<p>Hosting được tài trợ bởi <a class="coppy-right-link" href="http://iwebvn.net/">iwebvn.net</a>.</p>
+						<p>© <a class="coppy-right-link" href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved. Hosting được tài trợ bởi <a class="coppy-right-link" href="http://iwebvn.net/">iwebvn.net</a>.</p>
 					</div><!--end .coppy-right-->
 				</div>
 			</div><!--end .main-main-->
@@ -39,7 +38,10 @@
 			$(".don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi, #menu-item-304 a, #menu-item-303 a").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){$('#tmc_username').focus();jQuery('#login #tmc_login_error_container').html('Bạn phải đăng nhập trước khi thực hiện chức năng này').show();}});
 		});
 	</script>
+	
 	<?php endif;?>
+	<script src="<?php bloginfo('template_directory');?>/js/lazy.js"></script>	 
+	<script charset="utf-8" type="text/javascript">    jQuery(function(){		jQuery("div.main-content div.box-content img.thumb").lazyload({			placeholder: "<?php bloginfo('template_directory');?>/images/loading_timer.gif",			effect: "fadeToggle",			threshold : 0,		});    });    </script>
   <?php include_once("analyticstracking.php") ?>
   <div style="" class="message_overflow">
 		<div class="content_message_overflow">

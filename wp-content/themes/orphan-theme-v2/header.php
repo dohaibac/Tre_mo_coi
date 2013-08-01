@@ -11,8 +11,8 @@
              * Print the <title> tag based on what is being viewed.
              */
 
-            global $page, $paged, $classbody;
-
+            global $page, $paged, $classbody, $options;
+			$options = orphan_get_option_theme();
             wp_title('|', true, 'right');
 
             // Add the blog name.

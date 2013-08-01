@@ -9,7 +9,7 @@ get_header();
 					if($parent_photo == '') $parent_photo = get_template_directory_uri().'/images/no_image.png' ;
 					$user_post_id = isset($posts[0]->post_author) ? $posts[0]->post_author : null;
 					$get_userdata =  get_userdata( $user_post_id); 
-					$user_avatars = get_user_meta($user_post_id, "user_avatars", true);
+					$user_avatars = get_avatar( get_the_author_meta( 'ID' ), 50 );
 				?>
 					<h2><?php if(function_exists('bcn_display'))	{bcn_display();	} ?></h2>
 					<div class="box-content list-2">
@@ -86,7 +86,7 @@ get_header();
 										}
 										$gender = get_user_meta($user_post_id, "gender", true);
 										if($gender){
-											$html .= '<li>Địa chỉ : '.$gender.'</li>';
+											$html .= '<li>Giới tính : '.$gender.'</li>';
 										}
 										if(isset($get_userdata->user_email)){
 											$html .= '<li>Email : '.$get_userdata->user_email.'</li>';

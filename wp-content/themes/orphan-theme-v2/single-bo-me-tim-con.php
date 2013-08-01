@@ -5,64 +5,25 @@ get_header();
 		<div class="row">
 			<div class="row shadow-box">
 				<?php if (have_posts()) : the_post(); update_post_caches($posts); 	
-					$parent_photo = get_post_meta( get_the_ID(), 'orphan_parent_photo', true );
-					if($parent_photo == '') $parent_photo = get_template_directory_uri().'/images/no_image.png' ;
-					$user_post_id = isset($posts[0]->post_author) ? $posts[0]->post_author : null;
+					 $children_photo = get_post_meta( get_the_ID(), 'orphan_children_photo', true );
+					if($children_photo == '') $children_photo = get_template_directory_uri().'/images/no_image.png' ;
+					$user_post_id = get_the_author_meta( 'ID' );
 					$get_userdata =  get_userdata( $user_post_id); 
-					$user_avatars = get_user_meta($user_post_id, "user_avatars", true);
+					$user_avatars = get_avatar( get_the_author_meta( 'ID' ), 50 );
 				?>
 					<h2><?php if(function_exists('bcn_display'))	{bcn_display();	} ?></h2>
 					<div class="box-content list-2">
 						<div class="row style_border_bottom">
 							<div class="large-6 columns">
-								<div class="row">
-									<h3>Thông ton bố/mẹ</h3>
-									<div class="large-3 columns">
-										<a href="<?php the_permalink(); ?>" class="btn"><img class="thumb" src="<?php echo $user_avatars; ?>" alt="<?php the_title(); ?>" width="226" height="93"></a>
-									</div>
-									<div class="large-9 columns">
-										<h3>Tên bố/mẹ : <?php echo $get_userdata->display_name; ?></h3>
-										
-									</div>
-								</div>
-								<div class="row">
-									<div class="large-12 columns">
-										<?php 
-											$html = '';
-											$phone = get_user_meta($user_post_id, "phone", true);
-											if($phone){
-												$html .= '<li>Điện thoại : '.$phone.'</li>';
-											}
-											$gender = get_user_meta($user_post_id, "gender", true);
-											if($gender){
-												$html .= '<li>Địa chỉ : '.$gender.'</li>';
-											}
-											if(isset($get_userdata->user_email)){
-												$html .= '<li>Email : '.$get_userdata->user_email.'</li>';
-											}
-											$address = get_user_meta($user_post_id, "address", true);
-											if($address){
-												$html .= '<li>Địa chỉ : '.$address.'</li>';
-											}
-											
-											if($html!=''){
-												echo '<ul>'.$html.'</ul>';
-											}
-										?>
-									</div>
-								</div>
-							</div>
-							<div class="large-6 columns">
 								<h3>Tìm con với thông tin</h3>
 								<div class="row">
+									<?php $children_name = get_post_meta( get_the_ID(), 'orphan_children_name', true ); ?>
 									<div class="large-3 columns">
-										<a href="<?php the_permalink(); ?>" class="btn"><img class="thumb" src="<?php echo $children_photo; ?>" alt="<?php the_title(); ?>" width="226" height="93"></a>
+										<a href="<?php the_permalink(); ?>" class="btn"><img class="thumb" src="<?php echo $children_photo; ?>" alt="<?php echo $children_name; ?>" width="50" height="50"></a>
 									</div>
 									<div class="large-9 columns <?php the_ID(); ?>">
 										<h3>Tên con: 
 											<?php 
-												$children_name = get_post_meta( get_the_ID(), 'orphan_children_name', true );
-												//var_dump($children_name);
 												if($children_name!=''){
 													echo $children_name;
 												}
@@ -93,12 +54,57 @@ get_header();
 												}
 											?>
 											<?php 
+												$children_clothing = get_post_meta( get_the_ID(), 'orphan_children_clothing', true );
+												if($children_clothing!=''){
+													echo '<li>Áo quần lúc lạc: '.$children_clothing.'</li>';
+												}
+											?>
+											<?php 
 												$children_place_lost = get_post_meta( get_the_ID(), 'orphan_children_place_lost', true );
 												if($children_place_lost!=''){
 													echo '<li>Địa điểm lạc: '.$children_place_lost.'</li>';
 												}
 											?>
 										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="large-6 columns">
+								<div class="row">
+									<h3>Thông tin bố/mẹ</h3>
+									<div class="large-3 columns">
+										<a href="<?php the_permalink(); ?>" class="btn"><?php echo $user_avatars; ?></a>
+									</div>
+									<div class="large-9 columns">
+										<h3>Tên bố/mẹ : <?php echo $get_userdata->display_name; ?></h3>
+										
+									</div>
+								</div>
+								<div class="row">
+									<div class="large-12 columns">
+										<?php 
+											$html = '';
+											$phone = get_user_meta($user_post_id, "phone", true);
+											if($phone){
+												$html .= '<li>Điện thoại : '.$phone.'</li>';
+											}
+											$gender = get_user_meta($user_post_id, "gender", true);
+											if($gender){
+												$html .= '<li>Giới tính : '.$gender.'</li>';
+											}
+											if(isset($get_userdata->user_email)){
+												$html .= '<li>Email : '.$get_userdata->user_email.'</li>';
+											}
+											$address = get_user_meta($user_post_id, "address", true);
+											if($address){
+												$html .= '<li>Địa chỉ : '.$address.'</li>';
+											}
+											
+											if($html!=''){
+												echo '<ul>'.$html.'</ul>';
+											}
+										?>
+										<a href="<?php the_permalink(); ?>" class="btn read-more-01">Xem chi tiết...</a>
 									</div>
 								</div>
 							</div>

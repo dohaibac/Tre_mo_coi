@@ -65,10 +65,6 @@
 		  <div class="navbar-inner">
 			<div class="container-menu">
 				<?php custom_main_nav(); // Adjust using Menus in Wordpress Admin ?>
-				<form class="navbar-search pull-right">
-				  <input type="text" placeholder="Search" class="search-query">
-				   <button type="submit" class="btn search-bnt">Tìm kiếm</button>
-				</form>
 		  </div>
 		</div>
 	</div>

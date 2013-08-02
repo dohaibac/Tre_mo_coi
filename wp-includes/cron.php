@@ -230,7 +230,7 @@ function spawn_cron( $gmt_time = 0 ) {
 		set_transient( 'doing_cron', $doing_wp_cron );
 
 		ob_start();
-		wp_redirect( add_query_arg('doing_wp_cron', $doing_wp_cron, stripslashes($_SERVER['REQUEST_URI'])) );
+		wp_redirect( add_query_arg( 'doing_wp_cron', $doing_wp_cron, wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
 		echo ' ';
 
 		// flush any buffers and send the headers
@@ -321,8 +321,6 @@ function wp_get_schedules() {
 		'hourly'     => array( 'interval' => HOUR_IN_SECONDS,      'display' => __( 'Once Hourly' ) ),
 		'twicedaily' => array( 'interval' => 12 * HOUR_IN_SECONDS, 'display' => __( 'Twice Daily' ) ),
 		'daily'      => array( 'interval' => DAY_IN_SECONDS,       'display' => __( 'Once Daily' ) ),
-		'minutely'   => array( 'interval' => MINUTE_IN_SECONDS, 	'display' => __( 'Once Minutely' ) ),
-		'fivesecondly' => array( 'interval' => FIVESECONDS_IN_SECONDS, 	'display' => __( 'Five Secondly' ) ),
 	);
 	return array_merge( apply_filters( 'cron_schedules', array() ), $schedules );
 }

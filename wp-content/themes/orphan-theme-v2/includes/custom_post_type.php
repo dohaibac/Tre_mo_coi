@@ -107,16 +107,6 @@ $orphan_fields_info_array = array(
 	// tên, năm sinh, giới tính, hoàn cảnh (trc khi nhận vào trại trẻ), user id (người bảo trợ), ảnh,
 	orphan_result_meta(
 		array(
-			'name' 			=> 'new-name',
-			'label'			=> 'Tên mới',
-			'description' 	=> 'Chọn tên mới (nếu có)',
-			'type'			=> 'checkbox',
-			'rich_editor'	=> false,
-			'options'		=> null
-		)
-	),
-	orphan_result_meta(
-		array(
 			'name' 			=> 'photo',
 			'label'			=> 'Photo',
 			'description' 	=> 'Nhập đường dẫn ảnh',
@@ -215,7 +205,7 @@ $orphan_fields_cv_array = array(
 			'label'			=> 'Tình trạng khi gặp trẻ',
 			'description' 	=> 'Nhập tình trạng khi gặp trẻ',
 			'type'			=> 'textarea',
-			'rich_editor'	=> false,
+			'rich_editor'	=> true,
 			'options'		=> null
 		)
 	),
@@ -359,15 +349,15 @@ function orphan_show_meta_box($post, $metabox)	{
         $meta = get_post_meta($post->ID, $field['id'], true);
         echo '<tr>',
                 '<th style="width:20%"><label for="', $field['id'], '">', $field['label'], '</label></th>',
-                '<td style="width:79%">';
+                '<td>';
         switch ($field['type']) {
             case 'text':
-                echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30"  /><br/>', '
+                echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" /><br/>', '
 ', $field['desc'];
                 break;
 				
 			case 'date':
-                echo '<input type="text" class="'.$orphan_prefix.'datepicker" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" />', '
+                echo '<input type="text" class="'.$orphan_prefix.'datepicker" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '
 ', $field['desc'];
                 break;
 
@@ -430,12 +420,8 @@ function orphan_show_meta_box($post, $metabox)	{
                 echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />&nbsp;';
 				echo $field['desc'];
                 break;
-			default:
-				 echo '<input type="'.$field['type'].'" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30"  /><br/>', '
-', $field['desc'];
-                break;
         }
-        echo     '</td>',
+        echo     '<td>',
             '</tr>';
 
     }
@@ -562,23 +548,14 @@ function orphan_shortcode_meta_box(){
 					$key_value = $orphan_prefix.$field_value['name'];
 					if ( $key_value == $column_name ) {
 						$meta_values = get_post_meta($post_id, $key_value, true);
-						
 						if($meta_values){
 							if($field_value['type'] == 'upload'){
 								echo ('<img width="60" src="'.$meta_values.'"/>');
 							} else {
-								if($field_value['name'] == 'new-name'){
-									echo ($meta_values == 'on') ? 'Tên mới' : '';
-								} else {
-									echo $meta_values;
-								}
+								echo $meta_values;
 							}
 						} else {
-							if($field_value['name'] == 'new-name'){
-							
-							} else {
-								echo 'Đang cập nhật...';
-							}
+							echo 'Update...';
 						}
 					}
 				}

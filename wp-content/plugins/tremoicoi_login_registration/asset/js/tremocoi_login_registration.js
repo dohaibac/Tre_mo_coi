@@ -1,28 +1,28 @@
-$(document).ready(function(){		
-	$('#tmc_user_panel').html($('#tmc_user_panel_data').html());
-	$("#tmc_login_button").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){$('#tmc_username').focus();}, beforeShow: function(){jQuery('#login #tmc_login_error_container').hide();}});
-	$("#tmc_register_button").fancybox({scrolling: 'no', beforeShow: function(){
-		$('#tmc_register_form_container').show();
-		$('#tmc_register_waiting').hide();
-		$('#tmc_register_error_container').hide();
-		$('#tmc_register_success').hide();
+jQuery(document).ready(function(){		
+	jQuery('#tmc_user_panel').html(jQuery('#tmc_user_panel_data').html());
+	jQuery("#tmc_login_button").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){jQuery('#tmc_username').focus();}, beforeShow: function(){jQuery('#login #tmc_login_error_container').hide();}});
+	jQuery("#tmc_register_button").fancybox({scrolling: 'no', beforeShow: function(){
+		jQuery('#tmc_register_form_container').show();
+		jQuery('#tmc_register_waiting').hide();
+		jQuery('#tmc_register_error_container').hide();
+		jQuery('#tmc_register_success').hide();
 	}, autoDimensions : false,fitToView: false, helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}});
 	
-	$('#tmc_username').onEnter( function() {login();});
-	$('#tmc_password').onEnter( function() {login();});
-	$('#tmc_rememberme').onEnter( function() {login();});
-	$("#tmc_login_submit_button").click(function(){login();});
-	$("#tmc_register_submit_button").click(function(){register();return false;});
+	jQuery('#tmc_username').onEnter( function() {login();});
+	jQuery('#tmc_password').onEnter( function() {login();});
+	jQuery('#tmc_rememberme').onEnter( function() {login();});
+	jQuery("#tmc_login_submit_button").click(function(){login();});
+	jQuery("#tmc_register_submit_button").click(function(){register();return false;});
 	
-	$('#tmc_login_form_signup_link').click(function(){
-		$.fancybox.close();
-		$("#tmc_register_button").trigger("click");
+	jQuery('#tmc_login_form_signup_link').click(function(){
+		jQuery.fancybox.close();
+		jQuery("#tmc_register_button").trigger("click");
 	});
 	
 	
-	var tmc_register_validator = $('#tmc_register_form').bind("invalid-form.validate", function() {
-         $("#tmc_register_error_container").text("Bạn cần phải điền đầy đủ và hợp lệ các thông tin bên dưới.");
-		 $("#tmc_register_error_container").show();
+	var tmc_register_validator = jQuery('#tmc_register_form').bind("invalid-form.validate", function() {
+         jQuery("#tmc_register_error_container").text("Bạn cần phải điền đầy đủ và hợp lệ các thông tin bên dưới.");
+		 jQuery("#tmc_register_error_container").show();
      }).validate({
         rules:{
           'txt-username': "required",
@@ -46,29 +46,29 @@ $(document).ready(function(){
         debug: false
       });
 	
-	$('#tmc_register_reset_button').click(function() {
-		$('#tmc_register_form').find("input[type=text], input[type=password], textarea").val("");
-		$('#txt-username').focus();
-		$("#tmc_register_form").data('validator').resetForm();
-		$('#tmc_register_error_container').css({display:"none"});
+	jQuery('#tmc_register_reset_button').click(function() {
+		jQuery('#tmc_register_form').find("input[type=text], input[type=password], textarea").val("");
+		jQuery('#txt-username').focus();
+		jQuery("#tmc_register_form").data('validator').resetForm();
+		jQuery('#tmc_register_error_container').css({display:"none"});
 		return false;
 	});
 	
 	function login(){
-		var username = $.trim($('#tmc_username').val());
-		var pwd = $.trim($('#tmc_password').val());
-		var rememberme = $('#tmc_rememberme').is(':checked') ? 'forever' : null;
+		var username = jQuery.trim(jQuery('#tmc_username').val());
+		var pwd = jQuery.trim(jQuery('#tmc_password').val());
+		var rememberme = jQuery('#tmc_rememberme').is(':checked') ? 'forever' : null;
 		
-		$('#tmc_login_error_container').html('Bạn phải nhập đầy đủ thông tin.');
+		jQuery('#tmc_login_error_container').html('Bạn phải nhập đầy đủ thông tin.');
 		
 		if(username == '' || pwd == ''){
-			$('#tmc_login_error_container').show();
+			jQuery('#tmc_login_error_container').show();
 			return;
 		}
 		
-		$('#tmc_login_form').hide();
-		$('#tmc_login_waiting').show();
-		$('#tmc_login_error_container').hide();
+		jQuery('#tmc_login_form').hide();
+		jQuery('#tmc_login_waiting').show();
+		jQuery('#tmc_login_error_container').hide();
 		
 		jQuery.post(
 		   ajaxurl, 
@@ -84,10 +84,10 @@ $(document).ready(function(){
 					else
 						location.href = tmc_backurl;
 				}else{
-					$('#tmc_login_error_container').text('Tên đăng nhập/mật khẩu không đúng.');
-					$('#tmc_login_error_container').show();
-					$('#tmc_login_form').show();
-					$('#tmc_login_waiting').hide();
+					jQuery('#tmc_login_error_container').text('Tên đăng nhập/mật khẩu không đúng.');
+					jQuery('#tmc_login_error_container').show();
+					jQuery('#tmc_login_form').show();
+					jQuery('#tmc_login_waiting').hide();
 				}
 		   }
 		);
@@ -96,21 +96,21 @@ $(document).ready(function(){
 	function register(){
 		
 	  if(tmc_register_validator.form()){
-		 var username = $.trim($('#txt-username').val());
-		 var email = $.trim($('#txt-mail').val());
-		 var pwd = $.trim($('#txt-pwd').val());
-		 var first_name = $.trim($('#txt-firstname').val());
-		 var last_name = $.trim($('#txt-lastname').val());
-		 var address = $.trim($('#txt-address').val());
-		 var district = $.trim($('#txt-district').val());
-		 var province = $.trim($('#txt-province').val());
-		 var phone = $.trim($('#txt-phone').val());
-		 var captcha = $.trim($('#txt-captcha').val());
-		 var captcha_prefix = $('#captcha_prefix').val();
+		 var username = jQuery.trim(jQuery('#txt-username').val());
+		 var email = jQuery.trim(jQuery('#txt-mail').val());
+		 var pwd = jQuery.trim(jQuery('#txt-pwd').val());
+		 var first_name = jQuery.trim(jQuery('#txt-firstname').val());
+		 var last_name = jQuery.trim(jQuery('#txt-lastname').val());
+		 var address = jQuery.trim(jQuery('#txt-address').val());
+		 var district = jQuery.trim(jQuery('#txt-district').val());
+		 var province = jQuery.trim(jQuery('#txt-province').val());
+		 var phone = jQuery.trim(jQuery('#txt-phone').val());
+		 var captcha = jQuery.trim(jQuery('#txt-captcha').val());
+		 var captcha_prefix = jQuery('#captcha_prefix').val();
 		 
-		$('#tmc_register_form_container').hide();
-		$('#tmc_register_waiting').show();
-		$('#tmc_register_error_container').hide();
+		jQuery('#tmc_register_form_container').hide();
+		jQuery('#tmc_register_waiting').show();
+		jQuery('#tmc_register_error_container').hide();
 		 
 		 jQuery.post(
 		   ajaxurl, 
@@ -121,19 +121,19 @@ $(document).ready(function(){
 		   }, 
 		   function(response){
 				var result = jQuery.parseJSON(response);
-				$('#txt-captcha').removeClass('error');
-				$('#tmc_register_waiting').hide();
+				jQuery('#txt-captcha').removeClass('error');
+				jQuery('#tmc_register_waiting').hide();
 				console.log(result);
 				if(result.errors)
 				{
-					var errors = $(document.createElement('ul'));
+					var errors = jQuery(document.createElement('ul'));
 					
 					if(result.errors.captcha)
 					{
 						errors.append('<li>Mã bảo mật không đúng.</li>');
-						$('#captcha_prefix').val(result.captcha.prefix);
-						$('#captcha_file').attr('src', result.captcha.file);
-						$('#txt-captcha').addClass('error');
+						jQuery('#captcha_prefix').val(result.captcha.prefix);
+						jQuery('#captcha_file').attr('src', result.captcha.file);
+						jQuery('#txt-captcha').addClass('error');
 					}
 					else
 					{
@@ -146,26 +146,26 @@ $(document).ready(function(){
 					}
 					
 					errors.css({margin:0,padding:0,listStylePosition:'inside'});
-					$("#tmc_register_error_container").html('');
-					$("#tmc_register_error_container").append(errors);
-					$("#tmc_register_error_container").show();
+					jQuery("#tmc_register_error_container").html('');
+					jQuery("#tmc_register_error_container").append(errors);
+					jQuery("#tmc_register_error_container").show();
 					
-					$('#tmc_register_form_container').show();
+					jQuery('#tmc_register_form_container').show();
 				}
 				else{
-					$('#tmc_register_success').html('Chúc mừng bạn đã đăng ký thành công, chúng tôi đã gửi cho bạn một email kích hoạt tài khoản đến địa chỉ <i>' + email + '</i>. Hãy kiểm tra và kích hoạt tài khoản trước khi bạn có thể đăng thông tin lên website.');
-					$('#tmc_register_success').show();
+					jQuery('#tmc_register_success').html('Chúc mừng bạn đã đăng ký thành công, chúng tôi đã gửi cho bạn một email kích hoạt tài khoản đến địa chỉ <i>' + email + '</i>. Hãy kiểm tra và kích hoạt tài khoản trước khi bạn có thể đăng thông tin lên website.');
+					jQuery('#tmc_register_success').show();
 				}
 		   }
 		);
 	  }
 	  
-	  $.fancybox.reposition();
+	  jQuery.fancybox.reposition();
 	}
 });
 
-(function($) {
-    $.fn.onEnter = function(func) {
+(function(jQuery) {
+    jQuery.fn.onEnter = function(func) {
         this.bind('keypress', function(e) {
             if (e.keyCode == 13) func.apply(this, [e]);    
         });               

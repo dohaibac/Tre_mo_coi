@@ -54,7 +54,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 			<?php if (have_posts()) : the_post(); update_post_caches($posts); 	?>
 			<h2><?php if(function_exists('bcn_display')) {bcn_display(); } ?></h2>
 			<div class="box-content">
-				<?php do_action('insert_excel_link'); ?>
+				
 				<hr />
 				<span style="font-size:0.8em; color:blue;">Thông tin trẻ mồ côi sẽ được chúng tôi bảo mật và chỉ cho những người thật sự có nhu cầu nhận con nuôi tham khảo thông tin sau khi được chúng tôi đồng ý.<br /></span>
 				
@@ -94,7 +94,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 								<label for="chk-newname" class="inline" style="margin:8px 8px 0 0; padding:0px;">Tên mới</label>
 							</div>
 							<div class="small-2 columns" style="width:70px; padding:4px 0 0 0">
-							  <input type="checkbox" name="chk-newname" id="chk-newname" style="display:none;" /> 
+							  <input type="checkbox" value="on" name="chk-newname" id="chk-newname" style="display:none;" /> 
 							</div>
 						</div>
 						<div class="row">
@@ -153,7 +153,7 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 								<label for="url-hinhanh" class="inline">Hình ảnh</label>
 							</div>							
 							<div class="small-6 columns">
-								<input type="url" name="url-hinhanh" placeholder="Nhập url hình ảnh"  id="url-hinhanh" value="" class="inline" size="50"/>
+								<input type="text" name="url-hinhanh" placeholder="Nhập url hình ảnh"  id="url-hinhanh" value="" class="inline" size="50"/>
 								<a href="#_upload" data="url-hinhanh" class="button upload_image_button prefix" style="z-index:1">Đăng hình ảnh</a>
 							</div>
 							<div class="small-3 columns">
@@ -271,7 +271,10 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 					  'birthday_datepicker' : "required",
 					  'txt-time': "required",
 					  'txt-content': "required",
-					  'txt_captcha': "required"
+					  'txt_captcha': "required",
+					  'txt-hinhanh':{
+						url: true
+					  }
 					},
 					messages: {
 						
@@ -280,7 +283,10 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 					  'birthday_datepicker' : "Nhập ngày sinh",
 					  'txt-time': "Nhập địa điểm gặp trẻ em",
 					  'txt-content': "Nhập tình trạng lúc gặp trẻ",
-					  'txt_captcha': "Nhập mã bảo mật."
+					  'txt_captcha': "Nhập mã bảo mật.",
+					  'txt-hinhanh':{
+							url: 'Nhập đường dẫn ảnh đại diện.'
+					  }
 					},
 					wrapper : 'div',
 					debug: false
@@ -305,8 +311,8 @@ wp_enqueue_script('ui.datepicker-vi',get_bloginfo('template_directory').'/includ
 									if(response.status == 'true'){
 										$("#registerchild_error_container").text(response.message);
 										$("#registerchild_error_container").show();
-										alert(response.message);
 										$("#submit_form_register_child").attr('disabled', 'disabled');
+										alert(response.message);
 										setTimeout(function() {
 											window.location = url_home;
 									   }, 3000);

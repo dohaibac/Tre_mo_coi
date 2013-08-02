@@ -28,6 +28,7 @@ function insert_tre_mo_coi(){
 		$post_id  = wp_insert_post( $my_post );
 		//echo $post_id;
 		if($post_id){
+			add_post_meta( $post_id, $orphan_prefix.'new-name', $data["chk-newname"] );
 			add_post_meta( $post_id, $orphan_prefix.'birthday', $birthday );
 			add_post_meta( $post_id, $orphan_prefix.'gender', $data["txt-gender"] );
 			add_post_meta( $post_id, $orphan_prefix.'cv-address', $data["txt-place"] ); 

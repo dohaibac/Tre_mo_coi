@@ -1,5 +1,5 @@
 </div><!--end .main-content-->
-				<?php get_sidebar('footer'); ?>
+				<?php  get_sidebar('footer'); ?>
 				<div class="row main-bottom">
 					<!--Begin Menu bottom-->
 					<div class="row">
@@ -19,7 +19,7 @@
 			</div><!--end .main-main-->
 			<script src="<?php echo get_template_directory_uri(); ?>/js/foundation.min.js"></script>
 			<script>
-			$(document).foundation();
+			jQuery(document).foundation();
 
 			</script>
 			<footer></footer>
@@ -30,12 +30,12 @@
 	<script type="text/javascript">
 	
 		jQuery(document).ready(function(){
-			$('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').attr('data-link',function(){return this.href});
-			$('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').click(function(){
+			jQuery('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').attr('data-link',function(){return this.href});
+			jQuery('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').click(function(){
 				tmc_backurl = $(this).data('link');
 			});
-			$('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').attr('href', '#login');
-			$(".don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi, #menu-item-304 a, #menu-item-303 a").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){$('#tmc_username').focus();jQuery('#login #tmc_login_error_container').html('Bạn phải đăng nhập trước khi thực hiện chức năng này').show();}});
+			jQuery('#menu-item-304 a, #menu-item-303 a, .don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi').attr('href', '#login');
+			jQuery(".don-nhan-yeu-thuong, .nhap-thong-tin-tre-mo-coi, #menu-item-304 a, #menu-item-303 a").fancybox({scrolling: 'no', helpers: {title : {type : 'outside'}, overlay : { speedOut : 0}}, afterShow: function(){$('#tmc_username').focus();jQuery('#login #tmc_login_error_container').html('Bạn phải đăng nhập trước khi thực hiện chức năng này').show();}});
 		});
 	</script>
 	
@@ -52,5 +52,12 @@
 			</p>
 		</div>
 	</div>
+	<script language="javascript">(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) {return;}
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>

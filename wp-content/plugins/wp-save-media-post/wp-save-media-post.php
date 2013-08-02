@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: Save media post
+Plugin Name: Save image to post
 Plugin URI: http://isovn.net
 Description: To increase the speed of website. When you save an article, if the images found in post content (The image at another site). This plugin will automatically save the image of the host.
 Version: 1.0
-Author: LeePro
+Author: leeseawuyhs
 Author URI: http://isovn.net
 License: GPL2
 TextDomain: isovn.net
@@ -22,7 +22,7 @@ add_action('admin_menu', 'isovn_register_save_media_post_submenu_page');
 * Description : 	Register menu page
 * HISTORIES:
 * DATE				AUTH			DESCRIPTION
-* June 14, 2013		LeePro			Register menu page
+* June 14, 2013		leeseawuyhs			Register menu page
 */
 function isovn_register_save_media_post_submenu_page() {
 	add_submenu_page(
@@ -40,7 +40,7 @@ function isovn_register_save_media_post_submenu_page() {
 * Description : 	Setting form
 * HISTORIES:
 * DATE				AUTH			DESCRIPTION
-* June 14, 2013		LeePro			Setting form
+* June 14, 2013		leeseawuyhs			Setting form
 */
 function isovn_setting_callback(){
 	global $uc_message;
@@ -107,7 +107,7 @@ add_filter( 'plugin_action_links', 'isovn_save_media_post_action_links',10,2);
 * Description : 	action links
 * HISTORIES:
 * DATE				AUTH			DESCRIPTION
-* June 14, 2013		LeePro			action links
+* June 14, 2013		leeseawuyhs			action links
 */
 function isovn_save_media_post_action_links( $links, $file ) {
 	if ( $file != plugin_basename( __FILE__ ))
@@ -123,7 +123,7 @@ add_action( 'save_post', 'isovn_hook_update_media_in_post' );
 * Description : 	hook update post when user save post
 * HISTORIES:
 * DATE				AUTH			DESCRIPTION
-* June 14, 2013		LeePro			hook update post when user save post
+* June 14, 2013		leeseawuyhs			hook update post when user save post
 */
 function isovn_hook_update_media_in_post( $post_id ) {
 	if(isset($post_id)){
@@ -155,7 +155,7 @@ function isovn_hook_update_media_in_post( $post_id ) {
 * Description : 	get image in post content
 * HISTORIES:
 * DATE				AUTH			DESCRIPTION
-* June 14, 2013		LeePro			get image in post content
+* June 14, 2013		leeseawuyhs			get image in post content
 */
 function isovn_get_image_post_content($content = null){
 	preg_match_all('/<img[^>]+>/i',$content, $result); 
@@ -190,7 +190,7 @@ function isovn_get_image_post_content($content = null){
 * Description : 	save game form url
 * HISTORIES:
 * DATE				AUTH			DESCRIPTION
-* June 14, 2013		LeePro			save game form url
+* June 14, 2013		leeseawuyhs			save game form url
 */
 function isovn_save_image($inPath = null){ //Download images from remote server
 	global $dir_file_upload;
@@ -224,7 +224,7 @@ function isovn_save_image($inPath = null){ //Download images from remote server
 * Description : 	set file name
 * HISTORIES:
 * DATE				AUTH			DESCRIPTION
-* June 14, 2013		LeePro			set file name
+* June 14, 2013		leeseawuyhs			set file name
 */
 function isovn_set_file_name($url = null){
 	global $imgExts, $dir_file_upload ;
@@ -242,7 +242,7 @@ function isovn_set_file_name($url = null){
 			$urlExt = $ext_file;
 		}
 		if (in_array($urlExt, $imgExts)) {
-			$file_info['basename'] = str_replace(array(' ','%20'),'-',$file_info['filename'].'.'.$urlExt);
+			$file_info['basename'] = isovn_replace_character($file_info['filename'].'.'.$urlExt);
 			$file_info['name'] = $file_info['basename'];
 			 $check_file =$dir_file_upload['path'].'/'.$file_info['basename'];
 			$file_info['url'] = $check_file;
@@ -268,4 +268,29 @@ function isovn_set_file_name($url = null){
 		}
 	}
 	return null;
+}
+/**
+* Function name:	isovn_replace_character
+* Description : 	replace character
+* HISTORIES:
+* DATE				AUTH			DESCRIPTION
+* July 1, 2013		leeseawuyhs		replace character
+*/
+function isovn_replace_character($str) {
+	$str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
+	$str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
+	$str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
+	$str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $str);
+	$str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $str);
+	$str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $str);
+	$str = preg_replace("/(đ)/", 'd', $str);
+	$str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $str);
+	$str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $str);
+	$str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $str);
+	$str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $str);
+	$str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
+	$str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
+	$str = preg_replace("/(Đ)/", 'D', $str);
+	$str = str_replace(array(" ",'(',')','%20','&*#39;','%28','%29','.'), "", $str);
+	return $str;
 }

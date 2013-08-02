@@ -308,8 +308,8 @@ footer{
 .header{
 	 position: relative;
 }
-.header h2{
-
+.header h2 {
+  width: 45%;
 }
 .header h2 .logo{
 	background: url("../images/logo.png") no-repeat scroll 0 -10px transparent;
@@ -701,3 +701,5 @@ a.read-more-01{
     position: absolute;
     right: -15px;
 }
+
+#fancybox-wrap, #fancybox-content{overflow:hidden;}

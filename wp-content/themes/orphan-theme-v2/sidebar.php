@@ -16,16 +16,16 @@
 			
 			</ul>
 			<script type="text/javascript">			
-			$(document).ready(function() {
-				var link_video = $(".list_video li:first").find('a').attr("data"); 
-				$(".list_video li:first").addClass("playvideo");
+			jQuery(document).ready(function() {
+				var link_video = jQuery(".list_video li:first").find('a').attr("data"); 
+				jQuery(".list_video li:first").addClass("playvideo");
 				load_video(link_video,false);
-				$(".list_video li a").click(function(){ 
-					link_video = $(".list_video li:hover").find('a').attr("data"); 
+				jQuery(".list_video li a").click(function(){ 
+					link_video = jQuery(".list_video li:hover").find('a').attr("data"); 
 					if(link_video){
 						load_video(link_video, true);
-						$(".list_video li").removeClass("playvideo"); 
-						$(".list_video li:hover").addClass("playvideo"); 
+						jQuery(".list_video li").removeClass("playvideo"); 
+						jQuery(".list_video li:hover").addClass("playvideo"); 
 					}
 					return false;
 				});
@@ -77,7 +77,7 @@
 				</ul>
 			</div>
 			<script language="javascript">
-			$(".croll_news").jCarouselLite({
+			jQuery(".croll_news").jCarouselLite({
 				btnNext: ".croll_news .prev",
 				btnPrev: ".croll_news .next",
 				speed: 7000,

@@ -24,8 +24,8 @@
 				
 				<script type="text/javascript" src="<?php echo get_template_directory_uri() ?>/js/nivo-slider/jquery.nivo.slider.js"></script>
 				<script type="text/javascript">
-				$(window).load(function() {
-					$('#slider').nivoSlider({
+				jQuery(window).load(function() {
+					jQuery('#slider').nivoSlider({
 						controlNav : false
 					});
 				});

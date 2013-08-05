@@ -409,4 +409,88 @@ function short_the_title($title, $chars = 30){
 /**
  ~~~~~~~~~~~~ UTIL COMMON FUNCTIONS ~~~~~~~~~~~~
  */
+ /* Custom login page */
+ 
+function htx_custom_logo() {
+
+echo '
+
+<style type="text/css">
+
+
+
+#wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon {
+
+	background-position: 0 0;
+
+	}	
+
+
+
+</style>
+
+';
+
+}
+
+
+
+
+
+add_action("login_head", "orphan_login_head");
+
+function orphan_login_head() {
+	echo "<style>
+	body.login{
+		background: url('".get_bloginfo('template_url')."/images/bg.jpg') repeat scroll center top transparent;
+		display: block;
+		min-height: 500px;
+		overflow: hidden;
+	}
+
+	.login #nav a, .login #backtoblog a, .login label {
+		color: #000!important;
+	}
+	body.login #login h1 a {
+		background: url('".get_bloginfo('template_url')."/images/logo.png') no-repeat scroll center 0px transparent;
+		 height: 85px;
+		margin-top: 45px;
+		width: 319px;
+	}
+	body.login #login h1 a:hover {
+		background: url('".get_bloginfo('template_url')."/images/logo.png') no-repeat scroll center 0 transparent;
+		 height: 85px;
+		margin-top: 45px;
+		width: 319px;
+	}
+
+	html body.login div#login p#backtoblog a{color:#000!important;}
+	.login form{
+		background: #fff;
+	}
+	.login label{
+		color:#fff;
+	}
+	.login #nav a, .login #backtoblog a{
+		color:#000!important;
+		 font-size: 1.2em;
+	}
+	html body.login div#login{
+		padding-top:50px;
+	}
+	</style>
+	";
+
+}
+
+function orphan_login_logo_url() {
+    return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'orphan_login_logo_url' );
+
+function orphan_login_logo_url_title() {
+    return get_bloginfo('name');
+}
+
+add_filter( 'login_headertitle', 'orphan_login_logo_url_title' );
 ?>

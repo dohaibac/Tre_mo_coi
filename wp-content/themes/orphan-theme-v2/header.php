@@ -29,6 +29,7 @@
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="shortcut icon" href="<?php echo get_template_directory_uri();?>/images/favicon.png">
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />	
 	<link rel="alternate" type="text/xml" title="<?php wp_title( '|', true, 'right' ); ?>" href="<?php bloginfo('rss_url'); ?>" />

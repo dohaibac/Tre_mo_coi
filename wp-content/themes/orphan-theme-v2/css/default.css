@@ -389,6 +389,7 @@ span.date{
 /* album */
 .album{
 	position:relative;
+	width:930px!important;
 }
 .album a.control{position:absolute; top: 35%;  text-indent: -99999px; z-index: 999; width: 15px; height: 18px;}
 .album a.left{
@@ -400,9 +401,9 @@ span.date{
     right: -4px;
 }
 .album ul{margin: 5px 0 0;}
-.album ul li{ padding-bottom: 0.5em;}
+.album ul li{ padding-bottom: 0.5em;width:184px;}
 .album ul li a{}
-.album ul li img.thumb{}
+.album ul li img.thumb{width:158px; height:110px;}
 .album ul li h3{text-align:center;}
 /* user */
 .user-box{
@@ -703,3 +704,7 @@ a.read-more-01{
 }
 
 #fancybox-wrap, #fancybox-content{overflow:hidden;}
+
+.album .box-content{}
+.album .box-content li{}
+.album .thumb_gallery{}

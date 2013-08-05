@@ -40,7 +40,7 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/default.css" media="all"  />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie.css" media="all"  />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url');?>" media="screen" />
-	<link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	<!--<link href='http://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic' rel='stylesheet' type='text/css'>-->
 	<script type="text/javascript">
 	//<![CDATA[
 	ajaxurl = '<?php echo admin_url( 'admin-ajax.php'); ?>';

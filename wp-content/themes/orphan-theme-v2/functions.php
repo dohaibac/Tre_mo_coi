@@ -50,6 +50,7 @@ include('includes/post_type_nhan_con_nuoi.php');
 include('includes/insert_tre_mo_coi.php');
 include('includes/post_type_tim_nguoi_than.php');
 include('includes/post_type_vuon_uoc_mo.php');
+include('includes/post_type_hinh_anh.php');
 include('includes/action-becomeparents.php');
 include('includes/action-profile.php');
 /**
@@ -322,11 +323,11 @@ function orphan_get_json($data = null){
 }
 
 
-function orphan_get_post_thumbnai(){
+function orphan_get_post_thumbnai($thumbnail = 'thumbnail'){
 	global $post;
 	$src_img = '';
 	if (has_post_thumbnail()){ 
-		$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), $thumbnail);
 		if(isset($image[0])){
 			$src_img = $image[0];
 		} else {

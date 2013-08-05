@@ -442,7 +442,15 @@ add_action("login_head", "orphan_login_head");
 function orphan_login_head() {
 	echo "<style>
 	body.login{
-		background: url('".get_bloginfo('template_url')."/images/bg.jpg') repeat scroll center top transparent;
+		background: #7abcff; /* Old browsers */
+		background: -moz-linear-gradient(top,  #7abcff 0%, #60abf8 44%, #4096ee 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7abcff), color-stop(44%,#60abf8), color-stop(100%,#4096ee)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #7abcff 0%,#60abf8 44%,#4096ee 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #7abcff 0%,#60abf8 44%,#4096ee 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #7abcff 0%,#60abf8 44%,#4096ee 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #7abcff 0%,#60abf8 44%,#4096ee 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
+		/*background: url('".get_bloginfo('template_url')."/images/bg.jpg') repeat scroll center top transparent;*/
 		display: block;
 		min-height: 500px;
 		overflow: hidden;
@@ -451,18 +459,17 @@ function orphan_login_head() {
 	.login #nav a, .login #backtoblog a, .login label {
 		color: #000!important;
 	}
-	body.login #login h1 a {
-		background: url('".get_bloginfo('template_url')."/images/logo.png') no-repeat scroll center 0px transparent;
-		 height: 85px;
-		margin-top: 45px;
+
+	body.login #login h1 a,
+	body.login #login h1 a:hover
+	{
+		background: url('".get_bloginfo('template_url')."/images/logo-login.png') no-repeat scroll center -20px transparent;
+		 height: 100px;
+		margin-top: 0px;
+		margin-bottom:15px;
 		width: 319px;
 	}
-	body.login #login h1 a:hover {
-		background: url('".get_bloginfo('template_url')."/images/logo.png') no-repeat scroll center 0 transparent;
-		 height: 85px;
-		margin-top: 45px;
-		width: 319px;
-	}
+
 
 	html body.login div#login p#backtoblog a{color:#000!important;}
 	.login form{

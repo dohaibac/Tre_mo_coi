@@ -76,7 +76,7 @@
 					</div><!--Begin Menu bottom-->
 					<!--Begin .coppy-right-->
 					<div class="row coppy-right">
-						<p>© <a class="coppy-right-link" href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved. Hosting du?c tài tr? b?i <a class="coppy-right-link" href="http://iwebvn.net/">iwebvn.net</a>.</p>
+						<p>© <a class="coppy-right-link" href="http://evizi.com">Evizi Team</a>. Website Tre Mo Coi, LP. All Rights Reserved. Hosting được tài trợ bởi <a class="coppy-right-link" href="http://iwebvn.net/">iwebvn.net</a>.</p>
 					</div><!--end .coppy-right-->
 				</div>
 			</div><!--end .main-main-->

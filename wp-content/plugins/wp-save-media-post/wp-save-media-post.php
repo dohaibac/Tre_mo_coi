@@ -291,6 +291,6 @@ function isovn_replace_character($str) {
 	$str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
 	$str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
 	$str = preg_replace("/(Đ)/", 'D', $str);
-	$str = str_replace(array(" ",'(',')','%20','&*#39;','%28','%29','.'), "", $str);
+	$str = str_replace(array(" ",'(',')','%20','&*#39;','%28','%29'), "", $str);
 	return $str;
 }

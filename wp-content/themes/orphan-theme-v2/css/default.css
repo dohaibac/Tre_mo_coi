@@ -284,7 +284,7 @@ section.top-bar-section ul ul.dropdown li a{
 	background:none;
 }
 .main-bottom ul li a{color: #FFFFFF; font-size: 0.9em;}
-.main-bottom ul li a:hover{red;}
+.main-bottom ul li a:hover{color:red;}
 h2 .read-more{
 	float:right;
 	font-style:italic;

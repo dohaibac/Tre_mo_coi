@@ -111,7 +111,7 @@
 			<img src="<?php bloginfo('template_directory'); ?>/images/register-header.png" class="logo">
 			<p>
 				<img src="<?php bloginfo('template_directory'); ?>/images/loading_timer.gif" class="loading">
-				<strong class="info">Ðang x? lý thông tin.</strong>
+				<strong class="info">Ðang xử lý thông tin.</strong>
 			</p>
 		</div>
 	</div>

@@ -598,9 +598,10 @@ div.garden_dreams img.avatar,
 img.auth-dream{
 	  height: 69px;
     position: absolute;
-    right: 63px;
+    left: 187px;
     top: 11px;
     width: 69px;
+    
 }
 .dream-item h4{
 	font-size: 0.9em;
